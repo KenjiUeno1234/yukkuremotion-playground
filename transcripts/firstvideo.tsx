@@ -4,8 +4,8 @@ export const FirstVideoConfig: VideoConfig = {
   sections: [
     {
       title: 'イントロダクション',
-      bgmSrc: '/audio/bgm/honobono-wartz.wav',
-      backgroundVideo: '/video/cyber-bg.mp4',
+      // bgmSrc: '/audio/bgm/honobono-wartz.wav',
+      // backgroundVideo: '/video/cyber-bg.mp4',
       afterMovie: '/video/yukkuri-opening.mp4',
       afteMovieDelay: 0,
       fromFramesMap: {

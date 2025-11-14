@@ -9,3 +9,6 @@ out
 /vendor/
 /public/audio/yukkuri
 aquest-keys.ts
+
+# Remotion build artifacts
+/my-video/
