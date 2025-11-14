@@ -14,7 +14,11 @@
       "Bash(ver:*)",
       "Bash(npm start)",
       "Bash(cat:*)",
-      "Bash(.gitignore)"
+      "Bash(.gitignore)",
+      "Bash(powershell -Command:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File create-readme.ps1:*)",
+      "Bash(node create-readme.js:*)",
+      "Bash(node create-readme-v2.js:*)"
     ],
     "deny": [],
     "ask": []
