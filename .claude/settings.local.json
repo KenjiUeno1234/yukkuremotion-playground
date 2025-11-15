@@ -18,7 +18,12 @@
       "Bash(powershell -Command:*)",
       "Bash(powershell -ExecutionPolicy Bypass -File create-readme.ps1:*)",
       "Bash(node create-readme.js:*)",
-      "Bash(node create-readme-v2.js:*)"
+      "Bash(node create-readme-v2.js:*)",
+      "Bash(npm run convert:movieyou:*)",
+      "Bash(npm run:*)",
+      "Bash(dir:*)",
+      "Bash(ts-node:*)",
+      "Bash(npx ts-node:*)"
     ],
     "deny": [],
     "ask": []

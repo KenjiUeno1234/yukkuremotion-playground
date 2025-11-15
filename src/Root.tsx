@@ -1,5 +1,6 @@
 import {Composition} from 'remotion';
 import {FirstVideoConfig} from '../transcripts/firstvideo';
+import {MyVideoConfig} from '../transcripts/myvideo';
 import {FPS} from './constants';
 import {YukkuriVideo} from './YukkuriVideo';
 import {loadFont} from './load-fonts';
@@ -11,6 +12,15 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
+      <Composition
+        id="MyVideo"
+        component={YukkuriVideo}
+        durationInFrames={getTotalVideoFrames(MyVideoConfig)}
+        fps={FPS}
+        width={1920}
+        height={1080}
+        defaultProps={{videoConfig: MyVideoConfig}}
+      />
       <Composition
         id="FirstVideo"
         component={YukkuriVideo}

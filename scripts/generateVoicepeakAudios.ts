@@ -2,7 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import {execSync} from 'child_process';
 import {FirstVideoConfig} from '../transcripts/firstvideo';
-import {SPEAKER} from '../src/yukkuri/yukkuriVideoConfig';
+import {MyVideoConfig} from '../transcripts/myvideo';
+import {SPEAKER, VideoConfig} from '../src/yukkuri/yukkuriVideoConfig';
 
 // VOICEPEAK設定
 const VOICEPEAK_PATH = 'C:\\voicepeak\\VOICEPEAK\\voicepeak.exe';
@@ -106,6 +107,14 @@ async function main() {
   console.log('=========================================');
   console.log('');
 
+  // コマンドライン引数からビデオ設定を選択（デフォルトはmyvideo）
+  const videoType = process.argv[2] || 'myvideo';
+  const config: VideoConfig =
+    videoType === 'first' ? FirstVideoConfig : MyVideoConfig;
+
+  console.log(`使用する設定: ${videoType === 'first' ? 'FirstVideo' : 'MyVideo'}`);
+  console.log('');
+
   // VOICEPEAKチェック
   if (!checkVoicepeakExists()) {
     process.exit(1);
@@ -120,7 +129,7 @@ async function main() {
   let skipped = 0;
 
   // 各セクションの音声を生成
-  for (const section of FirstVideoConfig.sections) {
+  for (const section of config.sections) {
     console.log(`\nセクション: ${section.title}`);
     console.log('---');
 
@@ -171,7 +180,7 @@ async function main() {
       }
 
       // 通常の音声
-      if (!talk.id || talk.audioDurationFrames === 0) {
+      if (!talk.id) {
         continue;
       }
 
