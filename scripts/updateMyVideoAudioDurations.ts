@@ -92,6 +92,8 @@ function generateTypeScriptFile(config: any): string {
 
       return `    {
       title: '${section.title.replace(/'/g, "\\'")}',
+      bgmSrc: 'bgm/Floraria.mp3',
+      bgmVolume: 0.2,
       fromFramesMap: {},
       totalFrames: ${section.totalFrames},
       kuchipakuMap: {frames: [], amplitude: []},

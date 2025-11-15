@@ -85,6 +85,8 @@ function generateTypeScriptConfig(sections: Section[]): string {
 
       return `    {
       title: '${section.title.replace(/'/g, "\\'")}',
+      bgmSrc: 'bgm/Floraria.mp3',
+      bgmVolume: 0.2,
       fromFramesMap: {},
       totalFrames: 0,
       kuchipakuMap: {frames: [], amplitude: []},

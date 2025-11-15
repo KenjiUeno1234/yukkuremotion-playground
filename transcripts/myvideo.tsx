@@ -4,6 +4,8 @@ export const MyVideoConfig: VideoConfig = {
   sections: [
     {
       title: 'RAG過信への警鐘と本稿の目的',
+      bgmSrc: 'bgm/Floraria.mp3',
+      bgmVolume: 0.2,
       fromFramesMap: {},
       totalFrames: 589,
       kuchipakuMap: {frames: [], amplitude: []},
