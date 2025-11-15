@@ -6,19 +6,39 @@ import {VoiceConfig} from './yukkuriVideoConfig';
 export type Props = {
   talks: VoiceConfig[];
   fromFramesMap: {[key in number]: number};
+  customReimuImagePath?: string;
+  customMarisaImagePath?: string;
 };
 
-export const YukkuriSequence: React.FC<Props> = () => {
+export const YukkuriSequence: React.FC<Props> = ({
+  customReimuImagePath,
+  customMarisaImagePath,
+}) => {
   return (
     <Sequence>
-      <div style={reimuStyle}>
-        <YukkuriFace isReimu />
-      </div>
-      <div style={marisaStyle}>
-        <YukkuriFace isReimu={false} />
-      </div>
+      {customReimuImagePath ? (
+        <div style={centerCharacterStyle}>
+          <YukkuriFace isReimu customImagePath={customReimuImagePath} sizePx={380} />
+        </div>
+      ) : (
+        <>
+          <div style={reimuStyle}>
+            <YukkuriFace isReimu />
+          </div>
+          <div style={marisaStyle}>
+            <YukkuriFace isReimu={false} />
+          </div>
+        </>
+      )}
     </Sequence>
   );
+};
+
+const centerCharacterStyle: React.CSSProperties = {
+  position: 'absolute',
+  right: '60px',
+  bottom: '120px',
+  zIndex: zIndex.yukkuri,
 };
 
 const reimuStyle: React.CSSProperties = {

@@ -37,6 +37,16 @@ export const YukkuriVideo: React.FC<{
                   volume={section.bgmVolume || 0.32}
                 />
               )}
+              {section.backgroundImage && (
+                <Img
+                  src={staticFile(section.backgroundImage)}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                />
+              )}
               {section.backgroundVideo && (
                 <>
                   <LoopedOffthreadVideo
@@ -64,7 +74,12 @@ export const YukkuriVideo: React.FC<{
               totalFrames={cumulateFrames + section.totalFrames}
             />
 
-            <YukkuriSequence {...section} fromFramesMap={fromFrameMap} />
+            <YukkuriSequence
+              {...section}
+              fromFramesMap={fromFrameMap}
+              customReimuImagePath={section.customReimuImagePath}
+              customMarisaImagePath={section.customMarisaImagePath}
+            />
 
             {section.beforeMovie && (
               <Sequence

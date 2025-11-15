@@ -62,6 +62,7 @@ export type VideoConfig = {
 		talks: VoiceConfig[];
 		bgmSrc?: string;
 		bgmVolume?: number;
+		backgroundImage?: string;
 		backgroundVideo?: string;
 		showBgVideoOverlay?: boolean;
 		beforeMovie?: string;
@@ -75,5 +76,7 @@ export type VideoConfig = {
 		reimuKuchipakuMap: kuchipakuMap;
 		marisaKuchipakuMap: kuchipakuMap;
 		initialDelayFrames?: number; // Default: 60s
+		customReimuImagePath?: string;
+		customMarisaImagePath?: string;
 	}[];
 };

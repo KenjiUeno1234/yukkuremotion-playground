@@ -39,6 +39,7 @@ export type ReimuProps = {
   isKuchipaku?: boolean;
   isReimu?: boolean;
   mouth?: MOUTH_TYPE;
+  customImagePath?: string;
 };
 
 const DEFAULT_REIMU_SIZE_PX = 320;
@@ -84,6 +85,7 @@ export const YukkuriFace: React.FC<ReimuProps> = ({
   sizePx,
   isReimu,
   mouth,
+  customImagePath,
 }) => {
   const imageDirectory = useMemo(
     () => (isReimu ? 'reimu' : 'marisa'),
@@ -110,6 +112,7 @@ export const YukkuriFace: React.FC<ReimuProps> = ({
         imageDirectory={imageDirectory}
         isReimu={isReimu}
         mouth={mouth}
+        customImagePath={customImagePath}
       />
     </div>
   );
@@ -180,8 +183,9 @@ export const Face = (props: {
   sizePx?: number;
   isReimu?: boolean;
   imageDirectory: string;
+  customImagePath?: string;
 }) => {
-  const {face, mouth, sizePx, isReimu, imageDirectory} = props;
+  const {face, mouth, sizePx, isReimu, imageDirectory, customImagePath} = props;
 
   // Multiply by 1.2 because Marisa is bit smaller compared to Reimu
   const faceSizePx =
@@ -232,6 +236,15 @@ export const Face = (props: {
     () => (isReimu ? ReimuMouthByFrame[frame] : MarisaMouthByFrame[frame]),
     [frame]
   );
+
+  if (customImagePath) {
+    return (
+      <MemoizedCustomFace
+        faceSizePx={faceSizePx}
+        customImagePath={customImagePath}
+      />
+    );
+  }
 
   return (
     <MemoizedFace
@@ -285,6 +298,28 @@ const MemoizedFace = memo(PureFace, (prevProps, nextProps) => {
     prevProps.mouthImage === nextProps.mouthImage
   );
 });
+
+export const PureCustomFace = (props: {
+  faceSizePx: number;
+  customImagePath: string;
+}) => {
+  const {faceSizePx, customImagePath} = props;
+
+  return (
+    <div
+      style={{
+        ...containerStyle,
+      }}
+    >
+      <Img
+        style={{width: `${faceSizePx}px`}}
+        src={staticFile(customImagePath)}
+      />
+    </div>
+  );
+};
+
+const MemoizedCustomFace = memo(PureCustomFace);
 
 const containerStyle: React.CSSProperties = {
   position: 'relative',

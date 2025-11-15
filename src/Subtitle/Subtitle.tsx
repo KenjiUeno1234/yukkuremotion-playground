@@ -4,12 +4,12 @@ import {SPEAKER, SPEAKER_TYPE} from '../yukkuri/yukkuriVideoConfig';
 
 const subtitle: React.CSSProperties = {
   fontFamily: 'GenshinGothic',
-  fontSize: 64,
+  fontSize: 48,
   fontWeight: '900',
   lineHeight: 1.28,
   color: '#fff',
-  WebkitTextStroke: '4px #C90003',
-  textAlign: 'center',
+  WebkitTextStroke: '3px #C90003',
+  textAlign: 'left',
   zIndex: zIndex.anyValue,
 };
 
@@ -19,9 +19,9 @@ type Props = {
 };
 
 const colorBySpeaker = {
-  [SPEAKER.reimu]: '4px #C90003',
-  [SPEAKER.marisa]: '4px #D3BB02',
-  [SPEAKER.reimuAndMarisa]: '4px #EAF103',
+  [SPEAKER.reimu]: '3px #C90003',
+  [SPEAKER.marisa]: '3px #D3BB02',
+  [SPEAKER.reimuAndMarisa]: '3px #EAF103',
 };
 
 export const Subtitle: React.FC<Props> = ({speaker, children}) => {
