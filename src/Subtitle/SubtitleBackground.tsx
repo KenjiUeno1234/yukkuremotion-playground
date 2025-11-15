@@ -14,14 +14,17 @@ export const SubtitleWithBackground = (props: {
 
 const jimakuBackground: React.CSSProperties = {
   position: 'absolute',
-  width: '70%',
+  width: '100%',
   height: `${SUBTITLE_HEIGHT_PX}px`,
   bottom: 0,
   left: 0,
+  backgroundColor: '#062722',
+  opacity: 1,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
   paddingLeft: '40px',
+  paddingRight: '40px',
   textAlign: 'left',
   whiteSpace: 'pre-wrap',
   zIndex: zIndex.subtitle,

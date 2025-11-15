@@ -116,23 +116,8 @@ export const YukkuriVideo: React.FC<{
       <div style={logoStyle}>
         <Img src={staticFile('image/yukkurilogo.png')} />
       </div>
-
-      <div style={jimakuBackground} />
     </AbsoluteFill>
   );
-};
-
-const jimakuBackground: React.CSSProperties = {
-  position: 'absolute',
-  width: '100%',
-  height: `${SUBTITLE_HEIGHT_PX}px`,
-  bottom: 0,
-  backgroundImage: `url(${staticFile('image/telop/Cyber_telop2_black.png')})`,
-  backgroundPosition: 'center',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  zIndex: zIndex.anyValue,
 };
 
 const logoStyle: React.CSSProperties = {
