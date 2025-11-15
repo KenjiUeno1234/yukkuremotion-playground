@@ -100,7 +100,7 @@ export const YukkuriFace: React.FC<ReimuProps> = ({
     [video]
   );
 
-  const translateY = interpolate(frame, frames, intervals, {
+  const translateY = customImagePath ? 0 : interpolate(frame, frames, intervals, {
     easing: Easing.bezier(0.51, 0, 0.49, 1),
   });
 
