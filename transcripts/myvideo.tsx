@@ -6,21 +6,21 @@ export const MyVideoConfig: VideoConfig = {
       title: 'RAG過信への警鐘と本稿の目的',
       bgmSrc: 'bgm/Floraria.mp3',
       bgmVolume: 0.2,
-      fromFramesMap: {"0":30,"1":605},
-      totalFrames: 1380,
+      fromFramesMap: {"0":30,"1":348},
+      totalFrames: 703,
       kuchipakuMap: {frames: [], amplitude: []},
       talks: [
         {
-          text: '1-1. 本動画の位置づけについて説明するわね。登壇者は「自社データ＝RAG」という早合点に疑問を投げかけます。相談現場ではRAG不要の案件が多く、プロンプト設計だけで成果が出る例も豊富だと指摘します。',
+          text: '1-1. 本動画の位置づけについて説明するわね。登壇者は「自社データ＝RAG」という早合点に疑問を投げかけます。',
           speaker: 'reimu',
-          id: 'b7bdba3fde0e456690b2308f2e0d7a24',
-          audioDurationFrames: 550,
+          id: '393109c101d44c529228fe8d00baab2f',
+          audioDurationFrames: 293,
         },
         {
-          text: '1-2. 「3つの問」の全体像だが、RAG導入前に次の3点を確認します。1. 網羅的参照は必要か。2. 元データはLLMの上限内か。3. 動的に変えるパターン数はいくつか。これに該当すれば、RAGより簡便で高精度な代替が成立しやすいと述べます。',
+          text: '1-2. 「3つの問」の全体像だが、相談現場ではRAG不要の案件が多く、プロンプト設計だけで成果が出る例も豊富です。',
           speaker: 'marisa',
-          id: 'fb016cb8f8204357bd823ab093fda6fc',
-          audioDurationFrames: 744,
+          id: '4755a5f7cf974b0897d56787dd079812',
+          audioDurationFrames: 324,
         }
       ],
     },
@@ -29,14 +29,14 @@ export const MyVideoConfig: VideoConfig = {
       bgmSrc: 'bgm/Floraria.mp3',
       bgmVolume: 0.2,
       fromFramesMap: {"0":30},
-      totalFrames: 886,
+      totalFrames: 444,
       kuchipakuMap: {frames: [], amplitude: []},
       talks: [
         {
-          text: '2-1. チェックリスト型はRAG不適について説明するわね。校閲・監査などのチェックリスト型は、全観点を同時に適用する必要があります。RAGは必要部分だけを引く設計のため、一部のみ参照すると他観点が欠落します。結論として「網羅チェックはプロンプトに全観点を明示して回す」が正解です。',
+          text: '2-1. チェックリスト型はRAG不適について説明するわね。校閲・監査などのチェックリスト型は、全観点を同時に適用する必要があります。',
           speaker: 'reimu',
-          id: '07687b3267f240b39ec8fea8e43fe243',
-          audioDurationFrames: 796,
+          id: 'f81752c88704460c8f6c5c6e8e1c4aa5',
+          audioDurationFrames: 354,
         }
       ],
     }

@@ -24,7 +24,7 @@ const jimakuBackground: React.CSSProperties = {
   alignItems: 'center',
   justifyContent: 'flex-start',
   paddingLeft: '40px',
-  paddingRight: '40px',
+  paddingRight: '500px',
   textAlign: 'left',
   whiteSpace: 'pre-wrap',
   zIndex: zIndex.subtitle,
