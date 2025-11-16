@@ -1,12 +1,8 @@
-import React from 'react';
 import {CustomObjectKeys} from '../../transcripts/CustomObjects';
-import {FACE_TYPE} from './Face/ImagePaths/faceImagePaths';
 import {MouthType} from './Face/ImagePaths/mouthImagePaths';
 
 export const SPEAKER = {
-	reimu: 'reimu',
-	marisa: 'marisa',
-	reimuAndMarisa: 'reimuAndMarisa',
+	ayumi: 'ayumi',
 } as const;
 
 export type SPEAKER_TYPE = keyof typeof SPEAKER;
@@ -33,8 +29,6 @@ type BackgroundVideo = {
 
 export type VoiceConfig = {
 	id?: string;
-	// 霊夢と魔理沙がどっちも喋る時用
-	ids?: string[];
 	text: string;
 	textForDisplay?: string;
 	speaker: SPEAKER_TYPE;
@@ -73,10 +67,7 @@ export type VideoConfig = {
 		// Frame を floor している関係上どうしてもズレが起きるので微調整する苦肉の策
 		afteMovieDelay?: number;
 		kuchipakuMap: kuchipakuMap;
-		reimuKuchipakuMap: kuchipakuMap;
-		marisaKuchipakuMap: kuchipakuMap;
 		initialDelayFrames?: number; // Default: 60s
-		customReimuImagePath?: string;
-		customMarisaImagePath?: string;
+		customAyumiImagePath?: string;
 	}[];
 };

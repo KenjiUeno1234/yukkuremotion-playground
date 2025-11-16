@@ -14,7 +14,7 @@ function GunyoGunyo() {
         }px) rotate(${(frame % 720) * 30}deg)`,
       }}
     >
-      <Subtitle speaker="reimu">アニメーションしちゃうぞ〜〜〜〜〜</Subtitle>
+      <Subtitle speaker="ayumi">アニメーションしちゃうぞ〜〜〜〜〜</Subtitle>
     </div>
   );
 }

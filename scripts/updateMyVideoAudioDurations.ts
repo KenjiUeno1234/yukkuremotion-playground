@@ -3,6 +3,8 @@ import * as path from 'path';
 import getAudioDurationInSeconds from 'get-audio-duration';
 import {FPS} from '../src/constants';
 import {generateFromFramesMap} from './generateFromFramesMap';
+import {generateFaceFrameMap} from './generateFaceFrameMap';
+import {generateMouthFrameMap} from './generateMouthFrameMap';
 
 // myvideo.tsxの音声の長さを更新するスクリプト
 
@@ -74,6 +76,11 @@ async function updateAudioDurations() {
     console.log('✅ myvideo.tsxを更新しました');
     console.log(`総セリフ数: ${totalTalks}`);
     console.log(`更新されたセリフ数: ${updatedTalks}`);
+
+    console.log('\n🔄 フレームマップを生成しています...');
+    await generateFaceFrameMap(MyVideoConfig);
+    await generateMouthFrameMap(MyVideoConfig);
+    console.log('✅ フレームマップを生成しました');
   } catch (error) {
     console.error('❌ エラーが発生しました:', error);
     process.exit(1);
@@ -104,8 +111,6 @@ function generateTypeScriptFile(config: any): string {
       fromFramesMap: ${fromFramesMapCode},
       totalFrames: ${section.totalFrames},
       kuchipakuMap: {frames: [], amplitude: []},
-      reimuKuchipakuMap: {frames: [], amplitude: []},
-      marisaKuchipakuMap: {frames: [], amplitude: []},
       talks: [
 ${talksCode}
       ],

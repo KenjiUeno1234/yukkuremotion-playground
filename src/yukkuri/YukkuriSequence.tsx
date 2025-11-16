@@ -1,35 +1,22 @@
 import {Sequence} from 'remotion';
 import {zIndex} from '../constants';
-import {YukkuriFace} from './Face/YukkuriFace';
+import {AyumiFace} from './Face/YukkuriFace';
 import {VoiceConfig} from './yukkuriVideoConfig';
 
 export type Props = {
   talks: VoiceConfig[];
   fromFramesMap: {[key in number]: number};
-  customReimuImagePath?: string;
-  customMarisaImagePath?: string;
+  customAyumiImagePath?: string;
 };
 
 export const YukkuriSequence: React.FC<Props> = ({
-  customReimuImagePath,
-  customMarisaImagePath,
+  customAyumiImagePath,
 }) => {
   return (
     <Sequence>
-      {customReimuImagePath ? (
-        <div style={centerCharacterStyle}>
-          <YukkuriFace isReimu customImagePath={customReimuImagePath} sizePx={380} />
-        </div>
-      ) : (
-        <>
-          <div style={reimuStyle}>
-            <YukkuriFace isReimu />
-          </div>
-          <div style={marisaStyle}>
-            <YukkuriFace isReimu={false} />
-          </div>
-        </>
-      )}
+      <div style={centerCharacterStyle}>
+        <AyumiFace customImagePath={customAyumiImagePath} sizePx={380} />
+      </div>
     </Sequence>
   );
 };
@@ -38,19 +25,5 @@ const centerCharacterStyle: React.CSSProperties = {
   position: 'absolute',
   right: '60px',
   bottom: '120px',
-  zIndex: zIndex.yukkuri,
-};
-
-const reimuStyle: React.CSSProperties = {
-  position: 'absolute',
-  right: '10px',
-  bottom: '180px',
-  zIndex: zIndex.yukkuri,
-};
-
-const marisaStyle: React.CSSProperties = {
-  position: 'absolute',
-  left: '-5px',
-  bottom: '180px',
   zIndex: zIndex.yukkuri,
 };

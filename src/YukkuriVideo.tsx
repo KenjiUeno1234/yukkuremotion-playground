@@ -77,8 +77,7 @@ export const YukkuriVideo: React.FC<{
             <YukkuriSequence
               {...section}
               fromFramesMap={fromFrameMap}
-              customReimuImagePath={section.customReimuImagePath}
-              customMarisaImagePath={section.customMarisaImagePath}
+              customAyumiImagePath={section.customAyumiImagePath}
             />
 
             {section.beforeMovie && (

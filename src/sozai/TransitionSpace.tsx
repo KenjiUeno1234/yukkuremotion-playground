@@ -10,7 +10,7 @@ import {
 } from 'remotion';
 import {AbsoluteFill} from 'remotion';
 import React, {useEffect, useRef, useState} from 'react';
-import {Face, PureFace} from '../yukkuri/Face/YukkuriFace';
+import {Face} from '../yukkuri/Face/YukkuriFace';
 
 export const TransitionSpace = () => {
 	const frame = useCurrentFrame();
