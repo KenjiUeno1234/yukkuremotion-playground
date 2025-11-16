@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import getAudioDurationInSeconds from 'get-audio-duration';
 import {FPS} from '../src/constants';
+import {generateFromFramesMap} from './generateFromFramesMap';
 
 // myvideo.tsxの音声の長さを更新するスクリプト
 
@@ -61,6 +62,9 @@ async function updateAudioDurations() {
       );
     }
 
+    console.log('\n🔄 fromFramesMapを生成しています...');
+    await generateFromFramesMap(MyVideoConfig);
+
     console.log('\n💾 myvideo.tsxを更新しています...');
 
     // ファイルを再生成
@@ -90,11 +94,14 @@ function generateTypeScriptFile(config: any): string {
         )
         .join(',\n');
 
+      // fromFramesMapをオブジェクトとして出力
+      const fromFramesMapCode = JSON.stringify(section.fromFramesMap || {});
+
       return `    {
       title: '${section.title.replace(/'/g, "\\'")}',
       bgmSrc: 'bgm/Floraria.mp3',
       bgmVolume: 0.2,
-      fromFramesMap: {},
+      fromFramesMap: ${fromFramesMapCode},
       totalFrames: ${section.totalFrames},
       kuchipakuMap: {frames: [], amplitude: []},
       reimuKuchipakuMap: {frames: [], amplitude: []},
