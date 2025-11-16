@@ -9,7 +9,7 @@ const OUTPUT_FILE = path.join(process.cwd(), 'transcripts', 'myvideo.tsx');
 
 interface Talk {
   text: string;
-  speaker: 'reimu' | 'marisa';
+  speaker: 'reimu' | 'marisa' | 'ayumi';
   id: string;
   audioDurationFrames: number;
 }
@@ -23,7 +23,7 @@ function parseMovieyou(content: string): Section[] {
   const lines = content.split('\n');
   const sections: Section[] = [];
   let currentSection: Section | null = null;
-  let currentSpeaker: 'reimu' | 'marisa' | null = null;
+  let currentSpeaker: 'reimu' | 'marisa' | 'ayumi' | null = null;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
@@ -47,6 +47,8 @@ function parseMovieyou(content: string): Section[] {
         currentSpeaker = 'reimu';
       } else if (speaker.includes('魔理沙')) {
         currentSpeaker = 'marisa';
+      } else if (speaker.includes('ayumi')) {
+        currentSpeaker = 'ayumi';
       }
     }
     // 空行やマークダウン以外の行はセリフとして扱う
