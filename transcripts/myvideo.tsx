@@ -6,9 +6,6 @@ export const MyVideoConfig: VideoConfig = {
       title: 'RAG過信への警鐘と本稿の目的',
       bgmSrc: 'bgm/Floraria.mp3',
       bgmVolume: 0.2,
-      backgroundImage: 'BACKGROUND_LAYER/sora-yoru.jpg',
-      customReimuImagePath: 'jinbutu/目を開けている顔.png',
-      customMarisaImagePath: 'jinbutu/目を閉じている顔.png',
       fromFramesMap: {},
       totalFrames: 589,
       kuchipakuMap: {frames: [], amplitude: []},
@@ -18,7 +15,7 @@ export const MyVideoConfig: VideoConfig = {
         {
           text: '1-1. 本動画の位置づけについて説明するわね。登壇者は「自社データ＝RAG」という早合点に疑問を投げかけます。相談現場ではRAG不要の案件が多く、プロンプト設計だけで成果が出る例も豊富だと指摘します。',
           speaker: 'reimu',
-          id: '70d2f872314e4299b6f8ae32db03614c',
+          id: '9780bcba5f664321971bec9cb123cec7',
           audioDurationFrames: 529,
         }
       ],
