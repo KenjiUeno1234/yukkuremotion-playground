@@ -14,7 +14,7 @@ export const TalkSequence: React.FC<Props> = ({talks, fromFramesMap}) => {
       {talks.map((talk, index) => {
         return (
           <Talk
-            key={talk.ids && talks.includes.length > 0 ? talk.ids[0] : talk.id}
+            key={talk.ids && talk.ids.length > 0 ? talk.ids[0] : talk.id}
             voiceConfig={talk}
             from={fromFramesMap[index]}
             meta={{talks, index}}

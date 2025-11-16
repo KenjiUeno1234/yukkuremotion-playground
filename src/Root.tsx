@@ -21,7 +21,8 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         defaultProps={{videoConfig: MyVideoConfig}}
       />
-      <Composition
+      {/* 一時的にコメントアウト: 字幕の重複表示を防ぐため */}
+      {/* <Composition
         id="FirstVideo"
         component={YukkuriVideo}
         durationInFrames={getTotalVideoFrames(FirstVideoConfig)}
@@ -43,7 +44,7 @@ export const RemotionRoot: React.FC = () => {
             sections: [FirstVideoConfig.sections[0]],
           },
         }}
-      />
+      /> */}
       <Composition
         id="TransitionSpace"
         component={TransitionSpace}
