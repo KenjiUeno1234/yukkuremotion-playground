@@ -15,7 +15,7 @@ export const YukkuriSequence: React.FC<Props> = ({
   return (
     <Sequence>
       <div style={centerCharacterStyle}>
-        <AyumiFace customImagePath={customAyumiImagePath} sizePx={380} />
+        <AyumiFace customImagePath={customAyumiImagePath} sizePx={650} />
       </div>
     </Sequence>
   );
@@ -23,7 +23,7 @@ export const YukkuriSequence: React.FC<Props> = ({
 
 const centerCharacterStyle: React.CSSProperties = {
   position: 'absolute',
-  right: '60px',
-  bottom: '120px',
+  right: '-30px',
+  bottom: '-300px',
   zIndex: zIndex.yukkuri,
 };
