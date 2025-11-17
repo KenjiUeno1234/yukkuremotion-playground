@@ -1,5 +1,4 @@
 import {Composition} from 'remotion';
-import {FirstVideoConfig} from '../transcripts/firstvideo';
 import {MyVideoConfig} from '../transcripts/myvideo';
 import {FPS} from './constants';
 import {YukkuriVideo} from './YukkuriVideo';
@@ -21,30 +20,6 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         defaultProps={{videoConfig: MyVideoConfig}}
       />
-      {/* 一時的にコメントアウト: 字幕の重複表示を防ぐため */}
-      {/* <Composition
-        id="FirstVideo"
-        component={YukkuriVideo}
-        durationInFrames={getTotalVideoFrames(FirstVideoConfig)}
-        fps={FPS}
-        width={1920}
-        height={1080}
-        defaultProps={{videoConfig: FirstVideoConfig}}
-      />
-      <Composition
-        id="TestEncoding"
-        component={YukkuriVideo}
-        durationInFrames={FirstVideoConfig.sections[0].totalFrames}
-        fps={FPS}
-        width={1920}
-        height={1080}
-        defaultProps={{
-          videoConfig: {
-            ...FirstVideoConfig,
-            sections: [FirstVideoConfig.sections[0]],
-          },
-        }}
-      /> */}
       <Composition
         id="TransitionSpace"
         component={TransitionSpace}
