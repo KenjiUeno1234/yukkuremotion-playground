@@ -24,14 +24,7 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         defaultProps={{videoConfig: MyVideoConfig}}
       />
-      <Composition
-        id="TransitionSpace"
-        component={TransitionSpace}
-        durationInFrames={180}
-        fps={FPS}
-        width={1920}
-        height={1080}
-      />
+
       <Composition
         id="Slideshow"
         component={SlideshowVideo}
