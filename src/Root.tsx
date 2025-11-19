@@ -16,16 +16,6 @@ export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Composition
-        id="MyVideo"
-        component={YukkuriVideo}
-        durationInFrames={getTotalVideoFrames(MyVideoConfig)}
-        fps={FPS}
-        width={1920}
-        height={1080}
-        defaultProps={{videoConfig: MyVideoConfig}}
-      />
-
-      <Composition
         id="Slideshow"
         component={SlideshowVideo}
         durationInFrames={slideshowConfig.totalFrames}
@@ -33,22 +23,6 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={{config: slideshowConfig}}
-      />
-      <Composition
-        id="TestSlide"
-        component={TestSlide}
-        durationInFrames={150}
-        fps={FPS}
-        width={1920}
-        height={1080}
-      />
-      <Composition
-        id="MinimalTest"
-        component={MinimalTest}
-        durationInFrames={150}
-        fps={FPS}
-        width={1920}
-        height={1080}
       />
     </>
   );

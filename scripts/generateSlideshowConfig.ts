@@ -110,6 +110,8 @@ async function main() {
 import { SlideshowConfig } from '../types/slideshow';
 
 export const slideshowConfig: SlideshowConfig = {
+  bgmSrc: 'bgm/Floraria.mp3',
+  bgmVolume: 0.2,
   slides: ${JSON.stringify(slides, null, 2)},
   totalFrames: ${totalFrames},
 };
