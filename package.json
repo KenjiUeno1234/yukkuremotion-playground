@@ -21,6 +21,8 @@
 		"generate:yukkuri-voice-for-tuning:watch": "nodemon --watch scripts/generateYukkuriForTuning.ts scripts/generateYukkuriForTuning.ts",
 		"generate:voicepeak": "ts-node scripts/generateVoicepeakAudios.ts",
 		"generate:voicepeak:ps1": "powershell -ExecutionPolicy Bypass -File scripts/Generate-YukkuriVoiceFromConfig.ps1",
+		"generate:script-final": "ts-node scripts/generateScriptFinalVoices.ts",
+		"generate:slideshow-config": "ts-node scripts/generateSlideshowConfig.ts",
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook"
 	},

@@ -28,7 +28,9 @@
       "Bash(node -e:*)",
       "Bash(xcopy:*)",
       "Bash(python scripts/crop-images.py:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(mkdir:*)",
+      "Bash(curl -I http://localhost:3000/slide/S001.png)"
     ],
     "deny": [],
     "ask": []
