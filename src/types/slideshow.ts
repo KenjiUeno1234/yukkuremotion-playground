@@ -9,4 +9,6 @@ export interface SlideItem {
 export interface SlideshowConfig {
   slides: SlideItem[];
   totalFrames: number;
+  bgmSrc?: string; // BGMファイルパス
+  bgmVolume?: number; // BGM音量
 }

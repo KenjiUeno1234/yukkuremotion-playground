@@ -4,6 +4,8 @@
 import { SlideshowConfig } from '../types/slideshow';
 
 export const slideshowConfig: SlideshowConfig = {
+  bgmSrc: 'bgm/Floraria.mp3',
+  bgmVolume: 0.2,
   slides: [
   {
     "id": "S001",
