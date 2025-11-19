@@ -1,0 +1,26 @@
+script_final.md → 音声ファイル（音声合成）
+
+ここはスライドと独立だけど、同じセクションIDで紐づけると管理しやすい。
+
+script_final.md をもう一度読む
+
+## [Sxxx] ごとに、そのセクション内の - NARRATOR: のセリフを結合 or 1行ごとに分ける
+
+VOICEVOX / VOICEPEAK / 他TTSに投げて
+
+voices/S001_NARRATOR.wav
+
+voices/S002_NARRATOR.wav
+のように出力
+
+ついでに 長さ（秒） を測って audio_durations.json に保存しておくと Remotionで便利
+
+ステップ5：Remotion に載せる
+
+Remotion側は基本的に：
+
+「どのフレームから」「何フレーム分」
+
+「どのスライド画像」「どの音声ファイル」
+
+を並べていくだけ。
