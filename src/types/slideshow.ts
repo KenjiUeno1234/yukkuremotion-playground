@@ -1,9 +1,14 @@
+export interface NarrationSegment {
+  text: string; // ナレーションテキスト
+  voicePath: string; // voices/S001-1.wav
+  audioDurationFrames: number; // 音声の長さ（フレーム数）
+}
+
 export interface SlideItem {
   id: string; // S001, S002, etc.
-  narration: string; // NARRATOR部分のテキスト
   slidePath: string; // slide/S001.png
-  voicePath: string; // voices/S001.wav
-  audioDurationFrames: number; // 音声の長さ（フレーム数）
+  narrations: NarrationSegment[]; // 複数のナレーション
+  totalDurationFrames: number; // このスライドの合計フレーム数
 }
 
 export interface SlideshowConfig {

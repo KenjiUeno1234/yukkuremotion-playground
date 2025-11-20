@@ -7,16 +7,22 @@ const VOICES_DIR = path.join(process.cwd(), 'public', 'voices');
 const OUTPUT_FILE = path.join(process.cwd(), 'src', 'data', 'slideshowConfig.ts');
 const FPS = 30;
 
-interface SlideItem {
-  id: string;
-  narration: string;
-  slidePath: string;
+interface NarrationSegment {
+  text: string;
   voicePath: string;
   audioDurationFrames: number;
 }
 
+interface SlideItem {
+  id: string;
+  slidePath: string;
+  narrations: NarrationSegment[];
+  totalDurationFrames: number;
+}
+
 interface ParsedScript {
   id: string;
+  index: number;
   narration: string;
 }
 
@@ -25,6 +31,9 @@ function parseScriptFile(): ParsedScript[] {
   const content = fs.readFileSync(SCRIPT_FILE, 'utf-8');
   const lines = content.split('\n');
   const items: ParsedScript[] = [];
+
+  // 各スライドIDの出現回数をカウント
+  const idCounts: Record<string, number> = {};
 
   let currentId: string | null = null;
 
@@ -40,8 +49,15 @@ function parseScriptFile(): ParsedScript[] {
     }
 
     if (currentId && line.trim() && !line.trim().startsWith('[')) {
+      // このIDの出現回数をカウント
+      if (!idCounts[currentId]) {
+        idCounts[currentId] = 0;
+      }
+      idCounts[currentId]++;
+
       items.push({
         id: currentId,
+        index: idCounts[currentId],
         narration: line.trim(),
       });
       currentId = null;
@@ -71,29 +87,56 @@ async function main() {
   const parsedItems = parseScriptFile();
   console.log(`解析結果: ${parsedItems.length}件\n`);
 
+  // 同じスライドIDをグループ化
+  const groupedBySlide: Record<string, ParsedScript[]> = {};
+  for (const item of parsedItems) {
+    if (!groupedBySlide[item.id]) {
+      groupedBySlide[item.id] = [];
+    }
+    groupedBySlide[item.id].push(item);
+  }
+
   const slides: SlideItem[] = [];
   let totalFrames = 0;
 
-  for (const item of parsedItems) {
-    const voiceFilePath = path.join(VOICES_DIR, `${item.id}.wav`);
+  // スライドIDをソートして処理
+  const slideIds = Object.keys(groupedBySlide).sort();
 
-    if (!fs.existsSync(voiceFilePath)) {
-      console.error(`❌ 音声ファイルが見つかりません: ${item.id}.wav`);
-      continue;
+  for (const slideId of slideIds) {
+    const narrationItems = groupedBySlide[slideId];
+    const narrations: NarrationSegment[] = [];
+    let slideTotalFrames = 0;
+
+    console.log(`\n${slideId}:`);
+
+    for (const item of narrationItems) {
+      const voiceFilePath = path.join(VOICES_DIR, `${item.id}-${item.index}.wav`);
+
+      if (!fs.existsSync(voiceFilePath)) {
+        console.error(`  ❌ 音声ファイルが見つかりません: ${item.id}-${item.index}.wav`);
+        continue;
+      }
+
+      const audioDurationFrames = await getAudioDuration(voiceFilePath);
+      console.log(`  ✓ ${item.id}-${item.index}: ${(audioDurationFrames / FPS).toFixed(2)}秒 (${audioDurationFrames}フレーム)`);
+
+      narrations.push({
+        text: item.narration,
+        voicePath: `voices/${item.id}-${item.index}.wav`,
+        audioDurationFrames,
+      });
+
+      slideTotalFrames += audioDurationFrames;
     }
 
-    const audioDurationFrames = await getAudioDuration(voiceFilePath);
-    console.log(`  ✓ ${item.id}: ${(audioDurationFrames / FPS).toFixed(2)}秒 (${audioDurationFrames}フレーム)`);
-
     slides.push({
-      id: item.id,
-      narration: item.narration,
-      slidePath: `slide/${item.id}.png`,
-      voicePath: `voices/${item.id}.wav`,
-      audioDurationFrames,
+      id: slideId,
+      slidePath: `slide/${slideId}.png`,
+      narrations,
+      totalDurationFrames: slideTotalFrames,
     });
 
-    totalFrames += audioDurationFrames;
+    totalFrames += slideTotalFrames;
   }
 
   console.log(`\n総フレーム数: ${totalFrames} (${(totalFrames / FPS).toFixed(2)}秒)\n`);

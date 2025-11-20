@@ -23,6 +23,7 @@ const VOICE_CONFIG = {
 
 interface ScriptItem {
   id: string;
+  index: number; // 同じスライド内での順番（1, 2, 3...）
   text: string;
 }
 
@@ -31,6 +32,9 @@ function parseScriptFile(): ScriptItem[] {
   const content = fs.readFileSync(SCRIPT_FILE, 'utf-8');
   const lines = content.split('\n');
   const items: ScriptItem[] = [];
+
+  // 各スライドIDの出現回数をカウント
+  const idCounts: Record<string, number> = {};
 
   let currentId: string | null = null;
 
@@ -49,8 +53,15 @@ function parseScriptFile(): ScriptItem[] {
 
     // テキスト行を取得
     if (currentId && line.trim() && !line.trim().startsWith('[')) {
+      // このIDの出現回数をカウント
+      if (!idCounts[currentId]) {
+        idCounts[currentId] = 0;
+      }
+      idCounts[currentId]++;
+
       items.push({
         id: currentId,
+        index: idCounts[currentId],
         text: line.trim(),
       });
       currentId = null;
@@ -61,16 +72,17 @@ function parseScriptFile(): ScriptItem[] {
 }
 
 // 音声ファイルを生成
-function generateVoice(id: string, text: string): void {
-  const outputPath = path.join(OUTPUT_DIR, `${id}.wav`);
+function generateVoice(id: string, index: number, text: string): void {
+  const filename = `${id}-${index}.wav`;
+  const outputPath = path.join(OUTPUT_DIR, filename);
 
   // 既存ファイルがあればスキップ
   if (fs.existsSync(outputPath)) {
-    console.log(`  スキップ: ${id}.wav (既存)`);
+    console.log(`  スキップ: ${filename} (既存)`);
     return;
   }
 
-  console.log(`  生成中: ${id} - ${text.substring(0, 50)}...`);
+  console.log(`  生成中: ${filename} - ${text.substring(0, 50)}...`);
 
   const command = [
     `"${VOICEPEAK_PATH}"`,
@@ -85,9 +97,9 @@ function generateVoice(id: string, text: string): void {
 
   try {
     execSync(command, { stdio: 'inherit' });
-    console.log(`    成功: ${id}.wav`);
+    console.log(`    成功: ${filename}`);
   } catch (error) {
-    console.error(`    失敗: ${id}.wav`, error);
+    console.error(`    失敗: ${filename}`, error);
   }
 }
 
@@ -113,13 +125,14 @@ function main() {
   let failCount = 0;
 
   for (const item of items) {
-    const outputPath = path.join(OUTPUT_DIR, `${item.id}.wav`);
+    const filename = `${item.id}-${item.index}.wav`;
+    const outputPath = path.join(OUTPUT_DIR, filename);
 
     if (fs.existsSync(outputPath)) {
       skipCount++;
     } else {
       try {
-        generateVoice(item.id, item.text);
+        generateVoice(item.id, item.index, item.text);
         successCount++;
       } catch {
         failCount++;

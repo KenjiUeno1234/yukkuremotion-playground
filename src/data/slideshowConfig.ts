@@ -9,67 +9,212 @@ export const slideshowConfig: SlideshowConfig = {
   slides: [
   {
     "id": "S001",
-    "narration": "「自社データならRAGでしょ」と言われがちですが、実はそうとも限りません。まずは、その思い込みをそっとほどいていきましょう。",
     "slidePath": "slide/S001.png",
-    "voicePath": "voices/S001.wav",
-    "audioDurationFrames": 296
+    "narrations": [
+      {
+        "text": "「自社データならRAGでしょ」と言われがちですが、実はそうとも限りません。",
+        "voicePath": "voices/S001-1.wav",
+        "audioDurationFrames": 176
+      },
+      {
+        "text": "まずは、その思い込みをそっとほどいていきましょう。",
+        "voicePath": "voices/S001-2.wav",
+        "audioDurationFrames": 114
+      }
+    ],
+    "totalDurationFrames": 290
   },
   {
     "id": "S002",
-    "narration": "よく耳にするのは、「RAGを入れないとダメですよね？」という声。けれど実際は、プロンプトだけで綺麗に回せるケースがたくさんあります。内容がパターン化できるなら、むしろRAGより精度が上がることも珍しくありません。",
     "slidePath": "slide/S002.png",
-    "voicePath": "voices/S002.wav",
-    "audioDurationFrames": 518
+    "narrations": [
+      {
+        "text": "よく耳にするのは、「RAGを入れないとダメですよね？」という声。",
+        "voicePath": "voices/S002-1.wav",
+        "audioDurationFrames": 154
+      },
+      {
+        "text": "けれど実際は、プロンプトだけで綺麗に回せるケースがたくさんあります。",
+        "voicePath": "voices/S002-2.wav",
+        "audioDurationFrames": 147
+      },
+      {
+        "text": "内容がパターン化できるなら、むしろRAGより精度が上がることも珍しくありません。",
+        "voicePath": "voices/S002-3.wav",
+        "audioDurationFrames": 188
+      }
+    ],
+    "totalDurationFrames": 489
   },
   {
     "id": "S003",
-    "narration": "最初に考えるのは、「AIに全部の情報を見てほしいのかどうか」。もし“全部読んだうえで判断してほしい”なら、部分検索であるRAGはあまり向いていません。全文を読ませるアプローチのほうが自然です。",
     "slidePath": "slide/S003.png",
-    "voicePath": "voices/S003.wav",
-    "audioDurationFrames": 492
+    "narrations": [
+      {
+        "text": "最初に考えるのは、「AIに全部の情報を見てほしいのかどうか」。",
+        "voicePath": "voices/S003-1.wav",
+        "audioDurationFrames": 148
+      },
+      {
+        "text": "もし“全部読んだうえで判断してほしい”なら、部分検索であるRAGはあまり向いていません。",
+        "voicePath": "voices/S003-2.wav",
+        "audioDurationFrames": 228
+      },
+      {
+        "text": "全文を読ませるアプローチのほうが自然です。",
+        "voicePath": "voices/S003-3.wav",
+        "audioDurationFrames": 91
+      }
+    ],
+    "totalDurationFrames": 467
   },
   {
     "id": "S004",
-    "narration": "GPTやClaudeは10〜20万字、Geminiなら100万字以上入る時代です。実は、全文を入れてもコストはごくわずか。RAGを作り込むより、速くて安定していることが多いんですね。",
     "slidePath": "slide/S004.png",
-    "voicePath": "voices/S004.wav",
-    "audioDurationFrames": 461
+    "narrations": [
+      {
+        "text": "GPTやClaudeは10〜20万字、Geminiなら100万字以上入る時代です。",
+        "voicePath": "voices/S004-1.wav",
+        "audioDurationFrames": 184
+      },
+      {
+        "text": "実は、全文を入れてもコストはごくわずか。",
+        "voicePath": "voices/S004-2.wav",
+        "audioDurationFrames": 105
+      },
+      {
+        "text": "RAGを作り込むより、速くて安定していることが多いんですね。",
+        "voicePath": "voices/S004-3.wav",
+        "audioDurationFrames": 143
+      }
+    ],
+    "totalDurationFrames": 432
   },
   {
     "id": "S005",
-    "narration": "もしパターンが10〜20種類くらいなら、テンプレート化が最適です。業界別に作っておけば使い回しも簡単で、精度も運用も申し分ありません。",
     "slidePath": "slide/S005.png",
-    "voicePath": "voices/S005.wav",
-    "audioDurationFrames": 345
+    "narrations": [
+      {
+        "text": "もしパターンが10〜20種類くらいなら、テンプレート化が最適です。",
+        "voicePath": "voices/S005-1.wav",
+        "audioDurationFrames": 148
+      },
+      {
+        "text": "業界別に作っておけば使い回しも簡単で、精度も運用も申し分ありません。",
+        "voicePath": "voices/S005-2.wav",
+        "audioDurationFrames": 185
+      }
+    ],
+    "totalDurationFrames": 333
   },
   {
     "id": "S006",
-    "narration": "“全部見たい”ならそのままプロンプトへ。",
     "slidePath": "slide/S006.png",
-    "voicePath": "voices/S006.wav",
-    "audioDurationFrames": 100
+    "narrations": [
+      {
+        "text": "“全部見たい”ならそのままプロンプトへ。",
+        "voicePath": "voices/S006-1.wav",
+        "audioDurationFrames": 100
+      },
+      {
+        "text": "“上限に収まる”なら全文を入れる。",
+        "voicePath": "voices/S006-2.wav",
+        "audioDurationFrames": 100
+      },
+      {
+        "text": "“パターンが少ない”ならテンプレ化。",
+        "voicePath": "voices/S006-3.wav",
+        "audioDurationFrames": 91
+      },
+      {
+        "text": "この条件がそろえば、RAGは必要ありません。",
+        "voicePath": "voices/S006-4.wav",
+        "audioDurationFrames": 120
+      },
+      {
+        "text": "もっとシンプルで強い方法があるからです。",
+        "voicePath": "voices/S006-5.wav",
+        "audioDurationFrames": 89
+      }
+    ],
+    "totalDurationFrames": 500
   },
   {
     "id": "S007",
-    "narration": "RAGは万能ではありません。適材適所でこそ輝く技術です。「どの状況でもRAGが正解」というわけではないんです。",
     "slidePath": "slide/S007.png",
-    "voicePath": "voices/S007.wav",
-    "audioDurationFrames": 306
+    "narrations": [
+      {
+        "text": "RAGは万能ではありません。",
+        "voicePath": "voices/S007-1.wav",
+        "audioDurationFrames": 72
+      },
+      {
+        "text": "適材適所でこそ輝く技術です。",
+        "voicePath": "voices/S007-2.wav",
+        "audioDurationFrames": 87
+      },
+      {
+        "text": "「どの状況でもRAGが正解」というわけではないんです。",
+        "voicePath": "voices/S007-3.wav",
+        "audioDurationFrames": 133
+      }
+    ],
+    "totalDurationFrames": 292
   },
   {
     "id": "S008",
-    "narration": "RAGは“部分を取り出す技術”。",
     "slidePath": "slide/S008.png",
-    "voicePath": "voices/S008.wav",
-    "audioDurationFrames": 93
+    "narrations": [
+      {
+        "text": "RAGは“部分を取り出す技術”。",
+        "voicePath": "voices/S008-1.wav",
+        "audioDurationFrames": 93
+      },
+      {
+        "text": "全部読む用途には向きません。",
+        "voicePath": "voices/S008-2.wav",
+        "audioDurationFrames": 64
+      },
+      {
+        "text": "入力が収まるなら全文投入でOK。",
+        "voicePath": "voices/S008-3.wav",
+        "audioDurationFrames": 98
+      },
+      {
+        "text": "パターンが少ないならテンプレ化が最善。",
+        "voicePath": "voices/S008-4.wav",
+        "audioDurationFrames": 87
+      },
+      {
+        "text": "要は、状況に合わせて賢く選ぶことが大切なんです。",
+        "voicePath": "voices/S008-5.wav",
+        "audioDurationFrames": 128
+      }
+    ],
+    "totalDurationFrames": 470
   },
   {
     "id": "S009",
-    "narration": "勢いでRAGを作って失敗する例は少なくありません。まずは「本当に必要か」を落ち着いて見極めること。RAGを“使わない”判断こそ、自社データ活用の成功を近づける大事な一歩です。",
     "slidePath": "slide/S009.png",
-    "voicePath": "voices/S009.wav",
-    "audioDurationFrames": 499
+    "narrations": [
+      {
+        "text": "勢いでRAGを作って失敗する例は少なくありません。",
+        "voicePath": "voices/S009-1.wav",
+        "audioDurationFrames": 128
+      },
+      {
+        "text": "まずは「本当に必要か」を落ち着いて見極めること。",
+        "voicePath": "voices/S009-2.wav",
+        "audioDurationFrames": 127
+      },
+      {
+        "text": "RAGを“使わない”判断こそ、自社データ活用の成功を近づける大事な一歩です。",
+        "voicePath": "voices/S009-3.wav",
+        "audioDurationFrames": 216
+      }
+    ],
+    "totalDurationFrames": 471
   }
 ],
-  totalFrames: 3110,
+  totalFrames: 3744,
 };

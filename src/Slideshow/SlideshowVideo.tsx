@@ -31,15 +31,29 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
 
       {config.slides.map((slide, index) => {
         const startFrame = currentFrame;
-        const durationFrames = slide.audioDurationFrames;
+        const durationFrames = slide.totalDurationFrames;
 
         console.log(`Slide ${slide.id}: from=${startFrame}, duration=${durationFrames}`);
 
-        // fromFramesMapを作成（音声が開始するフレーム）
-        const fromFramesMap = { 0: 0 };
-
         // 次のスライドの開始フレームを更新
         currentFrame += durationFrames;
+
+        // 複数のナレーションをtalksに変換
+        let narrationFrame = 0;
+        const fromFramesMap: Record<number, number> = {};
+        const talks = slide.narrations.map((narration, idx) => {
+          fromFramesMap[idx] = startFrame + narrationFrame;
+          const talk = {
+            text: narration.text,
+            speaker: 'ayumi' as const,
+            audioDurationFrames: narration.audioDurationFrames,
+            audio: {
+              src: narration.voicePath,
+            },
+          };
+          narrationFrame += narration.audioDurationFrames;
+          return talk;
+        });
 
         return (
           <React.Fragment key={slide.id}>
@@ -62,35 +76,17 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
 
             {/* 字幕と音声 */}
             <TalkSequence
-              fromFramesMap={{ 0: startFrame }}
+              fromFramesMap={fromFramesMap}
               totalFrames={startFrame + durationFrames}
-              talks={[
-                {
-                  text: slide.narration,
-                  speaker: 'ayumi',
-                  audioDurationFrames: durationFrames,
-                  audio: {
-                    src: slide.voicePath,
-                  },
-                },
-              ]}
+              talks={talks}
               kuchipakuMap={{ frames: [], amplitude: [] }}
             />
 
             {/* ゆっくりキャラクター */}
             <YukkuriSequence
-              fromFramesMap={{ 0: startFrame }}
+              fromFramesMap={fromFramesMap}
               totalFrames={startFrame + durationFrames}
-              talks={[
-                {
-                  text: slide.narration,
-                  speaker: 'ayumi',
-                  audioDurationFrames: durationFrames,
-                  audio: {
-                    src: slide.voicePath,
-                  },
-                },
-              ]}
+              talks={talks}
               kuchipakuMap={{ frames: [], amplitude: [] }}
             />
           </React.Fragment>
