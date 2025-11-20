@@ -11,16 +11,18 @@ export type TalkProps = {
     talks: VoiceConfig[];
     index: number;
   };
+  isSlideshow?: boolean;
 };
 
-const getDurationInFrames = (voiceConfig: VoiceConfig) =>
+const getDurationInFrames = (voiceConfig: VoiceConfig, isSlideshow?: boolean) =>
   voiceConfig.customDuration ||
-  voiceConfig.audioDurationFrames + TALK_GAP_FRAMES;
+  voiceConfig.audioDurationFrames + (isSlideshow ? 0 : TALK_GAP_FRAMES);
 
 const getBackgroundVideoDuration = (
   currentTalk: VoiceConfig,
   talks: VoiceConfig[],
-  index: number
+  index: number,
+  isSlideshow?: boolean
 ) => {
   const video = currentTalk.backgroundVideo;
 
@@ -28,24 +30,24 @@ const getBackgroundVideoDuration = (
     return 0;
   }
 
-  let duration = getDurationInFrames(currentTalk);
+  let duration = getDurationInFrames(currentTalk, isSlideshow);
 
   if (video.extendTalksCount) {
     for (let i = 1; i <= video.extendTalksCount; i++) {
-      duration += getDurationInFrames(talks[index + i]);
+      duration += getDurationInFrames(talks[index + i], isSlideshow);
     }
   }
   return duration;
 };
 
-export const Talk: React.FC<TalkProps> = ({voiceConfig, from, meta}) => {
+export const Talk: React.FC<TalkProps> = ({voiceConfig, from, meta, isSlideshow}) => {
   const hasAudio = Boolean(voiceConfig.id) || Boolean(voiceConfig.ids);
 
   const CustomObject = voiceConfig.customObjectKey
     ? CustomObjects[voiceConfig.customObjectKey]
     : null;
 
-  const durationInFrames = getDurationInFrames(voiceConfig);
+  const durationInFrames = getDurationInFrames(voiceConfig, isSlideshow);
 
   return (
     <>
@@ -100,7 +102,8 @@ export const Talk: React.FC<TalkProps> = ({voiceConfig, from, meta}) => {
           durationInFrames={getBackgroundVideoDuration(
             voiceConfig,
             meta.talks,
-            meta.index
+            meta.index,
+            isSlideshow
           )}
           from={(from || 0) + (voiceConfig.backgroundVideo.from || 0)}
         >

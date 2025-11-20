@@ -9,7 +9,7 @@ interface SlideshowVideoProps {
   config: SlideshowConfig;
 }
 
-// 口パクパターンを生成する関数
+// 口パクパターンを生成する関数（改善版：ナレーション開始/終了を正確に反映）
 function generateKuchipakuMap(
   narrations: { audioDurationFrames: number }[],
   startFrame: number
@@ -20,18 +20,20 @@ function generateKuchipakuMap(
   let currentNarrationFrame = startFrame;
 
   for (const narration of narrations) {
-    // 各ナレーションの間、3フレームごとに口を開閉
+    // 各ナレーションの音声再生中は口パクを行う
     for (let i = 0; i < narration.audioDurationFrames; i++) {
       const frameNumber = currentNarrationFrame + i;
       frames.push(frameNumber);
 
-      // 3フレームサイクルで口パクパターンを作る (開く→開く→閉じる)
+      // より自然な口パクパターン: 2フレーム開いて1フレーム閉じる
       const cyclePosition = i % 3;
       amplitude.push(cyclePosition < 2 ? 1 : 0);
     }
 
     currentNarrationFrame += narration.audioDurationFrames;
   }
+
+  console.log(`口パクマップ生成: ${frames.length}フレーム, 開始=${startFrame}, 終了=${currentNarrationFrame - 1}`);
 
   return { frames, amplitude };
 }
@@ -49,7 +51,7 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
     <AbsoluteFill style={{ backgroundColor: 'transparent' }}>
       {/* 背景画像 - 全画面表示 */}
       <Img
-        src={staticFile('background/okumono_tanabata0259.png')}
+        src={staticFile('background/okumono_wakusei5.png')}
         style={{
           position: 'absolute',
           width: '100%',

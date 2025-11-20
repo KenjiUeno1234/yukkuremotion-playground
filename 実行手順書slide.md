@@ -25,7 +25,7 @@ script_final.md に記載されたNARRATOR部分から、以下の要素を含�
 
 1. **script_final.md**: ナレーションテキストが記載されたMarkdownファイル（同じスライドIDで複数のNARRATOR記述可能）
 2. **スライド画像**: public/slide/ フォルダに S001.png～S009.png を配置
-3. **背景画像**: public/background/ フォルダに okumono_tanabata0259.png を配置
+3. **背景画像**: public/background/ フォルダに okumono_wakusei5.png を配置
 4. **BGMファイル**: public/bgm/Floraria.mp3 が存在すること
 5. **VOICEPEAK**がインストールされていること
 
@@ -59,7 +59,7 @@ mkdir public\bgm
 mkdir public\voices
 
 # スライド画像（S001.png～S009.png）をpublic\slideフォルダに配置
-# 背景画像（okumono_tanabata0259.png）をpublic\backgroundフォルダに配置
+# 背景画像（okumono_wakusei5.png）をpublic\backgroundフォルダに配置
 # BGMファイル（Floraria.mp3）をpublic\bgmフォルダに配置
 ```
 
@@ -105,10 +105,10 @@ npm start
 
 ### 表示される要素
 
-1. **背景画像**: okumono_tanabata0259.png が画面全体に表示（zIndex: 1）
+1. **背景画像**: okumono_wakusei5.png が画面全体に表示（zIndex: 1）
 2. **スライド画像**: 画面左側70%の領域に表示（zIndex: 2）- キャラクターと重ならないように配置
 3. **ゆっくりキャラクター**: 画面右下に表示（650px）- 口パク機能付き
-4. **字幕**: 画面下部に表示（黒背景80%不透明、白文字32px、角丸4px）
+4. **字幕**: 画面下部に表示（黒背景80%不透明、白文字38px、角丸4px、下から80px）
 
 ### レイアウト詳細
 
@@ -194,7 +194,7 @@ npm start
 
 **確認事項**:
 ```bash
-powershell -Command "Test-Path public\background\okumono_tanabata0259.png"
+powershell -Command "Test-Path public\background\okumono_wakusei5.png"
 ```
 
 **解決方法**: 背景画像を public\background フォルダに配置し、ブラウザをハードリフレッシュ（Ctrl + Shift + R）
@@ -283,6 +283,38 @@ narrations: [
 
 **解決方法**: ステップ3を再実行して設定ファイルを再生成
 
+### 問題8: 字幕が切り替わる時に重なって見える
+
+**原因**: `TALK_GAP_FRAMES`がスライドショーモードで誤適用されていた
+
+**確認事項**:
+- src/yukkuri/Talk/TalkSequence.tsx で `isSlideshow={!!kuchipakuMap}` が設定されているか
+- src/yukkuri/Talk/index.tsx で `isSlideshow` パラメータが使用されているか
+
+**解決方法**:
+1. 修正済みコードを使用（2025-11-20以降）
+2. ブラウザをハードリフレッシュ（Ctrl + Shift + R）
+
+**技術詳細**: スライドショーではナレーション間にギャップがないため、`isSlideshow`モードでは`TALK_GAP_FRAMES`（25フレーム）を追加しません。
+
+### 問題9: 1分20秒付近で口パクが止まる
+
+**原因**: 字幕とkuchipakuMapの長さの不一致（問題8と同じ根本原因）
+
+**確認事項**:
+- ブラウザコンソールで「口パクマップ生成」ログを確認
+- 各スライドの開始/終了フレームが連続しているか確認
+
+**解決方法**:
+1. 問題8の解決方法を適用
+2. ブラウザコンソールで以下のログを確認：
+   ```
+   口パクマップ生成: 500フレーム, 開始=2011, 終了=2510
+   ```
+   （S006が正しく生成されていることを確認）
+
+**詳細**: [FIX_VERIFICATION_1min20sec.md](FIX_VERIFICATION_1min20sec.md) を参照
+
 ---
 
 ## 評価の実行
@@ -299,7 +331,7 @@ powershell -Command "if ((Get-ChildItem public\slide\*.png).Count -eq 9) { Write
 powershell -Command "if ((Get-ChildItem public\voices\*.wav).Count -eq 29) { Write-Host '✅ 音声ファイル: 29ファイル' -ForegroundColor Green } else { Write-Host '❌ 音声ファイルの数が不正です' -ForegroundColor Red }"
 
 # 背景画像
-powershell -Command "if (Test-Path public\background\okumono_tanabata0259.png) { Write-Host '✅ 背景画像あり' -ForegroundColor Green } else { Write-Host '❌ 背景画像なし' -ForegroundColor Red }"
+powershell -Command "if (Test-Path public\background\okumono_wakusei5.png) { Write-Host '✅ 背景画像あり' -ForegroundColor Green } else { Write-Host '❌ 背景画像なし' -ForegroundColor Red }"
 
 # BGM
 powershell -Command "if (Test-Path public\bgm\Floraria.mp3) { Write-Host '✅ BGMあり' -ForegroundColor Green } else { Write-Host '❌ BGMなし' -ForegroundColor Red }"

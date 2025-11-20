@@ -14,12 +14,12 @@ export const SubtitleWithBackground = (props: {
   </div>
 );
 
-// コンテナ: 画面最下部に配置
+// コンテナ: 画面下部に配置（少し上に移動）
 const jimakuContainer: React.CSSProperties = {
   position: 'absolute',
   width: '100%',
   height: 'auto',
-  bottom: '10px',
+  bottom: '80px',
   left: 0,
   display: 'flex',
   alignItems: 'flex-end',
@@ -34,14 +34,14 @@ const jimakuContainer: React.CSSProperties = {
 const jimakuTextBox: React.CSSProperties = {
   display: 'inline-block',
   backgroundColor: 'rgba(0, 0, 0, 0.8)',
-  padding: '8px 16px',
+  padding: '10px 20px',
   borderRadius: '4px',
 };
 
-// テキスト: 白文字
+// テキスト: 白文字（サイズを大きく）
 const jimakuText: React.CSSProperties = {
   color: '#FFFFFF',
-  fontSize: '32px',
+  fontSize: '38px',
   fontWeight: 'bold',
   textAlign: 'left',
   whiteSpace: 'pre-wrap',

@@ -6,9 +6,10 @@ export type Props = {
   talks: VoiceConfig[];
   fromFramesMap: {[key in number]: number};
   afterMovieFrames?: number;
+  kuchipakuMap?: { frames: number[]; amplitude: number[] };
 };
 
-export const TalkSequence: React.FC<Props> = ({talks, fromFramesMap}) => {
+export const TalkSequence: React.FC<Props> = ({talks, fromFramesMap, kuchipakuMap}) => {
   return (
     <>
       {talks.map((talk, index) => {
@@ -18,6 +19,7 @@ export const TalkSequence: React.FC<Props> = ({talks, fromFramesMap}) => {
             voiceConfig={talk}
             from={fromFramesMap[index]}
             meta={{talks, index}}
+            isSlideshow={!!kuchipakuMap}
           />
         );
       })}
