@@ -15,6 +15,7 @@ import {zIndex} from '../../constants';
 export type AyumiProps = {
   sizePx?: number;
   customImagePath?: string;
+  kuchipakuMap?: { frames: number[]; amplitude: number[] };
 };
 
 const DEFAULT_AYUMI_SIZE_PX = 320;
@@ -22,11 +23,13 @@ const DEFAULT_AYUMI_SIZE_PX = 320;
 export const AyumiFace: React.FC<AyumiProps> = ({
   sizePx,
   customImagePath,
+  kuchipakuMap,
 }) => {
   return (
     <Face
       sizePx={sizePx}
       customImagePath={customImagePath}
+      kuchipakuMap={kuchipakuMap}
     />
   );
 };
@@ -34,15 +37,26 @@ export const AyumiFace: React.FC<AyumiProps> = ({
 export const Face = (props: {
   sizePx?: number;
   customImagePath?: string;
+  kuchipakuMap?: { frames: number[]; amplitude: number[] };
 }) => {
-  const {sizePx, customImagePath} = props;
+  const {sizePx, customImagePath, kuchipakuMap} = props;
 
   const faceSizePx = sizePx ? sizePx : DEFAULT_AYUMI_SIZE_PX;
   const frame = useCurrentFrame();
 
   // Get eye and mouth state from frame maps
   const eyeState = useMemo(() => AyumiEyeByFrame[frame] || 0, [frame]);
-  const mouthState = useMemo(() => AyumiMouthByFrame[frame] || 0, [frame]);
+
+  // Use kuchipakuMap if provided, otherwise use default MouthByFrame
+  const mouthState = useMemo(() => {
+    if (kuchipakuMap && kuchipakuMap.frames.length > 0) {
+      const frameIndex = kuchipakuMap.frames.indexOf(frame);
+      if (frameIndex !== -1) {
+        return kuchipakuMap.amplitude[frameIndex];
+      }
+    }
+    return AyumiMouthByFrame[frame] || 0;
+  }, [frame, kuchipakuMap]);
 
   if (customImagePath) {
     return (

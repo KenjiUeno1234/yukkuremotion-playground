@@ -7,15 +7,21 @@ export type Props = {
   talks: VoiceConfig[];
   fromFramesMap: {[key in number]: number};
   customAyumiImagePath?: string;
+  kuchipakuMap: { frames: number[]; amplitude: number[] };
 };
 
 export const YukkuriSequence: React.FC<Props> = ({
   customAyumiImagePath,
+  kuchipakuMap,
 }) => {
   return (
     <Sequence>
       <div style={centerCharacterStyle}>
-        <AyumiFace customImagePath={customAyumiImagePath} sizePx={650} />
+        <AyumiFace
+          customImagePath={customAyumiImagePath}
+          sizePx={650}
+          kuchipakuMap={kuchipakuMap}
+        />
       </div>
     </Sequence>
   );

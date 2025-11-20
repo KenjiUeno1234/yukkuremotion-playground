@@ -9,6 +9,33 @@ interface SlideshowVideoProps {
   config: SlideshowConfig;
 }
 
+// 口パクパターンを生成する関数
+function generateKuchipakuMap(
+  narrations: { audioDurationFrames: number }[],
+  startFrame: number
+): { frames: number[]; amplitude: number[] } {
+  const frames: number[] = [];
+  const amplitude: number[] = [];
+
+  let currentNarrationFrame = startFrame;
+
+  for (const narration of narrations) {
+    // 各ナレーションの間、3フレームごとに口を開閉
+    for (let i = 0; i < narration.audioDurationFrames; i++) {
+      const frameNumber = currentNarrationFrame + i;
+      frames.push(frameNumber);
+
+      // 3フレームサイクルで口パクパターンを作る (開く→開く→閉じる)
+      const cyclePosition = i % 3;
+      amplitude.push(cyclePosition < 2 ? 1 : 0);
+    }
+
+    currentNarrationFrame += narration.audioDurationFrames;
+  }
+
+  return { frames, amplitude };
+}
+
 export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
   console.log('SlideshowVideo config:', {
     totalSlides: config.slides.length,
@@ -19,7 +46,7 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
   let currentFrame = 0;
 
   return (
-    <AbsoluteFill style={{ backgroundColor: '#000' }}>
+    <AbsoluteFill style={{ backgroundColor: 'transparent' }}>
       {/* 背景画像 - 全画面表示 */}
       <Img
         src={staticFile('background/okumono_tanabata0259.png')}
@@ -67,6 +94,9 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
           return talk;
         });
 
+        // 口パクマップを生成
+        const kuchipakuMap = generateKuchipakuMap(slide.narrations, startFrame);
+
         return (
           <React.Fragment key={slide.id}>
             {/* スライド画像 */}
@@ -77,10 +107,10 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
               <div
                 style={{
                   position: 'absolute',
-                  top: '10%',
-                  left: '10%',
-                  width: '60%',
-                  height: '70%',
+                  top: '0',
+                  left: '0',
+                  width: '70%',
+                  height: '92%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -105,7 +135,7 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
               fromFramesMap={fromFramesMap}
               totalFrames={startFrame + durationFrames}
               talks={talks}
-              kuchipakuMap={{ frames: [], amplitude: [] }}
+              kuchipakuMap={kuchipakuMap}
             />
 
             {/* ゆっくりキャラクター */}
@@ -113,16 +143,16 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
               fromFramesMap={fromFramesMap}
               totalFrames={startFrame + durationFrames}
               talks={talks}
-              kuchipakuMap={{ frames: [], amplitude: [] }}
+              kuchipakuMap={kuchipakuMap}
             />
           </React.Fragment>
         );
       })}
 
-      {/* ロゴ */}
-      <div style={logoStyle}>
+      {/* ロゴ - 非表示 */}
+      {/* <div style={logoStyle}>
         <Img src={staticFile('image/yukkurilogo.png')} />
-      </div>
+      </div> */}
     </AbsoluteFill>
   );
 };
