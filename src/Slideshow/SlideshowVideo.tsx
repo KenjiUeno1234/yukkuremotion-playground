@@ -20,6 +20,18 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: '#000' }}>
+      {/* 背景画像 - 全画面表示 */}
+      <Img
+        src={staticFile('background/okumono_tanabata0259.png')}
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: 1,
+        }}
+      />
+
       {/* BGM - 全体にループ再生 */}
       {config.bgmSrc && (
         <Audio
@@ -62,16 +74,30 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
               from={startFrame}
               durationInFrames={durationFrames}
             >
-              <Img
-                src={staticFile(slide.slidePath)}
+              <div
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
+                  position: 'absolute',
+                  top: '10%',
+                  left: '10%',
+                  width: '60%',
+                  height: '70%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 2,
                 }}
-                onLoad={() => console.log(`✅ ${slide.id} 画像読み込み成功`)}
-                onError={(e) => console.error(`❌ ${slide.id} 画像読み込みエラー`, e)}
-              />
+              >
+                <Img
+                  src={staticFile(slide.slidePath)}
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    objectFit: 'contain',
+                  }}
+                  onLoad={() => console.log(`✅ ${slide.id} 画像読み込み成功`)}
+                  onError={(e) => console.error(`❌ ${slide.id} 画像読み込みエラー`, e)}
+                />
+              </div>
             </Sequence>
 
             {/* 字幕と音声 */}
