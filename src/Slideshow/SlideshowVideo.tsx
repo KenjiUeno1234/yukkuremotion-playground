@@ -25,9 +25,9 @@ function generateKuchipakuMap(
       const frameNumber = currentNarrationFrame + i;
       frames.push(frameNumber);
 
-      // より自然な口パクパターン: 2フレーム開いて1フレーム閉じる
-      const cyclePosition = i % 3;
-      amplitude.push(cyclePosition < 2 ? 1 : 0);
+      // ゆっくりな口パクパターン: 6フレームサイクル（3フレーム開いて3フレーム閉じる）
+      const cyclePosition = i % 6;
+      amplitude.push(cyclePosition < 3 ? 1 : 0);
     }
 
     currentNarrationFrame += narration.audioDurationFrames;
@@ -46,6 +46,73 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
 
   // 各スライドの開始フレームを計算
   let currentFrame = 0;
+
+  // 全スライドの口パクマップを統合
+  const globalKuchipakuMap: { frames: number[]; amplitude: number[] } = {
+    frames: [],
+    amplitude: [],
+  };
+
+  // 全スライドのtalksを収集
+  const allTalks: any[] = [];
+  const globalFromFramesMap: Record<number, number> = {};
+  let talkIndex = 0;
+
+  // 一度スライドをループして、全データを収集
+  const slideData: Array<{
+    slide: typeof config.slides[0];
+    startFrame: number;
+    durationFrames: number;
+    fromFramesMap: Record<number, number>;
+    talks: any[];
+  }> = [];
+
+  config.slides.forEach((slide) => {
+    const startFrame = currentFrame;
+    const durationFrames = slide.totalDurationFrames;
+
+    console.log(`Slide ${slide.id}: from=${startFrame}, duration=${durationFrames}`);
+
+    // 複数のナレーションをtalksに変換
+    let narrationFrame = 0;
+    const fromFramesMap: Record<number, number> = {};
+    const talks = slide.narrations.map((narration, idx) => {
+      fromFramesMap[idx] = startFrame + narrationFrame;
+      globalFromFramesMap[talkIndex] = startFrame + narrationFrame;
+      talkIndex++;
+
+      const talk = {
+        text: narration.text,
+        speaker: 'ayumi' as const,
+        audioDurationFrames: narration.audioDurationFrames,
+        audio: {
+          src: narration.voicePath,
+        },
+      };
+      narrationFrame += narration.audioDurationFrames;
+      return talk;
+    });
+
+    allTalks.push(...talks);
+
+    // 口パクマップを生成して統合
+    const kuchipakuMap = generateKuchipakuMap(slide.narrations, startFrame);
+    globalKuchipakuMap.frames.push(...kuchipakuMap.frames);
+    globalKuchipakuMap.amplitude.push(...kuchipakuMap.amplitude);
+
+    slideData.push({
+      slide,
+      startFrame,
+      durationFrames,
+      fromFramesMap,
+      talks,
+    });
+
+    // 次のスライドの開始フレームを更新
+    currentFrame += durationFrames;
+  });
+
+  console.log(`✅ 統合口パクマップ: ${globalKuchipakuMap.frames.length}フレーム (0 ~ ${config.totalFrames - 1})`);
 
   return (
     <AbsoluteFill style={{ backgroundColor: 'transparent' }}>
@@ -70,86 +137,56 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
         />
       )}
 
-      {config.slides.map((slide, index) => {
-        const startFrame = currentFrame;
-        const durationFrames = slide.totalDurationFrames;
-
-        console.log(`Slide ${slide.id}: from=${startFrame}, duration=${durationFrames}`);
-
-        // 次のスライドの開始フレームを更新
-        currentFrame += durationFrames;
-
-        // 複数のナレーションをtalksに変換
-        let narrationFrame = 0;
-        const fromFramesMap: Record<number, number> = {};
-        const talks = slide.narrations.map((narration, idx) => {
-          fromFramesMap[idx] = startFrame + narrationFrame;
-          const talk = {
-            text: narration.text,
-            speaker: 'ayumi' as const,
-            audioDurationFrames: narration.audioDurationFrames,
-            audio: {
-              src: narration.voicePath,
-            },
-          };
-          narrationFrame += narration.audioDurationFrames;
-          return talk;
-        });
-
-        // 口パクマップを生成
-        const kuchipakuMap = generateKuchipakuMap(slide.narrations, startFrame);
-
-        return (
-          <React.Fragment key={slide.id}>
-            {/* スライド画像 */}
-            <Sequence
-              from={startFrame}
-              durationInFrames={durationFrames}
+      {slideData.map(({ slide, startFrame, durationFrames, fromFramesMap, talks }) => (
+        <React.Fragment key={slide.id}>
+          {/* スライド画像 */}
+          <Sequence
+            from={startFrame}
+            durationInFrames={durationFrames}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '70%',
+                height: '92%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 2,
+              }}
             >
-              <div
+              <Img
+                src={staticFile(slide.slidePath)}
                 style={{
-                  position: 'absolute',
-                  top: '0',
-                  left: '0',
-                  width: '70%',
-                  height: '92%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  zIndex: 2,
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  objectFit: 'contain',
                 }}
-              >
-                <Img
-                  src={staticFile(slide.slidePath)}
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    objectFit: 'contain',
-                  }}
-                  onLoad={() => console.log(`✅ ${slide.id} 画像読み込み成功`)}
-                  onError={(e) => console.error(`❌ ${slide.id} 画像読み込みエラー`, e)}
-                />
-              </div>
-            </Sequence>
+                onLoad={() => console.log(`✅ ${slide.id} 画像読み込み成功`)}
+                onError={(e) => console.error(`❌ ${slide.id} 画像読み込みエラー`, e)}
+              />
+            </div>
+          </Sequence>
 
-            {/* 字幕と音声 */}
-            <TalkSequence
-              fromFramesMap={fromFramesMap}
-              totalFrames={startFrame + durationFrames}
-              talks={talks}
-              kuchipakuMap={kuchipakuMap}
-            />
+          {/* 字幕と音声 */}
+          <TalkSequence
+            fromFramesMap={fromFramesMap}
+            totalFrames={startFrame + durationFrames}
+            talks={talks}
+            kuchipakuMap={globalKuchipakuMap}
+          />
+        </React.Fragment>
+      ))}
 
-            {/* ゆっくりキャラクター */}
-            <YukkuriSequence
-              fromFramesMap={fromFramesMap}
-              totalFrames={startFrame + durationFrames}
-              talks={talks}
-              kuchipakuMap={kuchipakuMap}
-            />
-          </React.Fragment>
-        );
-      })}
+      {/* ゆっくりキャラクター - 全体で1つ */}
+      <YukkuriSequence
+        fromFramesMap={globalFromFramesMap}
+        totalFrames={config.totalFrames}
+        talks={allTalks}
+        kuchipakuMap={globalKuchipakuMap}
+      />
 
       {/* ロゴ - 非表示 */}
       {/* <div style={logoStyle}>
