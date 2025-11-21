@@ -114,8 +114,12 @@ npm start
 
 1. **背景画像**: okumono_wakusei5.png が画面全体に表示（zIndex: 1）
 2. **スライド画像**: 画面左側70%の領域に表示（zIndex: 2）- キャラクターと重ならないように配置
-3. **ゆっくりキャラクター**: 画面右下に表示（650px）- 口パク機能付き
-4. **字幕**: 画面下部に表示（黒背景80%不透明、白文字38px、角丸4px、下から80px）
+3. **ゆっくりキャラクター**: 画面右下に表示（650px、zIndex: 10）- 口パク機能付き
+4. **字幕**: 画面下部に表示（zIndex: 20、黒背景80%不透明、白文字38px、角丸4px、下から80px）
+
+**zIndex設定の重要性**:
+- 字幕（zIndex: 20）がゆっくりキャラクター（zIndex: 10）の前面に表示されるため、キャラクターに被って見えなくなることがありません
+- この設定は `src/constants.ts` で定義されています
 
 ### レイアウト詳細
 
@@ -493,9 +497,31 @@ const cyclePosition = i % 3;
 amplitude.push(cyclePosition < 2 ? 1 : 0);  // 開→開→閉
 ```
 
+### zIndex設定（レイヤー順序）
+
+**設定ファイル**: [src/constants.ts](src/constants.ts#L11-L16)
+
+```typescript
+export const zIndex = {
+  anyValue: 1,          // 背景などの汎用レイヤー
+  yukkuri: 10,          // ゆっくりキャラクター（中間層）
+  subtitle: 20,         // 字幕（前面）
+  transitionMovie: 10000, // トランジション（最前面）
+} as const;
+```
+
+**レイヤー順序の説明**:
+1. **背景画像**（zIndex: 1）: 最背面に表示
+2. **スライド画像**（zIndex: 2）: 背景の上に表示
+3. **ゆっくりキャラクター**（zIndex: 10）: スライドの上に表示
+4. **字幕**（zIndex: 20）: キャラクターの上（最前面）に表示
+
+**重要**: 字幕のzIndexをゆっくりキャラクターより高く設定することで、字幕が常にキャラクターの前面に表示され、被って見えなくなる問題を防ぎます。
+
 ---
 
 **参考ドキュメント**:
 - BGM_FIX.md - BGM実装とトラブルシューティング
 - script_final.md - ナレーションスクリプト（複数NARRATOR対応）
 - src/types/slideshow.ts - 型定義（NarrationSegment, SlideItem）
+- src/constants.ts - zIndex設定を含む定数定義
