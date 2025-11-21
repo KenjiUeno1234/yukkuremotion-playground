@@ -23,5 +23,9 @@ export function loadFont() {
 			document.fonts.add(font);
 			continueRender(waitForFont);
 		})
-		.catch((err) => console.log('Error loading font', err));
+		.catch((err) => {
+			console.log('Error loading font', err);
+			// フォント読み込み失敗時もレンダリングを続行
+			continueRender(waitForFont);
+		});
 }

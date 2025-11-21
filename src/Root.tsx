@@ -11,7 +11,8 @@ import {TestSlide} from './Slideshow/TestSlide';
 import {MinimalTest} from './Slideshow/MinimalTest';
 
 export const RemotionRoot: React.FC = () => {
-  loadFont();
+  // フォント読み込みをスキップ（スライドショーではCSSで設定済み）
+  // loadFont();
 
   return (
     <>
