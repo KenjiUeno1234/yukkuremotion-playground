@@ -32,7 +32,7 @@
   {
     "section_id": "S003",
     "slide_index": 2,
-    "dialogue": "もし"全部読んだうえで判断してほしい"なら、部分検索であるRAGはあまり向いていません。"
+    "dialogue": "もし“全部読んだうえで判断してほしい”なら、部分検索であるRAGはあまり向いていません。"
   },
   {
     "section_id": "S003",
@@ -67,17 +67,17 @@
   {
     "section_id": "S006",
     "slide_index": 1,
-    "dialogue": ""全部見たい"ならそのままプロンプトへ。"
+    "dialogue": "“全部見たい”ならそのままプロンプトへ。"
   },
   {
     "section_id": "S006",
     "slide_index": 2,
-    "dialogue": ""上限に収まる"なら全文を入れる。"
+    "dialogue": "“上限に収まる”なら全文を入れる。"
   },
   {
     "section_id": "S006",
     "slide_index": 3,
-    "dialogue": ""パターンが少ない"ならテンプレ化。"
+    "dialogue": "“パターンが少ない”ならテンプレ化。"
   },
   {
     "section_id": "S006",
@@ -107,7 +107,7 @@
   {
     "section_id": "S008",
     "slide_index": 1,
-    "dialogue": "RAGは"部分を取り出す技術"。"
+    "dialogue": "RAGは“部分を取り出す技術”。"
   },
   {
     "section_id": "S008",
@@ -142,6 +142,6 @@
   {
     "section_id": "S009",
     "slide_index": 3,
-    "dialogue": "RAGを"使わない"判断こそ、自社データ活用の成功を近づける大事な一歩です。"
+    "dialogue": "RAGを“使わない”判断こそ、自社データ活用の成功を近づける大事な一歩です。"
   }
 ]

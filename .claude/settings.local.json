@@ -32,7 +32,10 @@
       "Bash(mkdir:*)",
       "Bash(curl -I http://localhost:3000/slide/S001.png)",
       "Bash(curl:*)",
-      "Bash(npx @marp-team/marp-cli:*)"
+      "Bash(npx @marp-team/marp-cli:*)",
+      "Bash(if exist slide-out*.json del /Q slide-out*.json)",
+      "Bash(if exist slide-out*.md del /Q slide-out*.md)",
+      "Bash(if exist slide-out*.pdf del /Q slide-out*.pdf)"
     ],
     "deny": [],
     "ask": []

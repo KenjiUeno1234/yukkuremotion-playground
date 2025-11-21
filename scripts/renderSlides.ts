@@ -67,76 +67,23 @@ type SlideConfig =
 
 // 共通のCSSスタイル
 const COMMON_STYLES = `<style>
-/* 全体：左上寄せ＋淡いブルー背景＋濃いブルー文字 */
 section {
-  background: radial-gradient(circle at top left,
-    #ffffff 0%,
-    #f4f8ff 40%,
-    #e0efff 100%);
+  background: linear-gradient(to bottom right, #ffffff, #e0f0ff);
   color: #003a8c;
-  text-shadow: 0 0 6px rgba(255,255,255,0.8);
-  font-size: 36px;
-  padding: 40px 60px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 8px;
+  font-size: 32px;
+  padding: 60px;
 }
 
-/* タイトル */
 h1 {
-  align-self: center;
-  color: #003a8c;
-  font-weight: 700;
-  font-size: 52px;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-
-h2, h3 {
-  color: #003a8c;
-  font-weight: 700;
-}
-
-/* 丸番号アイコン */
-.list-index {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  margin-right: 14px;
-  border-radius: 50%;
-  font-weight: 700;
-  font-size: 28px;
-  background: #ffeb99;   /* 明るいイエロー */
-  color: #003a8c;        /* 濃いブルー文字 */
-  flex-shrink: 0;
-}
-
-/* リスト1行のブロック */
-.list-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-
-/* 中央のメッセージ（strong-message用） */
-.big-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-size: 60px;
-  font-weight: 700;
-  color: #003a8c;
-  text-shadow: 0 0 8px rgba(255,255,255,0.9);
   text-align: center;
-  padding: 40px;
+  color: #003a8c;
+  font-size: 48px;
+  margin-bottom: 40px;
+}
+
+ol {
+  font-size: 32px;
+  line-height: 1.6;
 }
 </style>
 `;
@@ -160,9 +107,7 @@ function renderStrongMessage(slide: StrongMessageSlide, isFirst: boolean): strin
   parts.push("");
   parts.push(`<!-- ${slide.section_id} -->`);
   parts.push("");
-  parts.push('<div class="big-center">');
-  parts.push(slide.props.text);
-  parts.push("</div>");
+  parts.push(`# ${slide.props.text}`);
 
   return parts.join("\n");
 }
@@ -170,12 +115,7 @@ function renderStrongMessage(slide: StrongMessageSlide, isFirst: boolean): strin
 // list-3 テンプレートのレンダー関数
 function renderList3(slide: List3Slide, isFirst: boolean): string {
   const items = slide.props.items
-    .map(
-      (item, index) => `<div class="list-item">
-  <div class="list-index">${index + 1}</div>
-  <div>${item}</div>
-</div>`
-    )
+    .map((item, index) => `${index + 1}. ${item}`)
     .join("\n\n");
 
   const parts = [];
@@ -205,12 +145,7 @@ function renderList3(slide: List3Slide, isFirst: boolean): string {
 // list-4 テンプレートのレンダー関数
 function renderList4(slide: List4Slide, isFirst: boolean): string {
   const items = slide.props.items
-    .map(
-      (item, index) => `<div class="list-item">
-  <div class="list-index">${index + 1}</div>
-  <div>${item}</div>
-</div>`
-    )
+    .map((item, index) => `${index + 1}. ${item}`)
     .join("\n\n");
 
   const parts = [];
@@ -240,12 +175,7 @@ function renderList4(slide: List4Slide, isFirst: boolean): string {
 // list-5 テンプレートのレンダー関数
 function renderList5(slide: List5Slide, isFirst: boolean): string {
   const items = slide.props.items
-    .map(
-      (item, index) => `<div class="list-item">
-  <div class="list-index">${index + 1}</div>
-  <div>${item}</div>
-</div>`
-    )
+    .map((item, index) => `${index + 1}. ${item}`)
     .join("\n\n");
 
   const parts = [];

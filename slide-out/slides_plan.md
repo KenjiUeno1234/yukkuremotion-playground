@@ -5,85 +5,30 @@ paginate: true
 ---
 
 <style>
-/* 全体：左上寄せ＋淡いブルー背景＋濃いブルー文字 */
 section {
-  background: radial-gradient(circle at top left,
-    #ffffff 0%,
-    #f4f8ff 40%,
-    #e0efff 100%);
+  background: linear-gradient(to bottom right, #ffffff, #e0f0ff);
   color: #003a8c;
-  text-shadow: 0 0 6px rgba(255,255,255,0.8);
-  font-size: 36px;
-  padding: 40px 60px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 8px;
+  font-size: 32px;
+  padding: 60px;
 }
 
-/* タイトル */
 h1 {
-  align-self: center;
-  color: #003a8c;
-  font-weight: 700;
-  font-size: 52px;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-
-h2, h3 {
-  color: #003a8c;
-  font-weight: 700;
-}
-
-/* 丸番号アイコン */
-.list-index {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  margin-right: 14px;
-  border-radius: 50%;
-  font-weight: 700;
-  font-size: 28px;
-  background: #ffeb99;   /* 明るいイエロー */
-  color: #003a8c;        /* 濃いブルー文字 */
-  flex-shrink: 0;
-}
-
-/* リスト1行のブロック */
-.list-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-
-/* 中央のメッセージ（strong-message用） */
-.big-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-size: 60px;
-  font-weight: 700;
-  color: #003a8c;
-  text-shadow: 0 0 8px rgba(255,255,255,0.9);
   text-align: center;
-  padding: 40px;
+  color: #003a8c;
+  font-size: 48px;
+  margin-bottom: 40px;
+}
+
+ol {
+  font-size: 32px;
+  line-height: 1.6;
 }
 </style>
 
 
 <!-- S001 -->
 
-<div class="big-center">
-なんでもかんでもRAGじゃない
-</div>
+# なんでもかんでもRAGじゃない
 
 ---
 
@@ -91,20 +36,11 @@ h2, h3 {
 
 # よくある相談パターン
 
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>「RAGを入れないとダメですよね？」という声をよく耳にする</div>
-</div>
+1. よく耳にするのは、「RAGを入れないとダメですよね？」という声。
 
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>実際は、プロンプトだけで綺麗に回せるケースがたくさんある</div>
-</div>
+2. けれど実際は、プロンプトだけで綺麗に回せるケースがたくさんあります。
 
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>内容がパターン化できるなら、むしろRAGより精度が上がることも</div>
-</div>
+3. 内容がパターン化できるなら、むしろRAGより精度が上がることも珍しくありません。
 
 ---
 
@@ -112,20 +48,11 @@ h2, h3 {
 
 # 問い①：全部参照する？
 
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>「AIに全部の情報を見てほしいのかどうか」を考える</div>
-</div>
+1. 最初に考えるのは、「AIに全部の情報を見てほしいのかどうか」。
 
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>全部読んだうえで判断してほしいなら、部分検索のRAGは不向き</div>
-</div>
+2. もし“全部読んだうえで判断してほしい”なら、部分検索であるRAGはあまり向いていません。
 
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>全文を読ませるアプローチのほうが自然</div>
-</div>
+3. 全文を読ませるアプローチのほうが自然です。
 
 ---
 
@@ -133,20 +60,11 @@ h2, h3 {
 
 # 問い②：入力上限に収まる？
 
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>GPTやClaudeは10〜20万字、Geminiなら100万字以上入る</div>
-</div>
+1. GPTやClaudeは10〜20万字、Geminiなら100万字以上入る時代です。
 
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>全文を入れてもコストはごくわずか</div>
-</div>
+2. 実は、全文を入れてもコストはごくわずか。
 
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>RAGを作り込むより、速くて安定していることが多い</div>
-</div>
+3. RAGを作り込むより、速くて安定していることが多いんですね。
 
 ---
 
@@ -154,20 +72,9 @@ h2, h3 {
 
 # 問い③：パターンは何個？
 
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>パターンが10〜20種類くらいならテンプレート化が最適</div>
-</div>
+1. もしパターンが10〜20種類くらいなら、テンプレート化が最適です。
 
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>業界別に作っておけば使い回しも簡単</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>精度も運用も申し分ない</div>
-</div>
+2. 業界別に作っておけば使い回しも簡単で、精度も運用も申し分ありません。
 
 ---
 
@@ -175,30 +82,15 @@ h2, h3 {
 
 # 3つの問いまとめ
 
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>「全部見たい」ならそのままプロンプトへ</div>
-</div>
+1. “全部見たい”ならそのままプロンプトへ。
 
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>「上限に収まる」なら全文を入れる</div>
-</div>
+2. “上限に収まる”なら全文を入れる。
 
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>「パターンが少ない」ならテンプレ化</div>
-</div>
+3. “パターンが少ない”ならテンプレ化。
 
-<div class="list-item">
-  <div class="list-index">4</div>
-  <div>この条件がそろえば、RAGは必要ありません</div>
-</div>
+4. この条件がそろえば、RAGは必要ありません。
 
-<div class="list-item">
-  <div class="list-index">5</div>
-  <div>もっとシンプルで強い方法があるから</div>
-</div>
+5. もっとシンプルで強い方法があるからです。
 
 ---
 
@@ -206,20 +98,11 @@ h2, h3 {
 
 # RAG＝正義ではない
 
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>RAGは万能ではない</div>
-</div>
+1. RAGは万能ではありません。
 
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>適材適所でこそ輝く技術</div>
-</div>
+2. 適材適所でこそ輝く技術です。
 
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>「どの状況でもRAGが正解」というわけではない</div>
-</div>
+3. 「どの状況でもRAGが正解」というわけではないんです。
 
 ---
 
@@ -227,30 +110,15 @@ h2, h3 {
 
 # 今日のポイント
 
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>RAGは「部分を取り出す技術」</div>
-</div>
+1. RAGは“部分を取り出す技術”。
 
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>全部読む用途には向かない</div>
-</div>
+2. 全部読む用途には向きません。
 
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>入力が収まるなら全文投入でOK</div>
-</div>
+3. 入力が収まるなら全文投入でOK。
 
-<div class="list-item">
-  <div class="list-index">4</div>
-  <div>パターンが少ないならテンプレ化が最善</div>
-</div>
+4. パターンが少ないならテンプレ化が最善。
 
-<div class="list-item">
-  <div class="list-index">5</div>
-  <div>状況に合わせて賢く選ぶことが大切</div>
-</div>
+5. 要は、状況に合わせて賢く選ぶことが大切なんです。
 
 ---
 
@@ -258,17 +126,8 @@ h2, h3 {
 
 # RAGを使わない勇気を
 
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>勢いでRAGを作って失敗する例は少なくない</div>
-</div>
+1. 勢いでRAGを作って失敗する例は少なくありません。
 
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>まずは「本当に必要か」を落ち着いて見極める</div>
-</div>
+2. まずは「本当に必要か」を落ち着いて見極めること。
 
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>RAGを使わない判断こそ、成功を近づける大事な一歩</div>
-</div>
+3. RAGを“使わない”判断こそ、自社データ活用の成功を近づける大事な一歩です。
