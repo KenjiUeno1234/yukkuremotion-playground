@@ -11,8 +11,9 @@ import {TestSlide} from './Slideshow/TestSlide';
 import {MinimalTest} from './Slideshow/MinimalTest';
 
 export const RemotionRoot: React.FC = () => {
-  // フォント読み込みをスキップ（スライドショーではCSSで設定済み）
-  // loadFont();
+  // フォント読み込み（オプショナル）
+  // フォントファイルが存在しない場合でも、レンダリングは正常に続行されます
+  loadFont();
 
   return (
     <>

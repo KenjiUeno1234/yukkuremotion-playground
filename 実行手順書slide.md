@@ -29,6 +29,13 @@ script_final.md に記載されたNARRATOR部分から、以下の要素を含�
 4. **BGMファイル**: public/bgm/Floraria.mp3 が存在すること
 5. **VOICEPEAK**がインストールされていること
 
+### オプションファイル
+
+- **フォントファイル**: public/font/LanobePOPv2/LightNovelPOPv2.otf（オプション）
+  - フォントファイルが存在しない場合でも、レンダリングは正常に動作します
+  - デフォルトフォントが使用されます
+  - フォント読み込みエラーが発生しても、自動的にスキップされます
+
 ### script_final.mdの形式
 
 同じスライドIDで複数のNARRATORを記述できます：
@@ -314,6 +321,47 @@ narrations: [
    （S006が正しく生成されていることを確認）
 
 **詳細**: [FIX_VERIFICATION_1min20sec.md](FIX_VERIFICATION_1min20sec.md) を参照
+
+### 問題10: レンダリング時に「delayRender() timeout」エラーが発生する
+
+**エラーメッセージ例**:
+```
+Error: A delayRender() was called but not cleared after 28000ms
+The delayRender was called at: src/load-fonts.tsx:4
+```
+
+**原因**: フォントファイル（`public/font/LanobePOPv2/LightNovelPOPv2.otf`）が存在しないか、読み込みに失敗している
+
+**確認事項**:
+```bash
+powershell -Command "Test-Path public\font\LanobePOPv2\LightNovelPOPv2.otf"
+```
+
+**解決方法**:
+
+1. **フォントファイルは不要です**（2025-11-21以降の実装）
+   - フォントファイルが存在しない場合でも、自動的にデフォルトフォントが使用されます
+   - `src/load-fonts.tsx` には5秒のタイムアウトと自動スキップ機能が実装されています
+
+2. **ブラウザコンソールで確認**:
+   - `⚠️ フォント読み込みエラー` または `⚠️ フォント読み込みがタイムアウトしました` が表示される場合、フォントがスキップされています
+   - `✅ フォント読み込み成功` が表示される場合、正常に読み込まれています
+
+3. **キャッシュクリア（エラーが継続する場合）**:
+   ```bash
+   # Webpackキャッシュをクリア
+   powershell -Command "Remove-Item -Recurse -Force node_modules\.cache -ErrorAction SilentlyContinue"
+
+   # サーバーを再起動
+   npm start
+   ```
+
+**技術詳細**:
+- `src/load-fonts.tsx` には以下の安全機構が実装されています：
+  - 5秒のタイムアウト設定
+  - エラー発生時の自動`continueRender()`呼び出し
+  - try-catchによる例外処理
+- フォント読み込み失敗時でも、レンダリングは正常に続行されます
 
 ---
 
