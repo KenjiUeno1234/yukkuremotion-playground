@@ -10,7 +10,7 @@ export const DEFAULT_SECTION_END_FRAMES = 30;
 
 export const zIndex = {
   anyValue: 1,
-  subtitle: 10,
   yukkuri: 10,
+  subtitle: 20,  // 字幕をゆっくりキャラクターより前面に表示
   transitionMovie: 10000,
 } as const;
