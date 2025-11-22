@@ -35,7 +35,12 @@
       "Bash(npx @marp-team/marp-cli:*)",
       "Bash(if exist slide-out*.json del /Q slide-out*.json)",
       "Bash(if exist slide-out*.md del /Q slide-out*.md)",
-      "Bash(if exist slide-out*.pdf del /Q slide-out*.pdf)"
+      "Bash(if exist slide-out*.pdf del /Q slide-out*.pdf)",
+      "Bash(powershall -Command \"if ((Get-ChildItem public\\slide\\*.png -ErrorAction SilentlyContinue).Count -eq 9) { Write-Host ''✅ スライド画像: 9ファイル'' -ForegroundColor Green } else { Write-Host ''❌ スライド画像の数が不正です。現在'' (Get-ChildItem public\\slide\\*.png -ErrorAction SilentlyContinue).Count ''ファイル'' -ForegroundColor Red }\")",
+      "Bash(raw_transcript.md)",
+      "Bash(echo:*)",
+      "Bash(touch:*)",
+      "Bash(if exist raw_transcript.md del /Q raw_transcript.md)"
     ],
     "deny": [],
     "ask": []
