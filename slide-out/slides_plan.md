@@ -1,58 +1,138 @@
 ---
 marp: true
+paginate: false
 theme: default
-paginate: true
+---
+
+<style>
+/* スライド全体の背景と基本文字色 */
+section {
+  background: radial-gradient(circle at top left,
+    #ffffff 0%,
+    #f4f8ff 40%,
+    #e0efff 100%);
+  color: #003a8c;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+
+/* 中央のメッセージ */
+.big-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  font-size: 64px;
+  font-weight: 700;
+  color: #003a8c;
+  text-shadow: 0 0 8px rgba(255,255,255,0.9);
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+</style>
+
+<!-- S001 -->
+
+<div class="big-center">
+なんでもかんでもRAGじゃない
+</div>
+
 ---
 
 <style>
 section {
-  background: linear-gradient(to bottom right, #ffffff, #e0f0ff);
+  background: radial-gradient(circle at top left,
+    #ffffff 0%,
+    #f4f8ff 40%,
+    #e0efff 100%);
   color: #003a8c;
-  font-size: 32px;
-  padding: 60px;
+  text-shadow: 0 0 6px rgba(255,255,255,0.8);
+  font-size: 40px;
+  padding: 24px 72px 40px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
 h1 {
-  text-align: center;
+  align-self: center;
   color: #003a8c;
-  font-size: 48px;
-  margin-bottom: 40px;
+  font-weight: 700;
+  font-size: 55px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
-ol {
+h2, h3 {
+  color: #003a8c;
+  font-weight: 700;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+
+.list-index {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  margin-right: 16px;
+  border-radius: 50%;
+  font-weight: 700;
   font-size: 32px;
-  line-height: 1.6;
+  background: #ffeb99;
+  color: #003a8c;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 </style>
-
-
-<!-- S001 -->
-
-# なんでもかんでもRAGじゃない
-
----
 
 <!-- S002 -->
 
 # よくある相談パターン
 
-1. よく耳にするのは、「RAGを入れないとダメですよね？」という声。
+<div class="list-item">
+  <div class="list-index">1</div>
+  <div>「RAGを入れないといけない」という声が多い</div>
+</div>
 
-2. けれど実際は、プロンプトだけで綺麗に回せるケースがたくさんあります。
+<div class="list-item">
+  <div class="list-index">2</div>
+  <div>プロンプトだけで十分に回るケースが多い</div>
+</div>
 
-3. 内容がパターン化できるなら、むしろRAGより精度が上がることも珍しくありません。
+<div class="list-item">
+  <div class="list-index">3</div>
+  <div>パターン化できるならRAGより精度が上がることも</div>
+</div>
 
 ---
 
 <!-- S003 -->
 
-# 問い①：全部参照する？
+# 問い①：全部見てほしいか？
 
-1. 最初に考えるのは、「AIに全部の情報を見てほしいのかどうか」。
+<div class="list-item">
+  <div class="list-index">1</div>
+  <div>AIにデータを全部見てほしいのかどうか</div>
+</div>
 
-2. もし“全部読んだうえで判断してほしい”なら、部分検索であるRAGはあまり向いていません。
+<div class="list-item">
+  <div class="list-index">2</div>
+  <div>全部読んで判断してほしいなら部分検索のRAGは向かない</div>
+</div>
 
-3. 全文を読ませるアプローチのほうが自然です。
+<div class="list-item">
+  <div class="list-index">3</div>
+  <div>全文を読ませるほうが自然で確実</div>
+</div>
 
 ---
 
@@ -60,74 +140,137 @@ ol {
 
 # 問い②：入力上限に収まる？
 
-1. GPTやClaudeは10〜20万字、Geminiなら100万字以上入る時代です。
+<div class="list-item">
+  <div class="list-index">1</div>
+  <div>GPT/Claudeは10〜20万字、Geminiは100万字以上という上限</div>
+</div>
 
-2. 実は、全文を入れてもコストはごくわずか。
+<div class="list-item">
+  <div class="list-index">2</div>
+  <div>意外と全部入る。コストはほんのわずか</div>
+</div>
 
-3. RAGを作り込むより、速くて安定していることが多いんですね。
+<div class="list-item">
+  <div class="list-index">3</div>
+  <div>複雑なRAGを組むより安く・速く・安定して動く</div>
+</div>
 
 ---
 
 <!-- S005 -->
 
-# 問い③：パターンは何個？
+# 問い③：パターン数は？
 
-1. もしパターンが10〜20種類くらいなら、テンプレート化が最適です。
+<div class="list-item">
+  <div class="list-index">1</div>
+  <div>問い合わせや業務が10〜20パターンほどならテンプレート化が最適</div>
+</div>
 
-2. 業界別に作っておけば使い回しも簡単で、精度も運用も申し分ありません。
+<div class="list-item">
+  <div class="list-index">2</div>
+  <div>業界別に作ったプロンプトは使い回しが簡単</div>
+</div>
+
+<div class="list-item">
+  <div class="list-index">3</div>
+  <div>精度も運用性も申し分ない</div>
+</div>
 
 ---
 
 <!-- S006 -->
 
-# 3つの問いまとめ
+# RAGが必要ない条件
 
-1. “全部見たい”ならそのままプロンプトへ。
+<div class="list-item">
+  <div class="list-index">1</div>
+  <div>全部見たいならプロンプトに入れる</div>
+</div>
 
-2. “上限に収まる”なら全文を入れる。
+<div class="list-item">
+  <div class="list-index">2</div>
+  <div>上限に収まるなら全文を入れる</div>
+</div>
 
-3. “パターンが少ない”ならテンプレ化。
+<div class="list-item">
+  <div class="list-index">3</div>
+  <div>パターンが少ないならテンプレ化する</div>
+</div>
 
-4. この条件がそろえば、RAGは必要ありません。
+<div class="list-item">
+  <div class="list-index">4</div>
+  <div>この条件がそろえばRAGは必要ない</div>
+</div>
 
-5. もっとシンプルで強い方法があるからです。
+<div class="list-item">
+  <div class="list-index">5</div>
+  <div>もっとシンプルで強い選択肢がある</div>
+</div>
 
 ---
 
 <!-- S007 -->
 
-# RAG＝正義ではない
+# RAGは万能ではない
 
-1. RAGは万能ではありません。
+<div class="list-item">
+  <div class="list-index">1</div>
+  <div>RAGは万能の正義ではない</div>
+</div>
 
-2. 適材適所でこそ輝く技術です。
+<div class="list-item">
+  <div class="list-index">2</div>
+  <div>適材適所でこそ輝く技術</div>
+</div>
 
-3. 「どの状況でもRAGが正解」というわけではないんです。
+<div class="list-item">
+  <div class="list-index">3</div>
+  <div>どんな状況でもRAGに頼る必要はない</div>
+</div>
 
 ---
 
 <!-- S008 -->
 
-# 今日のポイント
+# 今日覚えておきたいこと
 
-1. RAGは“部分を取り出す技術”。
+<div class="list-item">
+  <div class="list-index">1</div>
+  <div>RAGは部分を取り出す仕組み</div>
+</div>
 
-2. 全部読む用途には向きません。
+<div class="list-item">
+  <div class="list-index">2</div>
+  <div>全部読ませたいなら向かない。収まるなら全文投入が合理的</div>
+</div>
 
-3. 入力が収まるなら全文投入でOK。
+<div class="list-item">
+  <div class="list-index">3</div>
+  <div>パターンが少ないならテンプレ化で十分</div>
+</div>
 
-4. パターンが少ないならテンプレ化が最善。
-
-5. 要は、状況に合わせて賢く選ぶことが大切なんです。
+<div class="list-item">
+  <div class="list-index">4</div>
+  <div>状況に合わせて柔軟に選ぶことが鍵</div>
+</div>
 
 ---
 
 <!-- S009 -->
 
-# RAGを使わない勇気を
+# RAGを使わない勇気
 
-1. 勢いでRAGを作って失敗する例は少なくありません。
+<div class="list-item">
+  <div class="list-index">1</div>
+  <div>勢いでRAGを導入して失敗する事例は多い</div>
+</div>
 
-2. まずは「本当に必要か」を落ち着いて見極めること。
+<div class="list-item">
+  <div class="list-index">2</div>
+  <div>「本当に必要か」を落ち着いて見極める</div>
+</div>
 
-3. RAGを“使わない”判断こそ、自社データ活用の成功を近づける大事な一歩です。
+<div class="list-item">
+  <div class="list-index">3</div>
+  <div>RAGを使わない勇気が成功を近づける</div>
+</div>

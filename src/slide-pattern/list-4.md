@@ -21,6 +21,7 @@ section {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
 /* タイトル */
@@ -31,6 +32,7 @@ h1 {
   font-size: 55px;
   margin-top: 8px;
   margin-bottom: 24px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
 h2, h3 {
@@ -51,6 +53,7 @@ h2, h3 {
   font-size: 32px;
   background: #ffeb99;   /* 明るいイエロー */
   color: #003a8c;        /* 濃いブルー文字 */
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
 /* リスト1行のブロック */
@@ -58,6 +61,7 @@ h2, h3 {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 </style>
 

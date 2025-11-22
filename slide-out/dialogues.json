@@ -2,82 +2,102 @@
   {
     "section_id": "S001",
     "slide_index": 1,
-    "dialogue": "「自社データならRAGでしょ」と言われがちですが、実はそうとも限りません。"
+    "dialogue": "最近、「自社データならRAGでしょ」っていう空気がありますよね。"
   },
   {
     "section_id": "S001",
     "slide_index": 2,
-    "dialogue": "まずは、その思い込みをそっとほどいていきましょう。"
+    "dialogue": "でも、実はそうとも限らないんです。"
+  },
+  {
+    "section_id": "S001",
+    "slide_index": 3,
+    "dialogue": "まずは、その思い込みを静かにほどいてみましょう。"
   },
   {
     "section_id": "S002",
     "slide_index": 1,
-    "dialogue": "よく耳にするのは、「RAGを入れないとダメですよね？」という声。"
+    "dialogue": "よくいただくご相談で、「RAGを入れないといけませんよね？」という声があります。"
   },
   {
     "section_id": "S002",
     "slide_index": 2,
-    "dialogue": "けれど実際は、プロンプトだけで綺麗に回せるケースがたくさんあります。"
+    "dialogue": "けれど本当は、プロンプトだけで十分に回るケースが多いんです。"
   },
   {
     "section_id": "S002",
     "slide_index": 3,
-    "dialogue": "内容がパターン化できるなら、むしろRAGより精度が上がることも珍しくありません。"
+    "dialogue": "むしろ、内容がパターン化できるなら、RAGより精度が上がることも珍しくありません。"
   },
   {
     "section_id": "S003",
     "slide_index": 1,
-    "dialogue": "最初に考えるのは、「AIに全部の情報を見てほしいのかどうか」。"
+    "dialogue": "最初に考えたいのは、「AIにデータを全部見てほしいのかどうか」。"
   },
   {
     "section_id": "S003",
     "slide_index": 2,
-    "dialogue": "もし“全部読んだうえで判断してほしい”なら、部分検索であるRAGはあまり向いていません。"
+    "dialogue": "もし"最初から全部読んだうえで判断してほしい"のであれば、部分検索であるRAGはあまり向いていません。"
   },
   {
     "section_id": "S003",
     "slide_index": 3,
-    "dialogue": "全文を読ませるアプローチのほうが自然です。"
+    "dialogue": "全文をそのまま読ませるほうが、自然で、確実です。"
   },
   {
     "section_id": "S004",
     "slide_index": 1,
-    "dialogue": "GPTやClaudeは10〜20万字、Geminiなら100万字以上入る時代です。"
+    "dialogue": "そして次に、"入力の上限に収まるかどうか"。"
   },
   {
     "section_id": "S004",
     "slide_index": 2,
-    "dialogue": "実は、全文を入れてもコストはごくわずか。"
+    "dialogue": "GPTやClaudeの10〜20万字、Geminiの100万字以上という上限なら、意外と全部入ってしまいます。"
   },
   {
     "section_id": "S004",
     "slide_index": 3,
-    "dialogue": "RAGを作り込むより、速くて安定していることが多いんですね。"
+    "dialogue": "しかもコストはほんのわずか。"
+  },
+  {
+    "section_id": "S004",
+    "slide_index": 4,
+    "dialogue": "複雑なRAGを組むより、安く・速く・安定して動くことが多いんです。"
   },
   {
     "section_id": "S005",
     "slide_index": 1,
-    "dialogue": "もしパターンが10〜20種類くらいなら、テンプレート化が最適です。"
+    "dialogue": "さらにもうひとつ。"
   },
   {
     "section_id": "S005",
     "slide_index": 2,
-    "dialogue": "業界別に作っておけば使い回しも簡単で、精度も運用も申し分ありません。"
+    "dialogue": ""パターン数はどれくらいか"。"
+  },
+  {
+    "section_id": "S005",
+    "slide_index": 3,
+    "dialogue": "もし問い合わせや業務が10〜20パターンほどなら、テンプレート化が最適です。"
+  },
+  {
+    "section_id": "S005",
+    "slide_index": 4,
+    "dialogue": "業界別に作ったプロンプトは使い回しが簡単で、精度も運用性も申し分ありません。"
   },
   {
     "section_id": "S006",
     "slide_index": 1,
-    "dialogue": "“全部見たい”ならそのままプロンプトへ。"
+    "dialogue": "つまり──全部見たいなら、プロンプトに入れる。"
   },
   {
     "section_id": "S006",
     "slide_index": 2,
-    "dialogue": "“上限に収まる”なら全文を入れる。"
+    "dialogue": "上限に収まるなら、全文を入れる。"
   },
   {
     "section_id": "S006",
     "slide_index": 3,
-    "dialogue": "“パターンが少ない”ならテンプレ化。"
+    "dialogue": "パターンが少ないなら、テンプレ化する。"
   },
   {
     "section_id": "S006",
@@ -87,61 +107,56 @@
   {
     "section_id": "S006",
     "slide_index": 5,
-    "dialogue": "もっとシンプルで強い方法があるからです。"
+    "dialogue": "もっとシンプルで、もっと強い選択肢があるからです。"
   },
   {
     "section_id": "S007",
     "slide_index": 1,
-    "dialogue": "RAGは万能ではありません。"
+    "dialogue": "そもそも、RAGは万能の正義ではありません。"
   },
   {
     "section_id": "S007",
     "slide_index": 2,
-    "dialogue": "適材適所でこそ輝く技術です。"
+    "dialogue": "適材適所でこそ輝く技術なんです。"
   },
   {
     "section_id": "S007",
     "slide_index": 3,
-    "dialogue": "「どの状況でもRAGが正解」というわけではないんです。"
+    "dialogue": "どんな状況でもRAGに頼る必要はないんですよ。"
   },
   {
     "section_id": "S008",
     "slide_index": 1,
-    "dialogue": "RAGは“部分を取り出す技術”。"
+    "dialogue": "今日覚えておきたいのは、RAGは"部分を取り出す仕組み"だということ。"
   },
   {
     "section_id": "S008",
     "slide_index": 2,
-    "dialogue": "全部読む用途には向きません。"
+    "dialogue": "全部読ませたいなら向かないし、入力に収まるなら全文投入のほうが合理的。"
   },
   {
     "section_id": "S008",
     "slide_index": 3,
-    "dialogue": "入力が収まるなら全文投入でOK。"
+    "dialogue": "パターンが少ないならテンプレ化で十分。"
   },
   {
     "section_id": "S008",
     "slide_index": 4,
-    "dialogue": "パターンが少ないならテンプレ化が最善。"
-  },
-  {
-    "section_id": "S008",
-    "slide_index": 5,
-    "dialogue": "要は、状況に合わせて賢く選ぶことが大切なんです。"
+    "dialogue": "つまり、状況に合わせて柔軟に選ぶことが鍵です。"
   },
   {
     "section_id": "S009",
     "slide_index": 1,
-    "dialogue": "勢いでRAGを作って失敗する例は少なくありません。"
+    "dialogue": "そして最後に……勢いでRAGを導入してうまくいかなかった、という事例は本当に多いんです。"
   },
   {
     "section_id": "S009",
     "slide_index": 2,
-    "dialogue": "まずは「本当に必要か」を落ち着いて見極めること。"
+    "dialogue": "大切なのは「本当に必要なのか」を落ち着いて見極めること。"
   },
   {
     "section_id": "S009",
     "slide_index": 3,
-    "dialogue": "RAGを“使わない”判断こそ、自社データ活用の成功を近づける大事な一歩です。"
+    "dialogue": "ときには"RAGを使わない勇気"こそが、自社データ活用の成功をぐっと近づけてくれます。"
   }
 ]

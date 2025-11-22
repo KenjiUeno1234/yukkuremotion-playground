@@ -40,7 +40,9 @@
       "Bash(raw_transcript.md)",
       "Bash(echo:*)",
       "Bash(touch:*)",
-      "Bash(if exist raw_transcript.md del /Q raw_transcript.md)"
+      "Bash(if exist raw_transcript.md del /Q raw_transcript.md)",
+      "Bash(if exist slide-outslides_plan.md del /Q slide-outslides_plan.md)",
+      "Bash(slide-outslides_plan.md)"
     ],
     "deny": [],
     "ask": []

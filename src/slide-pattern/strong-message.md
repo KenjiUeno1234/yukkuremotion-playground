@@ -1,5 +1,7 @@
 ---
 marp: true
+paginate: false
+theme: default
 ---
 
 <style>
@@ -10,6 +12,7 @@ section {
     #f4f8ff 40%,
     #e0efff 100%);
   color: #003a8c; /* 濃いめブルー */
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
 /* 中央のメッセージ */
@@ -22,6 +25,7 @@ section {
   font-weight: 700;
   color: #003a8c; /* タイトルと同系色 */
   text-shadow: 0 0 8px rgba(255,255,255,0.9); /* 白っぽいぼかしで柔らかく */
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 </style>
 
