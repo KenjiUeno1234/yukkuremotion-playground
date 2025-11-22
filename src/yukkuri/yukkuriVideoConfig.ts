@@ -42,6 +42,8 @@ export type VoiceConfig = {
 	customObjectKey?: CustomObjectKeys;
 	// 音声の長さより長くしたい、短くしたい場合にここに直接入力する
 	customDuration?: number;
+	// このセリフの後に追加する間（秒数）
+	pauseAfter?: number;
 	// 特に動画自体には影響のない、動画制作者のためのメモ
 	memoForEditor?: string;
 };

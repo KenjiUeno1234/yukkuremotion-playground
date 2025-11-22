@@ -14,6 +14,7 @@
 		"server": "ts-node server.ts",
 		"convert:movieyou": "ts-node scripts/convertInputToMovieyouDirect.ts",
 		"convert:input": "ts-node scripts/convertMovieyouToTranscript.ts",
+		"convert:script-final-hosei": "ts-node scripts/convertScriptFinalHoseiToTranscript.ts",
 		"update:audio-durations": "ts-node scripts/updateMyVideoAudioDurations.ts",
 		"generate:yukkuri-voice:force": "ts-node scripts/generateYukkuriVoiceFiles.ts force",
 		"generate:yukkuri-voice:watch": "nodemon --watch yukkuriVoices.ts scripts/generateYukkuriVoiceFiles.ts",

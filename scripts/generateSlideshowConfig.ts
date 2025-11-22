@@ -11,6 +11,7 @@ interface NarrationSegment {
   text: string;
   voicePath: string;
   audioDurationFrames: number;
+  pauseAfter?: number;
 }
 
 interface SlideItem {
@@ -18,6 +19,7 @@ interface SlideItem {
   slidePath: string;
   narrations: NarrationSegment[];
   totalDurationFrames: number;
+  pauseAfter?: number;
 }
 
 interface ParsedScript {
@@ -78,6 +80,40 @@ async function getAudioDuration(audioPath: string): Promise<number> {
   }
 }
 
+// スライド番号からパート番号を判定
+function getPartNumber(slideId: string): number {
+  const num = parseInt(slideId.substring(1));
+  if (num <= 2) return 1; // パート1: 問題提起 (S001-S002)
+  if (num <= 5) return 2; // パート2: 判断基準 (S003-S005)
+  return 3; // パート3: まとめ (S006-S009)
+}
+
+// pauseAfterを自動設定
+function calculatePauseAfter(
+  slideId: string,
+  isLastSlide: boolean,
+  nextSlideId?: string
+): number | undefined {
+  if (isLastSlide) {
+    // 動画の最後 → 5.0秒
+    return 5.0;
+  }
+
+  // 次のスライドがある場合、パート移行をチェック
+  if (nextSlideId) {
+    const currentPart = getPartNumber(slideId);
+    const nextPart = getPartNumber(nextSlideId);
+
+    if (currentPart !== nextPart) {
+      // パート間移行 → 2.5秒
+      return 2.5;
+    }
+  }
+
+  // スライド終わり（パート内） → 1.5秒
+  return 1.5;
+}
+
 // メイン処理
 async function main() {
   console.log('=========================================');
@@ -102,7 +138,8 @@ async function main() {
   // スライドIDをソートして処理
   const slideIds = Object.keys(groupedBySlide).sort();
 
-  for (const slideId of slideIds) {
+  for (let slideIndex = 0; slideIndex < slideIds.length; slideIndex++) {
+    const slideId = slideIds[slideIndex];
     const narrationItems = groupedBySlide[slideId];
     const narrations: NarrationSegment[] = [];
     let slideTotalFrames = 0;
@@ -129,14 +166,28 @@ async function main() {
       slideTotalFrames += audioDurationFrames;
     }
 
+    // pauseAfterを計算
+    const isLastSlide = slideIndex === slideIds.length - 1;
+    const nextSlideId = slideIndex < slideIds.length - 1 ? slideIds[slideIndex + 1] : undefined;
+    const pauseAfter = calculatePauseAfter(slideId, isLastSlide, nextSlideId);
+
+    // pauseAfterをフレーム数に変換してtotalDurationFramesに追加
+    const pauseAfterFrames = pauseAfter ? Math.floor(pauseAfter * FPS) : 0;
+    const totalDurationWithPause = slideTotalFrames + pauseAfterFrames;
+
     slides.push({
       id: slideId,
       slidePath: `slide/${slideId}.png`,
       narrations,
-      totalDurationFrames: slideTotalFrames,
+      totalDurationFrames: totalDurationWithPause,
+      pauseAfter,
     });
 
-    totalFrames += slideTotalFrames;
+    totalFrames += totalDurationWithPause;
+
+    if (pauseAfter) {
+      console.log(`  ⏸️  pauseAfter: ${pauseAfter}秒 (${pauseAfterFrames}フレーム)`);
+    }
   }
 
   console.log(`\n総フレーム数: ${totalFrames} (${(totalFrames / FPS).toFixed(2)}秒)\n`);

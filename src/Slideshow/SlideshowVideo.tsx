@@ -25,9 +25,9 @@ function generateKuchipakuMap(
       const frameNumber = currentNarrationFrame + i;
       frames.push(frameNumber);
 
-      // ゆっくりな口パクパターン: 6フレームサイクル（3フレーム開いて3フレーム閉じる）
-      const cyclePosition = i % 6;
-      amplitude.push(cyclePosition < 3 ? 1 : 0);
+      // 口パクパターン: 8フレームサイクル（4フレーム開いて4フレーム閉じる）
+      const cyclePosition = i % 8;
+      amplitude.push(cyclePosition < 4 ? 1 : 0);
     }
 
     currentNarrationFrame += narration.audioDurationFrames;

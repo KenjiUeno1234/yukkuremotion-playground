@@ -13,6 +13,7 @@ export async function generateFromFramesMap(videoConfig: VideoConfig) {
     const {talks} = section;
 
     section.fromFramesMap = {};
+    section.totalFrames = 0;
     let cumulate =
       section.initialDelayFrames || DEFAULT_SECTION_INITIAL_DELAY_FRAMES;
 
@@ -36,22 +37,30 @@ export async function generateFromFramesMap(videoConfig: VideoConfig) {
         );
 
         const audioDurationframes = Math.floor((durationSec || 1) * FPS);
+        const pauseAfterFrames = previousTalk.pauseAfter
+          ? Math.floor(previousTalk.pauseAfter * FPS)
+          : 0;
         const totalFrames =
-          previousTalk.customDuration || audioDurationframes + TALK_GAP_FRAMES;
+          previousTalk.customDuration ||
+          audioDurationframes + TALK_GAP_FRAMES + pauseAfterFrames;
         cumulate += totalFrames;
         section.fromFramesMap[i] = cumulate;
-        section.totalFrames = cumulate;
-
-        if (i === section.talks.length - 1) {
-          const currentTalk = talks[i];
-          const id = currentTalk.ids ? currentTalk.ids[0] : currentTalk.id;
-          const lastAudioDurationSec = await getAudioDurationInSeconds(
-            `./public/audio/yukkuri/${id}.wav`
-          );
-          section.totalFrames +=
-            Math.floor(lastAudioDurationSec) * FPS + TALK_GAP_FRAMES;
-        }
       }
+    }
+
+    // 最後のトークの長さを totalFrames に加算
+    const lastTalk = talks[talks.length - 1];
+    if (lastTalk.id || lastTalk.ids) {
+      const id = lastTalk.ids ? lastTalk.ids[0] : lastTalk.id;
+      const lastAudioDurationSec = await getAudioDurationInSeconds(
+        `./public/audio/yukkuri/${id}.wav`
+      );
+      const lastPauseAfterFrames = lastTalk.pauseAfter
+        ? Math.floor(lastTalk.pauseAfter * FPS)
+        : 0;
+      const lastAudioFrames = Math.floor(lastAudioDurationSec * FPS);
+      section.totalFrames =
+        cumulate + lastAudioFrames + TALK_GAP_FRAMES + lastPauseAfterFrames;
     }
 
     section.totalFrames += DEFAULT_SECTION_END_FRAMES;

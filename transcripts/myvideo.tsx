@@ -3,16 +3,15 @@ import {VideoConfig} from '../src/yukkuri/yukkuriVideoConfig';
 export const MyVideoConfig: VideoConfig = {
   sections: [
     {
-      title: 'セクション1',
+      title: 'メインセクション',
       bgmSrc: 'bgm/Floraria.mp3',
       bgmVolume: 0.2,
-      fromFramesMap: {"0":30,"1":186,"2":303,"3":441,"4":642,"5":810,"6":1029,"7":1207,"8":1472,"9":1630,"10":1771,"11":2056,"12":2149,"13":2361,"14":2432,"15":2524,"16":2723,"17":2953,"18":3091,"19":3207,"20":3319,"21":3457,"22":3604,"23":3736,"24":3852,"25":3976,"26":4164,"27":4374,"28":4490,"29":4640,"30":4878,"31":5051},
-      totalFrames: 5316,
+      fromFramesMap: {"0":30,"1":186,"2":303,"3":486,"4":687,"5":855,"6":1149,"7":1327,"8":1592,"9":1795,"10":1936,"11":2221,"12":2314,"13":2571,"14":2642,"15":2734,"16":2933,"17":3238,"18":3376,"19":3492,"20":3604,"21":3742,"22":3934,"23":4066,"24":4182,"25":4351,"26":4539,"27":4749,"28":4865,"29":5060,"30":5298,"31":5471},
+      totalFrames: 5892,
       kuchipakuMap: {frames: [], amplitude: []},
       talks: [
         {
-          text: '最近、「自社データなららぐでしょ」っていう空気がありますよね。',
-          textForDisplay: '最近、「自社データならRAGでしょ」っていう空気がありますよね。',
+          text: '最近、「自社データならラグでしょ」っていう空気がありますよね。',
           speaker: 'ayumi',
           id: 'S001-1',
           audioDurationFrames: 131,
@@ -28,10 +27,10 @@ export const MyVideoConfig: VideoConfig = {
           speaker: 'ayumi',
           id: 'S001-3',
           audioDurationFrames: 113,
+          pauseAfter: 1.5,
         },
         {
           text: 'よくいただくご相談で、「ラグを入れないといけませんよね？」という声があります。',
-          textForDisplay: 'よくいただくご相談で、「RAGを入れないといけませんよね？」という声があります。',
           speaker: 'ayumi',
           id: 'S002-1',
           audioDurationFrames: 176,
@@ -43,22 +42,20 @@ export const MyVideoConfig: VideoConfig = {
           audioDurationFrames: 143,
         },
         {
-          text: 'むしろ、内容がパターン化できるなら、らぐより精度が上がることも珍しくありません。',
-          textForDisplay: 'むしろ、内容がパターン化できるなら、RAGより精度が上がることも珍しくありません。',
+          text: 'むしろ、内容がパターン化できるなら、ラグより精度が上がることも珍しくありません。',
           speaker: 'ayumi',
           id: 'S002-3',
           audioDurationFrames: 194,
+          pauseAfter: 2.5,
         },
         {
-          text: '最初に考えたいのは、「えーあいにデータを全部見てほしいのかどうか」。',
-          textForDisplay: '最初に考えたいのは、「AIにデータを全部見てほしいのかどうか」。',
+          text: '最初に考えたいのは、「エーアイにデータを全部見てほしいのかどうか」。',
           speaker: 'ayumi',
           id: 'S003-1',
           audioDurationFrames: 153,
         },
         {
-          text: 'もし"最初から全部読んだうえで判断してほしい"のであれば、部分検索であるらぐはあまり向いていません。',
-          textForDisplay: 'もし"最初から全部読んだうえで判断してほしい"のであれば、部分検索であるRAGはあまり向いていません。',
+          text: 'もし"最初から全部読んだうえで判断してほしい"のであれば、部分検索であるラグはあまり向いていません。',
           speaker: 'ayumi',
           id: 'S003-2',
           audioDurationFrames: 240,
@@ -68,6 +65,7 @@ export const MyVideoConfig: VideoConfig = {
           speaker: 'ayumi',
           id: 'S003-3',
           audioDurationFrames: 133,
+          pauseAfter: 1.5,
         },
         {
           text: 'そして次に、"入力の上限に収まるかどうか"。',
@@ -77,7 +75,6 @@ export const MyVideoConfig: VideoConfig = {
         },
         {
           text: 'ジーピーティーやクロードの10から20万字、ジェミニの100万字以上という上限なら、意外と全部入ってしまいます。',
-          textForDisplay: 'GPTやClaudeの10〜20万字、Geminiの100万字以上という上限なら、意外と全部入ってしまいます。',
           speaker: 'ayumi',
           id: 'S004-2',
           audioDurationFrames: 260,
@@ -89,11 +86,11 @@ export const MyVideoConfig: VideoConfig = {
           audioDurationFrames: 68,
         },
         {
-          text: '複雑ならぐを組むより、安く・速く・安定して動くことが多いんです。',
-          textForDisplay: '複雑なRAGを組むより、安く・速く・安定して動くことが多いんです。',
+          text: '複雑なラグを組むより、安く・速く・安定して動くことが多いんです。',
           speaker: 'ayumi',
           id: 'S004-4',
           audioDurationFrames: 187,
+          pauseAfter: 1.5,
         },
         {
           text: 'さらにもうひとつ。',
@@ -109,7 +106,6 @@ export const MyVideoConfig: VideoConfig = {
         },
         {
           text: 'もし問い合わせや業務が10から20パターンほどなら、テンプレート化が最適です。',
-          textForDisplay: 'もし問い合わせや業務が10〜20パターンほどなら、テンプレート化が最適です。',
           speaker: 'ayumi',
           id: 'S005-3',
           audioDurationFrames: 174,
@@ -119,6 +115,7 @@ export const MyVideoConfig: VideoConfig = {
           speaker: 'ayumi',
           id: 'S005-4',
           audioDurationFrames: 205,
+          pauseAfter: 2.5,
         },
         {
           text: 'つまり──全部見たいなら、プロンプトに入れる。',
@@ -139,8 +136,7 @@ export const MyVideoConfig: VideoConfig = {
           audioDurationFrames: 87,
         },
         {
-          text: 'この条件がそろえば、らぐは必要ありません。',
-          textForDisplay: 'この条件がそろえば、RAGは必要ありません。',
+          text: 'この条件がそろえば、ラグは必要ありません。',
           speaker: 'ayumi',
           id: 'S006-4',
           audioDurationFrames: 113,
@@ -150,10 +146,10 @@ export const MyVideoConfig: VideoConfig = {
           speaker: 'ayumi',
           id: 'S006-5',
           audioDurationFrames: 122,
+          pauseAfter: 1.5,
         },
         {
-          text: 'そもそも、らぐは万能の正義ではありません。',
-          textForDisplay: 'そもそも、RAGは万能の正義ではありません。',
+          text: 'そもそも、ラグは万能の正義ではありません。',
           speaker: 'ayumi',
           id: 'S007-1',
           audioDurationFrames: 107,
@@ -165,15 +161,14 @@ export const MyVideoConfig: VideoConfig = {
           audioDurationFrames: 91,
         },
         {
-          text: 'どんな状況でもらぐに頼る必要はないんですよ。',
-          textForDisplay: 'どんな状況でもRAGに頼る必要はないんですよ。',
+          text: 'どんな状況でもラグに頼る必要はないんですよ。',
           speaker: 'ayumi',
           id: 'S007-3',
           audioDurationFrames: 99,
+          pauseAfter: 1.5,
         },
         {
-          text: '今日覚えておきたいのは、らぐは"部分を取り出す仕組み"だということ。',
-          textForDisplay: '今日覚えておきたいのは、RAGは"部分を取り出す仕組み"だということ。',
+          text: '今日覚えておきたいのは、ラグは"部分を取り出す仕組み"だということ。',
           speaker: 'ayumi',
           id: 'S008-1',
           audioDurationFrames: 163,
@@ -195,10 +190,10 @@ export const MyVideoConfig: VideoConfig = {
           speaker: 'ayumi',
           id: 'S008-4',
           audioDurationFrames: 125,
+          pauseAfter: 1.5,
         },
         {
-          text: 'そして最後に……勢いでらぐを導入してうまくいかなかった、という事例は本当に多いんです。',
-          textForDisplay: 'そして最後に……勢いでRAGを導入してうまくいかなかった、という事例は本当に多いんです。',
+          text: 'そして最後に……勢いでラグを導入してうまくいかなかった、という事例は本当に多いんです。',
           speaker: 'ayumi',
           id: 'S009-1',
           audioDurationFrames: 213,
@@ -210,11 +205,11 @@ export const MyVideoConfig: VideoConfig = {
           audioDurationFrames: 148,
         },
         {
-          text: 'ときには"らぐを使わない勇気"こそが、自社データ活用の成功をぐっと近づけてくれます。',
-          textForDisplay: 'ときには"RAGを使わない勇気"こそが、自社データ活用の成功をぐっと近づけてくれます。',
+          text: 'ときには"ラグを使わない勇気"こそが、自社データ活用の成功をぐっと近づけてくれます。',
           speaker: 'ayumi',
           id: 'S009-3',
           audioDurationFrames: 216,
+          pauseAfter: 5,
         }
       ],
     }

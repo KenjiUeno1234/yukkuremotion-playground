@@ -2,6 +2,7 @@ export interface NarrationSegment {
   text: string; // ナレーションテキスト
   voicePath: string; // voices/S001-1.wav
   audioDurationFrames: number; // 音声の長さ（フレーム数）
+  pauseAfter?: number; // ナレーション後の間（秒）
 }
 
 export interface SlideItem {
@@ -9,6 +10,7 @@ export interface SlideItem {
   slidePath: string; // slide/S001.png
   narrations: NarrationSegment[]; // 複数のナレーション
   totalDurationFrames: number; // このスライドの合計フレーム数
+  pauseAfter?: number; // スライド終了後の間（秒）
 }
 
 export interface SlideshowConfig {

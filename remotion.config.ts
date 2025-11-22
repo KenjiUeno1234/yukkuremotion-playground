@@ -2,7 +2,7 @@
 // Each option also is available as a CLI flag: https://remotion.dev/docs/cli
 // ! The configuration file does only apply if you render via the CLI !
 
-import {Config} from '@remotion/cli/config';
+// import {Config} from '@remotion/cli/config';
 
-Config.setVideoImageFormat('jpeg');
-Config.setOverwriteOutput(true);
+// Config.setVideoImageFormat('jpeg');
+// Config.setOverwriteOutput(true);

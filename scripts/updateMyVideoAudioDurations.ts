@@ -96,11 +96,14 @@ function generateTypeScriptFile(config: any): string {
             const textForDisplayLine = talk.textForDisplay
               ? `\n          textForDisplay: '${talk.textForDisplay.replace(/'/g, "\\'")}',`
               : '';
+            const pauseAfterLine = talk.pauseAfter
+              ? `\n          pauseAfter: ${talk.pauseAfter},`
+              : '';
             return `        {
           text: '${talk.text.replace(/'/g, "\\'")}',${textForDisplayLine}
           speaker: '${talk.speaker}',
           id: '${talk.id}',
-          audioDurationFrames: ${talk.audioDurationFrames},
+          audioDurationFrames: ${talk.audioDurationFrames},${pauseAfterLine}
         }`;
           }
         )

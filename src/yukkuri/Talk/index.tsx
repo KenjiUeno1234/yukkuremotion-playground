@@ -1,6 +1,6 @@
 import {Audio, Img, OffthreadVideo, Sequence, staticFile} from 'remotion';
 import {CustomObjects} from '../../../transcripts/CustomObjects';
-import {SUBTITLE_HEIGHT_PX, TALK_GAP_FRAMES} from '../../constants';
+import {FPS, SUBTITLE_HEIGHT_PX, TALK_GAP_FRAMES} from '../../constants';
 import {SubtitleWithBackground} from '../../Subtitle/SubtitleBackground';
 import {VoiceConfig} from '../yukkuriVideoConfig';
 
@@ -14,9 +14,15 @@ export type TalkProps = {
   isSlideshow?: boolean;
 };
 
-const getDurationInFrames = (voiceConfig: VoiceConfig, isSlideshow?: boolean) =>
-  voiceConfig.customDuration ||
-  voiceConfig.audioDurationFrames + (isSlideshow ? 0 : TALK_GAP_FRAMES);
+const getDurationInFrames = (voiceConfig: VoiceConfig, isSlideshow?: boolean) => {
+  const pauseAfterFrames = voiceConfig.pauseAfter
+    ? Math.floor(voiceConfig.pauseAfter * FPS)
+    : 0;
+  return (
+    voiceConfig.customDuration ||
+    voiceConfig.audioDurationFrames + (isSlideshow ? 0 : TALK_GAP_FRAMES) + pauseAfterFrames
+  );
+};
 
 const getBackgroundVideoDuration = (
   currentTalk: VoiceConfig,
@@ -50,8 +56,11 @@ export const Talk: React.FC<TalkProps> = ({voiceConfig, from, meta, isSlideshow}
   const durationInFrames = getDurationInFrames(voiceConfig, isSlideshow);
 
   return (
-    <>
-      <Sequence durationInFrames={durationInFrames} from={from}>
+    <Sequence durationInFrames={durationInFrames} from={from}>
+      {/* 字幕と音声はaudioDurationFramesの間だけ表示 */}
+      <Sequence
+        durationInFrames={voiceConfig.audioDurationFrames}
+      >
         <SubtitleWithBackground
           subtitle={voiceConfig.textForDisplay || voiceConfig.text}
           speaker={voiceConfig.speaker}
@@ -71,7 +80,7 @@ export const Talk: React.FC<TalkProps> = ({voiceConfig, from, meta, isSlideshow}
       {voiceConfig.image && (
         <Sequence
           durationInFrames={durationInFrames}
-          from={(from || 0) + (voiceConfig.image.from || 0)}
+          from={voiceConfig.image.from || 0}
         >
           <div
             style={{
@@ -87,7 +96,7 @@ export const Talk: React.FC<TalkProps> = ({voiceConfig, from, meta, isSlideshow}
       {voiceConfig.audio && (
         <Sequence
           durationInFrames={durationInFrames}
-          from={(from || 0) + (voiceConfig.audio.from || 0)}
+          from={voiceConfig.audio.from || 0}
         >
           <Audio
             src={staticFile(voiceConfig.audio.src)}
@@ -105,7 +114,7 @@ export const Talk: React.FC<TalkProps> = ({voiceConfig, from, meta, isSlideshow}
             meta.index,
             isSlideshow
           )}
-          from={(from || 0) + (voiceConfig.backgroundVideo.from || 0)}
+          from={voiceConfig.backgroundVideo.from || 0}
         >
           <div
             style={{
@@ -123,11 +132,11 @@ export const Talk: React.FC<TalkProps> = ({voiceConfig, from, meta, isSlideshow}
       )}
 
       {CustomObject && (
-        <Sequence durationInFrames={durationInFrames} from={from || 0}>
+        <Sequence durationInFrames={durationInFrames}>
           <CustomObject />
         </Sequence>
       )}
-    </>
+    </Sequence>
   );
 };
 
