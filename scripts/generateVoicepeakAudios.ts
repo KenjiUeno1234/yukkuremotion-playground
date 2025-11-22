@@ -29,6 +29,27 @@ const MARISA_CONFIG = {
   emotion: 'happy=15,sad=15,angry=0,whisper=30,cool=35',
 };
 
+// VOICEPEAKが英語読みしてしまう単語をひらがなに変換
+// VOICEPEAKは「ラグ」を「RAG(アールエージー)」と読んでしまうため、ひらがなに変換する
+function convertKatakanaToHiraganaForVoicepeak(text: string): string {
+  const conversions: {[key: string]: string} = {
+    ラグ: 'らぐ',
+    エーアイ: 'えーあい',
+    ジーピーティー: 'じーぴーてぃー',
+    クロード: 'くろーど',
+    ジェミニ: 'じぇみに',
+    // 必要に応じて追加
+  };
+
+  let convertedText = text;
+  for (const [katakana, hiragana] of Object.entries(conversions)) {
+    const regex = new RegExp(katakana, 'g');
+    convertedText = convertedText.replace(regex, hiragana);
+  }
+
+  return convertedText;
+}
+
 // VOICEPEAKの存在確認
 function checkVoicepeakExists(): boolean {
   try {
@@ -138,6 +159,9 @@ async function main() {
 
       // speaker が reimuAndMarisa の場合
       if (talk.speaker === SPEAKER.reimuAndMarisa && talk.ids) {
+        // VOICEPEAKの英語読み変換を回避するため、カタカナをひらがなに変換
+        const voiceText = convertKatakanaToHiraganaForVoicepeak(talk.text);
+
         // 霊夢
         const reimuId = talk.ids[0];
         const reimuPath = path.join(OUTPUT_DIR, `${reimuId}.wav`);
@@ -147,7 +171,10 @@ async function main() {
           skipped++;
         } else {
           console.log(`[${count}] 生成中: 霊夢 - ${talk.text}`);
-          if (generateVoice(talk.text, reimuPath, REIMU_CONFIG)) {
+          if (voiceText !== talk.text) {
+            console.log(`    🔄 変換後: ${voiceText}`);
+          }
+          if (generateVoice(voiceText, reimuPath, REIMU_CONFIG)) {
             console.log(`    成功: ${reimuPath}`);
             success++;
           } else {
@@ -167,7 +194,10 @@ async function main() {
           skipped++;
         } else {
           console.log(`[${count}] 生成中: 魔理沙 - ${talk.text}`);
-          if (generateVoice(talk.text, marisaPath, MARISA_CONFIG)) {
+          if (voiceText !== talk.text) {
+            console.log(`    🔄 変換後: ${voiceText}`);
+          }
+          if (generateVoice(voiceText, marisaPath, MARISA_CONFIG)) {
             console.log(`    成功: ${marisaPath}`);
             success++;
           } else {
@@ -197,9 +227,15 @@ async function main() {
         continue;
       }
 
-      console.log(`[${count}] 生成中: ${speakerLabel} - ${talk.text}`);
+      // VOICEPEAKの英語読み変換を回避するため、カタカナをひらがなに変換
+      const voiceText = convertKatakanaToHiraganaForVoicepeak(talk.text);
 
-      if (generateVoice(talk.text, outputPath, config)) {
+      console.log(`[${count}] 生成中: ${speakerLabel} - ${talk.text}`);
+      if (voiceText !== talk.text) {
+        console.log(`    🔄 変換後: ${voiceText}`);
+      }
+
+      if (generateVoice(voiceText, outputPath, config)) {
         console.log(`    成功: ${outputPath}`);
         success++;
       } else {

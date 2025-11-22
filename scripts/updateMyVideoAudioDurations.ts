@@ -92,12 +92,17 @@ function generateTypeScriptFile(config: any): string {
     .map((section: any) => {
       const talksCode = section.talks
         .map(
-          (talk: any) => `        {
-          text: '${talk.text.replace(/'/g, "\\'")}',
+          (talk: any) => {
+            const textForDisplayLine = talk.textForDisplay
+              ? `\n          textForDisplay: '${talk.textForDisplay.replace(/'/g, "\\'")}',`
+              : '';
+            return `        {
+          text: '${talk.text.replace(/'/g, "\\'")}',${textForDisplayLine}
           speaker: '${talk.speaker}',
           id: '${talk.id}',
           audioDurationFrames: ${talk.audioDurationFrames},
-        }`
+        }`;
+          }
         )
         .join(',\n');
 

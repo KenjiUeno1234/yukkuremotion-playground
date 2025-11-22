@@ -42,7 +42,14 @@
       "Bash(touch:*)",
       "Bash(if exist raw_transcript.md del /Q raw_transcript.md)",
       "Bash(if exist slide-outslides_plan.md del /Q slide-outslides_plan.md)",
-      "Bash(slide-outslides_plan.md)"
+      "Bash(slide-outslides_plan.md)",
+      "Bash(test_lag.txt)",
+      "Bash(\"C:\\voicepeak\\VOICEPEAK\\voicepeak.exe\" -t test_lag.txt -n \"Haruno Sora\" --speed 115 --pitch -50 -o test_lag.wav)",
+      "Bash(\"C:\\voicepeak\\VOICEPEAK\\voicepeak.exe\" -t test_real_text.txt -n \"Haruno Sora\" --speed 115 --pitch -50 -o test_real.wav)",
+      "Bash(voice_gen_log.txt)",
+      "Bash(node test-conversion.js:*)",
+      "Bash(if exist publicaudioyukkuriS001-1.wav del /Q publicaudioyukkuriS001-1.wav)",
+      "Bash(tee:*)"
     ],
     "deny": [],
     "ask": []

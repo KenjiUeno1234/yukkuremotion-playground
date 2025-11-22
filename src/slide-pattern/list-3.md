@@ -1,12 +1,8 @@
 <style>
 /* 全体：左上寄せ＋淡いブルー背景＋濃いブルー文字 */
 section {
-  background: radial-gradient(circle at top left,
-    #ffffff 0%,
-    #f4f8ff 40%,
-    #e0efff 100%);
+  background: #f0f8ff; /* 淡いブルー単色背景（Canva互換） */
   color: #003a8c;
-  text-shadow: 0 0 6px rgba(255,255,255,0.8);
   font-size: 40px;
   padding: 24px 72px 40px 72px;
 
