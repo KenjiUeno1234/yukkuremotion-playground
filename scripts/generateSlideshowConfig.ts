@@ -2,7 +2,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { getAudioDurationInSeconds } from 'get-audio-duration';
 
-const SCRIPT_FILE = path.join(process.cwd(), 'script_final.md');
+// 字幕表示用（RAG、AIなど表示）
+const SCRIPT_FILE_FOR_SUBTITLE = path.join(process.cwd(), 'script_final.md');
+// 音声ファイル名のベース（script_final_hosei.mdから生成された音声ファイルを使用）
 const VOICES_DIR = path.join(process.cwd(), 'public', 'voices');
 const OUTPUT_FILE = path.join(process.cwd(), 'src', 'data', 'slideshowConfig.ts');
 const FPS = 30;
@@ -28,9 +30,9 @@ interface ParsedScript {
   narration: string;
 }
 
-// script_final.mdを解析
+// script_final.md（字幕用）を解析
 function parseScriptFile(): ParsedScript[] {
-  const content = fs.readFileSync(SCRIPT_FILE, 'utf-8');
+  const content = fs.readFileSync(SCRIPT_FILE_FOR_SUBTITLE, 'utf-8');
   const lines = content.split('\n');
   const items: ParsedScript[] = [];
 
@@ -95,8 +97,8 @@ function calculatePauseAfter(
   nextSlideId?: string
 ): number | undefined {
   if (isLastSlide) {
-    // 動画の最後 → 5.0秒
-    return 5.0;
+    // 動画の最後 → 3.0秒
+    return 3.0;
   }
 
   // 次のスライドがある場合、パート移行をチェック
@@ -105,8 +107,8 @@ function calculatePauseAfter(
     const nextPart = getPartNumber(nextSlideId);
 
     if (currentPart !== nextPart) {
-      // パート間移行 → 2.5秒
-      return 2.5;
+      // パート間移行 → 1.5秒
+      return 1.5;
     }
   }
 

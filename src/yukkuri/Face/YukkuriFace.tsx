@@ -50,16 +50,11 @@ export const Face = (props: {
   // Use kuchipakuMap if provided, otherwise use default MouthByFrame
   const mouthState = useMemo(() => {
     if (kuchipakuMap && kuchipakuMap.frames.length > 0) {
-      // 効率的な検索: バイナリサーチまたは直接インデックス計算
-      // frames配列は連続しているため、最初のフレームからのオフセットで計算可能
-      const firstFrame = kuchipakuMap.frames[0];
-      const lastFrame = kuchipakuMap.frames[kuchipakuMap.frames.length - 1];
-
-      if (frame >= firstFrame && frame <= lastFrame) {
-        const index = frame - firstFrame;
-        if (index >= 0 && index < kuchipakuMap.amplitude.length) {
-          return kuchipakuMap.amplitude[index];
-        }
+      // frames配列から現在のフレームのインデックスを検索
+      // frames配列にギャップがある可能性があるため、indexOf を使用
+      const index = kuchipakuMap.frames.indexOf(frame);
+      if (index !== -1 && index < kuchipakuMap.amplitude.length) {
+        return kuchipakuMap.amplitude[index];
       }
     }
     return AyumiMouthByFrame[frame] || 0;

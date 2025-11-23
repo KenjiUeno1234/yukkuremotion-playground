@@ -14,15 +14,20 @@ export const slideshowConfig: SlideshowConfig = {
       {
         "text": "最近、「自社データならRAGでしょ」っていう空気がありますよね。",
         "voicePath": "voices/S001-1.wav",
-        "audioDurationFrames": 176
+        "audioDurationFrames": 128
       },
       {
         "text": "でも、実はそうとも限らないんです。",
         "voicePath": "voices/S001-2.wav",
-        "audioDurationFrames": 114
+        "audioDurationFrames": 91
+      },
+      {
+        "text": "まずは、その思い込みを静かにほどいてみましょう。",
+        "voicePath": "voices/S001-3.wav",
+        "audioDurationFrames": 111
       }
     ],
-    "totalDurationFrames": 335,
+    "totalDurationFrames": 375,
     "pauseAfter": 1.5
   },
   {
@@ -45,8 +50,8 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 188
       }
     ],
-    "totalDurationFrames": 564,
-    "pauseAfter": 2.5
+    "totalDurationFrames": 534,
+    "pauseAfter": 1.5
   },
   {
     "id": "S003",
@@ -89,9 +94,14 @@ export const slideshowConfig: SlideshowConfig = {
         "text": "しかもコストはほんのわずか。",
         "voicePath": "voices/S004-3.wav",
         "audioDurationFrames": 143
+      },
+      {
+        "text": "複雑なRAGを組むより、安く・速く・安定して動くことが多いんです。",
+        "voicePath": "voices/S004-4.wav",
+        "audioDurationFrames": 179
       }
     ],
-    "totalDurationFrames": 477,
+    "totalDurationFrames": 656,
     "pauseAfter": 1.5
   },
   {
@@ -107,10 +117,20 @@ export const slideshowConfig: SlideshowConfig = {
         "text": "\"パターン数はどれくらいか\"。",
         "voicePath": "voices/S005-2.wav",
         "audioDurationFrames": 185
+      },
+      {
+        "text": "もし問い合わせや業務が10〜20パターンほどなら、テンプレート化が最適です。",
+        "voicePath": "voices/S005-3.wav",
+        "audioDurationFrames": 170
+      },
+      {
+        "text": "業界別に作ったプロンプトは使い回しが簡単で、精度も運用性も申し分ありません。",
+        "voicePath": "voices/S005-4.wav",
+        "audioDurationFrames": 200
       }
     ],
-    "totalDurationFrames": 408,
-    "pauseAfter": 2.5
+    "totalDurationFrames": 748,
+    "pauseAfter": 1.5
   },
   {
     "id": "S006",
@@ -216,9 +236,9 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 216
       }
     ],
-    "totalDurationFrames": 621,
-    "pauseAfter": 5
+    "totalDurationFrames": 561,
+    "pauseAfter": 3
   }
 ],
-  totalFrames: 4186,
+  totalFrames: 4655,
 };

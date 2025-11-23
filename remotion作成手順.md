@@ -1,6 +1,6 @@
 # Remotion動画作成 実行手順書
 
-このドキュメントは、**script_final_hosei.md** から、Remotionでスライド同期型の動画を作成する手順を説明します。
+このドキュメントは、**script_final.md** (字幕用) と **script_final_hosei.md** (音声用) から、Remotionでスライド同期型の動画を作成する手順を説明します。
 
 ## 前提条件
 
@@ -15,31 +15,49 @@
 ## 動画作成の全体フロー
 
 ```
-script_final_hosei.md（発音修正済み原稿：[S001]マーカー付き）
-    ↓ 新規スクリプトで変換（今後実装予定）
-transcripts/myvideo.tsx（TypeScript台本）自動生成
-    ↓ npm run generate:voicepeak
-音声ファイル生成（VOICEPEAK）
-    ↓ npm run update:audio-durations ⚠️ 必須
-音声長 + fromFramesMap 設定（音声重複防止）
+script_final.md（字幕表示用：RAG、AIなど表示）
+script_final_hosei.md（音声生成用：ラグ、エーアイなど発音補正）
+    ↓ スクリプトで音声生成
+音声ファイル生成（VOICEPEAK）→ public/voices/S001-1.wav, S001-2.wav...
+    ↓ スクリプトでスライドショー設定生成
+slideshowConfig.ts 生成（字幕はscript_final.md、音声ファイルは既存のwavファイル）
     ↓ npm start
 プレビュー確認（http://localhost:3000）
 ```
 
-**重要:** `npm run update:audio-durations` は必ず実行してください。このステップで `fromFramesMap` が生成され、各セリフが順次再生されるようになります。
+**重要な仕様:**
+- **字幕**: script_final.md から読み込み（「RAG」「AI」などそのまま表示）
+- **音声**: script_final_hosei.md から生成（「ラグ」「エーアイ」など発音補正済み）
+- この仕様により、字幕は技術用語を正確に表示しつつ、音声は自然な読み上げを実現
 
 ---
 
 ## ファイル構成の理解
 
-### script_final.md と script_final_hosei.md
+### script_final.md と script_final_hosei.md の違い
 
-**script_final.md**: オリジナルの原稿（技術用語そのまま）
+**script_final.md**: 字幕表示用（技術用語そのまま）
+- 字幕に「RAG」「AI」などと表示される
+- 視聴者が読みやすい形式
 
-**script_final_hosei.md**: 発音修正版の原稿（音声合成用に最適化）
+**script_final_hosei.md**: 音声生成用（発音修正版）
+- 音声合成エンジンが正しく読み上げられるように修正
+- 「RAG」→「ラグ」、「AI」→「エーアイ」など
 
 #### フォーマット例:
 
+**script_final.md** (字幕用):
+```markdown
+[S001] なんでもかんでもRAGじゃない
+NARRATOR:
+最近、「自社データならRAGでしょ」っていう空気がありますよね。
+
+[S001] なんでもかんでもRAGじゃない
+NARRATOR:
+でも、実はそうとも限らないんです。
+```
+
+**script_final_hosei.md** (音声用):
 ```markdown
 [S001] なんでもかんでもRAGじゃない
 NARRATOR:
@@ -48,10 +66,6 @@ NARRATOR:
 [S001] なんでもかんでもRAGじゃない
 NARRATOR:
 でも、実はそうとも限らないんです。
-
-[S002] RAGが向いているケース
-NARRATOR:
-ラグが向いているのは、こんなケースです。
 ```
 
 #### 重要なポイント:
@@ -62,12 +76,8 @@ NARRATOR:
    - 例: [S001]が3回 → S001-1.wav, S001-2.wav, S001-3.wav
 
 2. **NARRATOR部分**
-   - 字幕として画面下部に表示される
-   - 音声ファイル生成の元データとなる
-   - script_final_hosei.md では発音が修正されている
-     - 「RAG」→「ラグ」
-     - 「AI」→「エーアイ」
-     - 「10〜20」→「10から20」
+   - script_final.md: 字幕として画面下部に表示される
+   - script_final_hosei.md: 音声ファイル生成の元データとなる
 
 3. **PNGスライドとの同期**
    - [S001] → `public/slide/S001.png`
@@ -76,83 +86,40 @@ NARRATOR:
 
 ---
 
-## ステップ1: TypeScript台本ファイルの生成
+## ステップ1: 音声ファイルの生成
 
-### 1-1. script_final_hosei.md から transcripts/myvideo.tsx への変換
+### 1-1. script_final_hosei.md から音声を生成
 
-**現在、この変換スクリプトは開発中です。** 完成するまでは、以下の手順で手動または別のワークフローを使用してください。
-
-**今後実装予定のコマンド:**
-```bash
-npm run convert:script-final-hosei
-```
-
-このコマンドは以下の処理を行う予定です：
-- script_final_hosei.md を読み取る
-- [S001]などのスライドマーカーを解析
-- NARRATOR部分のテキストを抽出
-- 各セリフにUUIDを自動生成
-- TypeScript形式の台本ファイルを作成
-
-**生成されるファイルの例:**
-
-```typescript
-export const MyVideoConfig: VideoConfig = {
-  sections: [
-    {
-      title: 'セクション1',
-      bgmSrc: 'bgm/Floraria.mp3',
-      bgmVolume: 0.2,
-      fromFramesMap: {},  // 後でupdate:audio-durationsで自動生成
-      totalFrames: 0,     // 後でupdate:audio-durationsで自動生成
-      kuchipakuMap: {frames: [], amplitude: []},
-      talks: [
-        {
-          text: '最近、「自社データならラグでしょ」っていう空気がありますよね。',
-          speaker: 'ayumi',
-          id: 'af3682ce89ed4a638609016c6d4bb03f',
-          audioDurationFrames: 0,  // 後でupdate:audio-durationsで自動生成
-          slideNumber: 'S001',      // スライド番号
-        },
-        {
-          text: 'でも、実はそうとも限らないんです。',
-          speaker: 'ayumi',
-          id: 'b1234567890abcdef1234567890abcd',
-          audioDurationFrames: 0,
-          slideNumber: 'S001',
-        },
-        // ...
-      ],
-    },
-  ],
-};
-```
-
----
-
-## ステップ2: 音声ファイルの生成
-
-### 2-1. VOICEPEAKで音声を生成
-
-以下のコマンドを実行して、全てのセリフの音声ファイルを生成します：
+以下のコマンドを実行して、全てのナレーションの音声ファイルを生成します：
 
 ```bash
-npm run generate:voicepeak
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts
 ```
 
 このコマンドは：
-- **transcripts/myvideo.tsx** からセリフを読み取る
-- 各セリフごとにVOICEPEAKで音声生成
-- **public/audio/yukkuri/{id}.wav** として保存
-- 既存ファイルは自動的にスキップ
+- **script_final_hosei.md** からナレーションテキストを読み取る
+- [S001]などのスライドマーカーを解析
+- 各ナレーションごとにVOICEPEAKで音声生成
+- **public/voices/S001-1.wav, S001-2.wav...** として保存
+- **既存ファイルは自動的にスキップ**（重要）
 
-### 2-2. 音声設定のカスタマイズ
+**生成される音声ファイルの例:**
+```
+public/voices/
+├── S001-1.wav  （「最近、「自社データならラグでしょ」っていう空気がありますよね。」）
+├── S001-2.wav  （「でも、実はそうとも限らないんです。」）
+├── S001-3.wav  （「まずは、その思い込みを静かにほどいてみましょう。」）
+├── S002-1.wav
+├── S002-2.wav
+└── ...
+```
 
-音声の設定を変更する場合は、**scripts/generateVoicepeakAudios.ts** を編集：
+### 1-2. 音声設定のカスタマイズ
+
+音声の設定を変更する場合は、**scripts/generateScriptFinalHoseiVoices.ts** を編集：
 
 ```typescript
-// ayumiの声設定
-const AYUMI_CONFIG = {
+const VOICE_CONFIG = {
   voice: 'Haruno Sora',
   speed: 120,
   pitch: -30,
@@ -162,101 +129,121 @@ const AYUMI_CONFIG = {
 };
 ```
 
-### 2-3. 音声の長さを台本に反映（重要）
+### 1-3. 音声の強制再生成
 
-音声ファイル生成後、以下のコマンドで音声の長さを台本に反映します：
+**重要:** 既存の音声ファイルがある場合はスキップされます。script_final_hosei.md を修正した場合は、以下のいずれかの方法で再生成してください。
+
+#### 方法1: --force オプションを使用（推奨）
+
+既存ファイルを強制的に上書きします：
 
 ```bash
-npm run update:audio-durations
+# 全ファイルを強制再生成
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts --force
 ```
 
-**⚠️ このステップは必須です！** スキップすると音声が重複して再生されます。
+**メリット:**
+- ファイルを削除する手間が不要
+- script_final_hosei.md を修正後、このコマンド一つで全ファイルを最新化
+- 既存ファイルは自動的に上書きされる
 
-このコマンドは以下を実行します：
+#### 方法2: ファイルを削除してから再生成
 
-1. **`audioDurationFrames`の設定**
-   - 生成された音声ファイルの長さを取得
-   - 各セリフの音声長をフレーム数に変換して設定（30 FPS基準）
+特定のファイルのみ再生成したい場合：
 
-2. **`fromFramesMap`の自動生成（音声重複防止のために必須）**
-   - 各セリフの開始フレーム位置を自動計算
-   - 例: `{"0":30,"1":315,"2":416}` → 1つ目は30フレーム目から、2つ目は315フレーム目から、3つ目は416フレーム目から開始
-   - このマップがないと、全セリフが同時に再生されて音声が重複します
+```bash
+# 特定のファイルのみ削除して再生成（例: S001-1.wav）
+rm public/voices/S001-1.wav
+rm public/voices/S001-2.wav
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts
 
-3. **`totalFrames`の計算**
-   - セクション全体の総フレーム数を計算
-   - プレビューと動画レンダリングに必要な情報を設定
+# 全ファイルを削除して再生成
+rm -rf public/voices/*.wav
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts
+```
 
-4. **`kuchipakuMap`の生成**
-   - 口パク（くちぱく）アニメーション用のデータを生成
-   - 6フレーム周期で口の開閉を制御（3フレーム開く、3フレーム閉じる）
+---
+
+## ステップ2: スライドショー設定ファイルの生成
+
+### 2-1. slideshowConfig.ts を生成
+
+音声ファイル生成後、以下のコマンドでスライドショー設定ファイルを生成します：
+
+```bash
+npx ts-node scripts/generateSlideshowConfig.ts
+```
+
+このコマンドは：
+1. **script_final.md** から字幕テキストを読み込む（RAG、AIなどそのまま）
+2. **public/voices/** から音声ファイル（S001-1.wav など）を読み込む
+3. 音声ファイルの長さを自動計算（フレーム数に変換）
+4. pauseAfter（間）を自動設定:
+   - スライド終わり（パート内）: 1.5秒
+   - パート間移行: 1.5秒
+   - 動画終わり: 3.0秒
+5. **src/data/slideshowConfig.ts** を生成
 
 **生成例:**
 ```typescript
-fromFramesMap: {"0":30,"1":315,"2":416},  // ← 各セリフの開始位置
-totalFrames: 2490,                         // ← セクション全体の長さ
-kuchipakuMap: {
-  frames: [0, 1, 2, 3, ...],              // ← フレーム番号
-  amplitude: [1, 1, 1, 0, 0, 0, 1, ...]   // ← 口の開閉（1=開く、0=閉じる）
-},
-talks: [
-  {
-    text: '...',
-    audioDurationFrames: 260,              // ← 音声の長さ
-  },
-  // ...
-]
+export const slideshowConfig: SlideshowConfig = {
+  bgmSrc: 'bgm/Floraria.mp3',
+  bgmVolume: 0.2,
+  slides: [
+    {
+      id: "S001",
+      slidePath: "slide/S001.png",
+      narrations: [
+        {
+          text: "最近、「自社データならRAGでしょ」っていう空気がありますよね。",  // ← script_final.md から
+          voicePath: "voices/S001-1.wav",  // ← script_final_hosei.md から生成
+          audioDurationFrames: 128
+        },
+        {
+          text: "でも、実はそうとも限らないんです。",
+          voicePath: "voices/S001-2.wav",
+          audioDurationFrames: 91
+        }
+      ],
+      totalDurationFrames: 375,  // 音声フレーム数 + pauseAfterフレーム数
+      pauseAfter: 1.5
+    }
+  ],
+  totalFrames: 4655
+};
 ```
 
-### 2-4. 強制再生成
+### 2-2. pauseAfter（間）の調整
 
-既存音声を削除して再生成したい場合：
+pauseAfterの秒数を変更したい場合は、**scripts/generateSlideshowConfig.ts** の `calculatePauseAfter` 関数を編集：
 
-```bash
-# Windowsの場合
-if exist public\audio\yukkuri rmdir /s /q public\audio\yukkuri
-npm run generate:voicepeak
-npm run update:audio-durations
+```typescript
+function calculatePauseAfter(
+  slideId: string,
+  isLastSlide: boolean,
+  nextSlideId?: string
+): number | undefined {
+  if (isLastSlide) {
+    return 3.0;  // 動画の最後
+  }
 
-# macOS/Linuxの場合
-rm -rf public/audio/yukkuri
-npm run generate:voicepeak
-npm run update:audio-durations
+  if (nextSlideId) {
+    const currentPart = getPartNumber(slideId);
+    const nextPart = getPartNumber(nextSlideId);
+    if (currentPart !== nextPart) {
+      return 1.5;  // パート間移行
+    }
+  }
+
+  return 1.5;  // スライド終わり（パート内）
+}
 ```
 
 ---
 
-## ステップ3: スライド同期の確認
+## ステップ3: プレビューで確認
 
-### 3-1. スライドファイルの確認
-
-`public/slide/` フォルダに、script_final_hosei.md の [S001] などに対応するPNGファイルが配置されているか確認します：
-
-```
-public/slide/
-├── S001.png
-├── S002.png
-├── S003.png
-└── ...
-```
-
-### 3-2. スライド番号とナレーションの対応
-
-script_final_hosei.md の構造に基づいて、以下のように同期されます：
-
-| スライド番号 | PNGファイル | ナレーション音声 | 字幕表示 |
-|------------|------------|----------------|---------|
-| [S001] | S001.png | S001-1.wav, S001-2.wav | NARRATOR部分 |
-| [S002] | S002.png | S002-1.wav, S002-2.wav, S002-3.wav | NARRATOR部分 |
-| [S003] | S003.png | S003-1.wav | NARRATOR部分 |
-
-**重要:** スライドの切り替えタイミング、字幕の表示、音声の再生は全て自動的に同期されます。
-
----
-
-## ステップ4: プレビューで確認
-
-### 4-1. プレビューサーバーの起動
+### 3-1. プレビューサーバーの起動
 
 ```bash
 npm start
@@ -265,13 +252,15 @@ npm start
 ブラウザで以下のURLを開きます：
 - **http://localhost:3000**
 
-### 4-2. プレビューでの確認事項
+### 3-2. プレビューでの確認事項
 
 ✅ スライド画像（PNG）が正しく表示されるか
 ✅ 音声が正しく再生されるか（順次再生、重複なし）
-✅ 字幕が表示されるか（NARRATOR部分）
+✅ 字幕が正しく表示されるか（「RAG」「AI」など技術用語が表示される）
+✅ 音声は「ラグ」「エーアイ」と発音されているか
 ✅ スライドと字幕と音声のタイミングが同期しているか
-✅ キャラクターの口パク（くちぱく）が音声に合っているか
+✅ キャラクターの口パクが音声に合っているか
+✅ 間（pauseAfter）が適切に設定されているか
 ✅ BGMが適切な音量で流れているか
 
 ---
@@ -279,60 +268,104 @@ npm start
 ## クイックスタート（要約）
 
 ```bash
-# 前提: script_final_hosei.md に原稿を配置済み
+# 前提: script_final.md（字幕用）と script_final_hosei.md（音声用）を配置済み
 # 前提: public/slide/ にスライドPNG配置済み
 
-# 1. TypeScript台本を生成（今後実装予定）
-npm run convert:script-final-hosei
+# 1. 音声ファイルを生成（script_final_hosei.md から）
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts
 
-# 2. 音声ファイルを生成
-npm run generate:voicepeak
+# 2. スライドショー設定ファイルを生成（字幕はscript_final.md、音声は既存wav）
+npx ts-node scripts/generateSlideshowConfig.ts
 
-# 3. 音声の長さを台本に反映（⚠️ 必須: スキップすると音声が重複します）
-npm run update:audio-durations
-
-# 4. プレビュー確認
+# 3. プレビュー確認
 npm start
 ```
 
 **⚠️ 重要な注意事項:**
-- **ステップ3 (`npm run update:audio-durations`) は必ず実行してください**
-- このステップをスキップすると、`fromFramesMap`が生成されず、全セリフが同時に再生されて音声が重複します
-- 音声ファイルを再生成した場合は、必ずステップ3を再実行してください
-- [S001]などのスライド番号は、public/slide/ 内のPNGファイル名と一致させてください
+- script_final_hosei.md を修正した場合は、`--force` オプションで音声を再生成：
+  ```bash
+  npx ts-node scripts/generateScriptFinalHoseiVoices.ts --force
+  ```
+- 音声ファイルを再生成した場合は、必ずステップ2（slideshowConfig生成）を再実行
+- [S001]などのスライド番号は、public/slide/ 内のPNGファイル名と一致させる
+- script_final.md と script_final_hosei.md のスライド構造（[S001]の数など）は一致させる
 
 ---
 
 ## トラブルシューティング
 
-### 音声が重複して再生される
+### 字幕と音声の内容が合わない
 
 **症状:**
-- 複数のセリフが同時に再生され、音声が重なって聞こえる
+- 字幕に「ラグ」と表示されるが、「RAG」と表示されるべき
+- または、音声が「アールエージー」と読み上げられる
 
-**原因:**
-- `transcripts/myvideo.tsx` の `fromFramesMap` が空オブジェクト `{}` になっている
-- `npm run update:audio-durations` を実行していない、または実行し忘れた
+**原因と解決方法:**
+
+#### ケース1: 字幕が発音補正版になっている
+**原因:** generateSlideshowConfig.ts が script_final_hosei.md を読み込んでいる
 
 **解決方法:**
+1. scripts/generateSlideshowConfig.ts を確認
+2. `SCRIPT_FILE_FOR_SUBTITLE` が `script_final.md` を指しているか確認：
+```typescript
+const SCRIPT_FILE_FOR_SUBTITLE = path.join(process.cwd(), 'script_final.md');
+```
+3. 修正後、再生成：
 ```bash
-# 音声の長さとfromFramesMapを再生成
-npm run update:audio-durations
+npx ts-node scripts/generateSlideshowConfig.ts
 ```
 
-**確認方法:**
-[transcripts/myvideo.tsx](transcripts/myvideo.tsx) を開いて、以下のように `fromFramesMap` に値が設定されているか確認：
+#### ケース2: 音声ファイルが古いバージョンから生成されている
+**原因:** script_final_hosei.md を更新したが、音声ファイルが古いまま
 
-```typescript
-fromFramesMap: {"0":30,"1":315,"2":416},  // ✅ 正しい
+**解決方法（推奨）:**
+1. --force オプションで音声を強制再生成：
+```bash
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts --force
+```
+2. slideshowConfig を再生成：
+```bash
+npx ts-node scripts/generateSlideshowConfig.ts
 ```
 
-以下の場合は修正が必要：
-```typescript
-fromFramesMap: {},  // ❌ 空オブジェクト → 音声が重複する
+**解決方法（代替）:**
+1. 古い音声ファイルを削除：
+```bash
+rm public/voices/S001-1.wav
+rm public/voices/S001-2.wav
+# または全削除
+rm -rf public/voices/*.wav
+```
+2. 音声を再生成：
+```bash
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts
+```
+3. slideshowConfig を再生成：
+```bash
+npx ts-node scripts/generateSlideshowConfig.ts
 ```
 
----
+### 音声ファイルが見つからない
+
+**症状:**
+- generateSlideshowConfig.ts 実行時に「❌ 音声ファイルが見つかりません」エラー
+
+**原因:**
+- script_final.md と script_final_hosei.md のスライド構造が一致していない
+- 例: script_final.md には S001 が3回あるが、script_final_hosei.md では2回しかない
+
+**解決方法:**
+1. script_final.md と script_final_hosei.md を比較
+2. [S001]などのスライドマーカーの出現回数を一致させる
+3. 音声ファイルを再生成：
+```bash
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts
+```
+4. slideshowConfig を再生成：
+```bash
+npx ts-node scripts/generateSlideshowConfig.ts
+```
 
 ### スライドが表示されない
 
@@ -345,228 +378,59 @@ fromFramesMap: {},  // ❌ 空オブジェクト → 音声が重複する
 
 **解決方法:**
 1. `public/slide/` フォルダを確認
-2. script_final_hosei.md の [S001] に対応する S001.png があるか確認
+2. script_final.md の [S001] に対応する S001.png があるか確認
 3. ファイル名が大文字・小文字も含めて完全一致しているか確認
 
----
-
-### 字幕とスライドのタイミングがずれる
+### 口パクが間の部分も動いている
 
 **症状:**
-- スライドの切り替わりと字幕の表示タイミングが合っていない
+- pauseAfter（間）の部分でも口パクアニメーションが続いている
 
 **原因:**
-- script_final_hosei.md の [S001] マーカーの配置が正しくない
-- transcripts/myvideo.tsx の slideNumber プロパティが正しく設定されていない
+- YukkuriFace.tsx の kuchipakuMap 処理が正しくない
 
 **解決方法:**
-1. script_final_hosei.md で各NARRATOR部分の直前に正しいスライド番号があるか確認
-2. transcripts/myvideo.tsx を再生成
-3. `npm run update:audio-durations` を再実行
+このプロジェクトでは既に修正済みです。src/yukkuri/Face/YukkuriFace.tsx で `kuchipakuMap.frames.indexOf(frame)` を使用してギャップを正しく処理しています。
 
----
-
-### 音声が生成されない
-
-- VOICEPEAKのパスを確認: `C:\\voicepeak\\VOICEPEAK\\voicepeak.exe`
-- `scripts/generateVoicepeakAudios.ts` の `VOICEPEAK_PATH` を修正
-
-### プレビューでエラー
-
-- `public/audio/yukkuri/` に音声ファイルがあるか確認
-- ブラウザのコンソールでエラー内容を確認
-
----
-
-## 参考ファイル
-
-- **台本サンプル**: transcripts/firstvideo.tsx
-- **音声生成スクリプト**: scripts/generateVoicepeakAudios.ts
-- **動画設定型定義**: src/yukkuri/yukkuriVideoConfig.ts
-- **スライド用原稿サンプル**: script_final.md, script_final_hosei.md
-
----
-
-## BGM設定
-
-### BGMファイルの準備
-
-動画に背景音楽を追加するには、BGMファイルを **public/bgm/** フォルダに配置します。
+### BGM設定
 
 **デフォルト設定：**
 - BGMファイル: `Floraria.mp3`
 - 配置場所: `public/bgm/Floraria.mp3`
 - 音量: 20%（0.2）
 
-### BGMの自動設定
+**BGM設定のカスタマイズ:**
 
-TypeScript台本生成時に、自動的にBGM設定が追加されます。
-
-### BGM設定のカスタマイズ
-
-BGMを変更したい場合は、以下のファイルを編集してください：
-
-**transcripts/myvideo.tsx** (手動編集):
+scripts/generateSlideshowConfig.ts を編集：
 ```typescript
-{
-  title: 'セクションタイトル',
-  bgmSrc: 'bgm/Floraria.mp3',  // BGMファイルのパス（先頭のスラッシュなし）
+const fileContent = `// This file is auto-generated by scripts/generateSlideshowConfig.ts
+// Do not edit manually
+
+import { SlideshowConfig } from '../types/slideshow';
+
+export const slideshowConfig: SlideshowConfig = {
+  bgmSrc: 'bgm/Floraria.mp3',  // BGMファイルのパス
   bgmVolume: 0.2,               // 音量（0.0〜1.0）
-  // ...
-}
-```
-
-**推奨音量：**
-- `0.1` - 10%（非常に控えめ）
-- `0.2` - 20%（デフォルト、推奨）
-- `0.3` - 30%（やや大きめ）
-
----
-
-## カスタムレイアウト設定
-
-### 背景画像の設定
-
-動画に背景画像を追加するには、以下の手順に従ってください：
-
-#### 1. 背景画像ファイルの配置
-
-背景画像を **public/background/** フォルダに配置します。
-
-**推奨設定：**
-- 画像形式: JPG、PNG
-- 解像度: 1920x1080 以上
-- アスペクト比: 16:9
-
-**例：**
-```
-public/background/okumono_wakusei5.png
-```
-
-#### 2. transcripts/myvideo.tsx での設定
-
-**transcripts/myvideo.tsx** を編集して、背景画像を追加：
-
-```typescript
-export const MyVideoConfig: VideoConfig = {
-  sections: [
-    {
-      title: 'セクションタイトル',
-      bgmSrc: 'bgm/Floraria.mp3',
-      bgmVolume: 0.2,
-      backgroundImage: 'background/okumono_wakusei5.png',  // 背景画像のパス
-      // ...
-    }
-  ],
+  slides: ${JSON.stringify(slides, null, 2)},
+  totalFrames: ${totalFrames},
 };
+`;
 ```
-
-**注意事項：**
-- パスは `public/` からの相対パスで指定（先頭のスラッシュなし）
-- `backgroundImage` が設定されている場合、背景色の代わりに画像が表示されます
-
----
-
-### カスタム人物画像の設定
-
-デフォルトのゆっくりキャラクターの代わりに、カスタム人物画像を使用できます。
-
-#### 1. 人物画像ファイルの配置
-
-人物画像を **public/jinbutu/** フォルダに配置します。
-
-**推奨設定：**
-- 画像形式: PNG（透過背景推奨）
-- サイズ: 全身が収まるように適切なサイズ
-- アスペクト比: 人物の縦横比に応じて調整
-
-**例：**
-```
-public/jinbutu/目を開けている顔.png
-public/jinbutu/目を閉じている顔.png
-```
-
-#### 2. transcripts/myvideo.tsx での設定
-
-**transcripts/myvideo.tsx** を編集して、人物画像を追加：
-
-```typescript
-export const MyVideoConfig: VideoConfig = {
-  sections: [
-    {
-      title: 'セクションタイトル',
-      bgmSrc: 'bgm/Floraria.mp3',
-      bgmVolume: 0.2,
-      backgroundImage: 'background/okumono_wakusei5.png',
-      customReimuImagePath: 'jinbutu/目を開けている顔.png',  // 右側に表示される人物画像
-      customMarisaImagePath: 'jinbutu/目を閉じている顔.png',  // （オプション）
-      // ...
-    }
-  ],
-};
-```
-
-**動作：**
-- `customReimuImagePath` が設定されている場合、画面右側に1人の人物が表示されます
-- デフォルトのゆっくりキャラクター（霊夢・魔理沙）は非表示になります
-- カスタム人物画像は静止画として表示され、ふわふわアニメーションは適用されません
-
-**サイズ調整：**
-- 人物画像のサイズは自動的に380px幅に調整されます
-- 配置位置: 画面右下（`right: 60px`, `bottom: 120px`）
-
----
-
-### 字幕スタイルのカスタマイズ
-
-字幕のスタイルは以下のファイルで設定されています：
-
-**src/Subtitle/SubtitleBackground.tsx**
-```typescript
-const jimakuBackground: React.CSSProperties = {
-  backgroundColor: '#062722',  // 背景色（濃い緑）
-  width: '100%',
-  paddingLeft: '40px',
-  paddingRight: '40px',
-};
-```
-
-**src/Subtitle/Subtitle.tsx**
-```typescript
-const subtitle: React.CSSProperties = {
-  fontFamily: 'GenshinGothic',
-  fontSize: 48,
-  fontWeight: 'bold',
-  color: '#DEFFEE',  // フォント色（明るい緑）
-  textAlign: 'left',
-};
-```
-
-**カスタマイズポイント：**
-- `backgroundColor`: 字幕背景の色
-- `fontSize`: フォントサイズ（デフォルト: 48px）
-- `color`: テキストの色
-- `textAlign`: テキストの配置（left/center/right）
 
 ---
 
 ## まとめ
 
-このワークフローにより、**script_final_hosei.md に配置した原稿** から **スライド同期型のRemotionプレビュー動画** を作成できます！
-
-1. **script_final_hosei.md** に発音修正済み原稿を配置（[S001]マーカー + NARRATOR）
-2. **public/slide/** にスライドPNGを配置（S001.png, S002.png など）
-3. **TypeScript台本** で動画設定を自動生成（今後実装予定）
-4. **VOICEPEAK** で音声を自動生成
-5. **fromFramesMap** で音声のタイミングを自動調整
-6. **Remotion** でスライド・字幕・音声が同期したプレビュー確認
+このワークフローにより、**script_final.md（字幕用）** と **script_final_hosei.md（音声用）** から **スライド同期型のRemotionプレビュー動画** を作成できます！
 
 **主な特徴:**
+- 字幕と音声で異なるスクリプトファイルを使用
+  - 字幕: 技術用語を正確に表示（「RAG」「AI」）
+  - 音声: 自然な読み上げ（「ラグ」「エーアイ」）
 - スライド番号（[S001]）でPNG、字幕、音声を自動同期
-- NARRATOR部分が字幕として表示
-- 発音修正版（script_final_hosei.md）で自然な音声生成
-- fromFramesMapで音声の重複を自動防止
-- 口パク（くちぱく）アニメーションが音声に同期
+- pauseAfter で適切な間を自動設定
+- 口パクアニメーションが音声に同期し、間では停止
+- 音声ファイルの重複生成を自動スキップ
 
 **注意**: 動画のレンダリング（MP4ファイル出力）は実施しません。プレビュー確認までを実施します。
 

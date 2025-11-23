@@ -89,6 +89,8 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
           src: narration.voicePath,
         },
       };
+      // audioDurationFrames のみ加算（pauseAfter は含めない）
+      // これにより、口パクはaudioDurationFramesの間だけ行われる
       narrationFrame += narration.audioDurationFrames;
       return talk;
     });
