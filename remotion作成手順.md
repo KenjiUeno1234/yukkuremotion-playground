@@ -93,15 +93,27 @@ NARRATOR:
 以下のコマンドを実行して、全てのナレーションの音声ファイルを生成します：
 
 ```bash
+# 推奨: --forceオプションで常に最新版を生成
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts --force
+```
+
+**--force オプションの使用を推奨する理由:**
+- script_final_hosei.mdの内容が常に最新版で音声化される
+- 古い音声ファイルとの不一致を防げる
+- 字幕と音声の内容が確実に一致する
+
+**--force なしで実行した場合:**
+```bash
 npx ts-node scripts/generateScriptFinalHoseiVoices.ts
 ```
+- **既存ファイルは自動的にスキップ**される
+- script_final_hosei.mdを修正しても音声は更新されない
 
 このコマンドは：
 - **script_final_hosei.md** からナレーションテキストを読み取る
 - [S001]などのスライドマーカーを解析
 - 各ナレーションごとにVOICEPEAKで音声生成
 - **public/voices/S001-1.wav, S001-2.wav...** として保存
-- **既存ファイルは自動的にスキップ**（重要）
 
 **生成される音声ファイルの例:**
 ```
@@ -271,10 +283,11 @@ npm start
 # 前提: script_final.md（字幕用）と script_final_hosei.md（音声用）を配置済み
 # 前提: public/slide/ にスライドPNG配置済み
 
-# 1. 音声ファイルを生成（script_final_hosei.md から）
-npx ts-node scripts/generateScriptFinalHoseiVoices.ts
+# 1. 音声ファイルを強制再生成（script_final_hosei.md から）
+#    --force オプションで既存ファイルを上書きし、常に最新版を生成
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts --force
 
-# 2. スライドショー設定ファイルを生成（字幕はscript_final.md、音声は既存wav）
+# 2. スライドショー設定ファイルを生成（字幕はscript_final.md、音声は最新wav）
 npx ts-node scripts/generateSlideshowConfig.ts
 
 # 3. プレビュー確認
@@ -282,10 +295,8 @@ npm start
 ```
 
 **⚠️ 重要な注意事項:**
-- script_final_hosei.md を修正した場合は、`--force` オプションで音声を再生成：
-  ```bash
-  npx ts-node scripts/generateScriptFinalHoseiVoices.ts --force
-  ```
+- **推奨:** 常に`--force`オプションを使用して音声ファイルを最新版に更新することで、字幕と音声の不一致を防げます
+- 既存の音声ファイルをそのまま使いたい場合のみ、`--force`なしで実行（既存ファイルはスキップされます）
 - 音声ファイルを再生成した場合は、必ずステップ2（slideshowConfig生成）を再実行
 - [S001]などのスライド番号は、public/slide/ 内のPNGファイル名と一致させる
 - script_final.md と script_final_hosei.md のスライド構造（[S001]の数など）は一致させる
@@ -430,7 +441,19 @@ export const slideshowConfig: SlideshowConfig = {
 - スライド番号（[S001]）でPNG、字幕、音声を自動同期
 - pauseAfter で適切な間を自動設定
 - 口パクアニメーションが音声に同期し、間では停止
-- 音声ファイルの重複生成を自動スキップ
+- **--forceオプションで常に最新版の音声を生成し、字幕と音声の不一致を防止**
+
+**推奨ワークフロー:**
+```bash
+# 1. 音声を最新版で強制再生成
+npx ts-node scripts/generateScriptFinalHoseiVoices.ts --force
+
+# 2. スライドショー設定を生成
+npx ts-node scripts/generateSlideshowConfig.ts
+
+# 3. プレビュー確認
+npm start
+```
 
 **注意**: 動画のレンダリング（MP4ファイル出力）は実施しません。プレビュー確認までを実施します。
 

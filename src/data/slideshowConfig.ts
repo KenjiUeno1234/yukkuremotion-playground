@@ -37,20 +37,20 @@ export const slideshowConfig: SlideshowConfig = {
       {
         "text": "よくいただくご相談で、「RAGを入れないといけませんよね？」という声があります。",
         "voicePath": "voices/S002-1.wav",
-        "audioDurationFrames": 154
+        "audioDurationFrames": 169
       },
       {
         "text": "けれど本当は、プロンプトだけで十分に回るケースが多いんです。",
         "voicePath": "voices/S002-2.wav",
-        "audioDurationFrames": 147
+        "audioDurationFrames": 141
       },
       {
         "text": "むしろ、内容がパターン化できるなら、RAGより精度が上がることも珍しくありません。",
         "voicePath": "voices/S002-3.wav",
-        "audioDurationFrames": 188
+        "audioDurationFrames": 187
       }
     ],
-    "totalDurationFrames": 534,
+    "totalDurationFrames": 542,
     "pauseAfter": 1.5
   },
   {
@@ -60,20 +60,20 @@ export const slideshowConfig: SlideshowConfig = {
       {
         "text": "最初に考えたいのは、「AIにデータを全部見てほしいのかどうか」。",
         "voicePath": "voices/S003-1.wav",
-        "audioDurationFrames": 148
+        "audioDurationFrames": 147
       },
       {
         "text": "もし\"最初から全部読んだうえで判断してほしい\"のであれば、部分検索であるRAGはあまり向いていません。",
         "voicePath": "voices/S003-2.wav",
-        "audioDurationFrames": 228
+        "audioDurationFrames": 206
       },
       {
         "text": "全文をそのまま読ませるほうが、自然で、確実です。",
         "voicePath": "voices/S003-3.wav",
-        "audioDurationFrames": 91
+        "audioDurationFrames": 129
       }
     ],
-    "totalDurationFrames": 512,
+    "totalDurationFrames": 527,
     "pauseAfter": 1.5
   },
   {
@@ -83,17 +83,17 @@ export const slideshowConfig: SlideshowConfig = {
       {
         "text": "そして次に、\"入力の上限に収まるかどうか\"。",
         "voicePath": "voices/S004-1.wav",
-        "audioDurationFrames": 184
+        "audioDurationFrames": 110
       },
       {
         "text": "GPTやClaudeの10〜20万字、Geminiの100万字以上という上限なら、意外と全部入ってしまいます。",
         "voicePath": "voices/S004-2.wav",
-        "audioDurationFrames": 105
+        "audioDurationFrames": 252
       },
       {
         "text": "しかもコストはほんのわずか。",
         "voicePath": "voices/S004-3.wav",
-        "audioDurationFrames": 143
+        "audioDurationFrames": 68
       },
       {
         "text": "複雑なRAGを組むより、安く・速く・安定して動くことが多いんです。",
@@ -101,7 +101,7 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 179
       }
     ],
-    "totalDurationFrames": 656,
+    "totalDurationFrames": 654,
     "pauseAfter": 1.5
   },
   {
@@ -111,12 +111,12 @@ export const slideshowConfig: SlideshowConfig = {
       {
         "text": "さらにもうひとつ。",
         "voicePath": "voices/S005-1.wav",
-        "audioDurationFrames": 148
+        "audioDurationFrames": 46
       },
       {
         "text": "\"パターン数はどれくらいか\"。",
         "voicePath": "voices/S005-2.wav",
-        "audioDurationFrames": 185
+        "audioDurationFrames": 60
       },
       {
         "text": "もし問い合わせや業務が10〜20パターンほどなら、テンプレート化が最適です。",
@@ -129,7 +129,7 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 200
       }
     ],
-    "totalDurationFrames": 748,
+    "totalDurationFrames": 521,
     "pauseAfter": 1.5
   },
   {
@@ -139,30 +139,30 @@ export const slideshowConfig: SlideshowConfig = {
       {
         "text": "つまり──全部見たいなら、プロンプトに入れる。",
         "voicePath": "voices/S006-1.wav",
-        "audioDurationFrames": 100
+        "audioDurationFrames": 109
       },
       {
         "text": "上限に収まるなら、全文を入れる。",
         "voicePath": "voices/S006-2.wav",
-        "audioDurationFrames": 100
+        "audioDurationFrames": 88
       },
       {
         "text": "パターンが少ないなら、テンプレ化する。",
         "voicePath": "voices/S006-3.wav",
-        "audioDurationFrames": 91
+        "audioDurationFrames": 86
       },
       {
         "text": "この条件がそろえば、RAGは必要ありません。",
         "voicePath": "voices/S006-4.wav",
-        "audioDurationFrames": 120
+        "audioDurationFrames": 107
       },
       {
         "text": "もっとシンプルで、もっと強い選択肢があるからです。",
         "voicePath": "voices/S006-5.wav",
-        "audioDurationFrames": 89
+        "audioDurationFrames": 120
       }
     ],
-    "totalDurationFrames": 545,
+    "totalDurationFrames": 555,
     "pauseAfter": 1.5
   },
   {
@@ -172,17 +172,17 @@ export const slideshowConfig: SlideshowConfig = {
       {
         "text": "そもそも、RAGは万能の正義ではありません。",
         "voicePath": "voices/S007-1.wav",
-        "audioDurationFrames": 72
+        "audioDurationFrames": 102
       },
       {
         "text": "適材適所でこそ輝く技術なんです。",
         "voicePath": "voices/S007-2.wav",
-        "audioDurationFrames": 87
+        "audioDurationFrames": 92
       },
       {
         "text": "どんな状況でもRAGに頼る必要はないんですよ。",
         "voicePath": "voices/S007-3.wav",
-        "audioDurationFrames": 133
+        "audioDurationFrames": 98
       }
     ],
     "totalDurationFrames": 337,
@@ -195,25 +195,25 @@ export const slideshowConfig: SlideshowConfig = {
       {
         "text": "今日覚えておきたいのは、RAGは\"部分を取り出す仕組み\"だということ。",
         "voicePath": "voices/S008-1.wav",
-        "audioDurationFrames": 93
+        "audioDurationFrames": 140
       },
       {
         "text": "全部読ませたいなら向かないし、入力に収まるなら全文投入のほうが合理的。",
         "voicePath": "voices/S008-2.wav",
-        "audioDurationFrames": 64
+        "audioDurationFrames": 180
       },
       {
         "text": "パターンが少ないならテンプレ化で十分。",
         "voicePath": "voices/S008-3.wav",
-        "audioDurationFrames": 98
+        "audioDurationFrames": 90
       },
       {
         "text": "つまり、状況に合わせて柔軟に選ぶことが鍵です。",
         "voicePath": "voices/S008-4.wav",
-        "audioDurationFrames": 87
+        "audioDurationFrames": 122
       }
     ],
-    "totalDurationFrames": 387,
+    "totalDurationFrames": 577,
     "pauseAfter": 1.5
   },
   {
@@ -223,22 +223,22 @@ export const slideshowConfig: SlideshowConfig = {
       {
         "text": "そして最後に……勢いでRAGを導入してうまくいかなかった、という事例は本当に多いんです。",
         "voicePath": "voices/S009-1.wav",
-        "audioDurationFrames": 128
+        "audioDurationFrames": 208
       },
       {
         "text": "大切なのは「本当に必要なのか」を落ち着いて見極めること。",
         "voicePath": "voices/S009-2.wav",
-        "audioDurationFrames": 127
+        "audioDurationFrames": 145
       },
       {
         "text": "ときには\"RAGを使わない勇気\"こそが、自社データ活用の成功をぐっと近づけてくれます。",
         "voicePath": "voices/S009-3.wav",
-        "audioDurationFrames": 216
+        "audioDurationFrames": 190
       }
     ],
-    "totalDurationFrames": 561,
+    "totalDurationFrames": 633,
     "pauseAfter": 3
   }
 ],
-  totalFrames: 4655,
+  totalFrames: 4721,
 };

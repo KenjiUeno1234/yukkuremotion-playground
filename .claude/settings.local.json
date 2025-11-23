@@ -51,7 +51,8 @@
       "Bash(if exist publicaudioyukkuriS001-1.wav del /Q publicaudioyukkuriS001-1.wav)",
       "Bash(tee:*)",
       "Bash(del publicvoicesS001-1.wav)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []
