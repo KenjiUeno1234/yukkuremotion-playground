@@ -266,14 +266,16 @@ npm start
 
 ### 3-2. プレビューでの確認事項
 
-✅ スライド画像（PNG）が正しく表示されるか
-✅ 音声が正しく再生されるか（順次再生、重複なし）
-✅ 字幕が正しく表示されるか（「RAG」「AI」など技術用語が表示される）
-✅ 音声は「ラグ」「エーアイ」と発音されているか
-✅ スライドと字幕と音声のタイミングが同期しているか
-✅ キャラクターの口パクが音声に合っているか
-✅ 間（pauseAfter）が適切に設定されているか
-✅ BGMが適切な音量で流れているか
+✅ **スライド画像**: PNG画像が正しく表示されるか
+✅ **音声再生**: 音声が正しく再生されるか（順次再生、重複なし）
+✅ **字幕表示**: 字幕が正しく表示されるか（「RAG」「AI」など技術用語が表示される）
+✅ **音声発音**: 音声は「ラグ」「エーアイ」と発音されているか
+✅ **同期**: スライドと字幕と音声のタイミングが同期しているか
+✅ **口パクアニメーション**:
+　　- ナレーション中: ゆっくりの口がパクパク動く
+　　- 間（pauseAfter）の部分: ゆっくりの口が閉じて停止している
+✅ **間の長さ**: pauseAfterが適切に設定されているか（1.5秒または3秒）
+✅ **BGM**: BGMが適切な音量で流れているか（デフォルト20%）
 
 ---
 
@@ -398,10 +400,21 @@ npx ts-node scripts/generateSlideshowConfig.ts
 - pauseAfter（間）の部分でも口パクアニメーションが続いている
 
 **原因:**
-- YukkuriFace.tsx の kuchipakuMap 処理が正しくない
+- [YukkuriFace.tsx:51-63](src/yukkuri/Face/YukkuriFace.tsx#L51-L63)で、kuchipakuMapに該当フレームが見つからない場合、`AyumiMouthByFrame[frame]`にフォールバックしていた
+- `AyumiMouthByFrame`は全フレームに対して口パクパターン（0または1）が定義されている配列なので、間（pauseAfter）の部分でも口パクが動き続けていた
 
 **解決方法:**
-このプロジェクトでは既に修正済みです。src/yukkuri/Face/YukkuriFace.tsx で `kuchipakuMap.frames.indexOf(frame)` を使用してギャップを正しく処理しています。
+このプロジェクトでは既に修正済みです。[YukkuriFace.tsx:59-60](src/yukkuri/Face/YukkuriFace.tsx#L59-L60)で以下の修正を実施：
+
+```typescript
+// kuchipakuMapが提供されているが、該当フレームがない場合は口を閉じる（間の部分）
+return 0;
+```
+
+**修正の効果:**
+- **音声再生中のフレーム**: `kuchipakuMap.amplitude[index]`の値（0または1）で口パク
+- **間（pauseAfter）のフレーム**: kuchipakuMapに含まれないため、常に0（口を閉じる）を返す
+- `kuchipakuMap.frames.indexOf(frame)`を使用してギャップを正しく処理
 
 ### BGM設定
 
@@ -440,7 +453,10 @@ export const slideshowConfig: SlideshowConfig = {
   - 音声: 自然な読み上げ（「ラグ」「エーアイ」）
 - スライド番号（[S001]）でPNG、字幕、音声を自動同期
 - pauseAfter で適切な間を自動設定
-- 口パクアニメーションが音声に同期し、間では停止
+- **口パクアニメーションが音声に完全同期**
+  - 音声再生中: 口パクが動く（8フレームサイクル: 4フレーム開いて4フレーム閉じる）
+  - 間（pauseAfter）: 口を閉じて停止
+  - YukkuriFace.tsxで`kuchipakuMap`を使用して正確に制御
 - **--forceオプションで常に最新版の音声を生成し、字幕と音声の不一致を防止**
 
 **推奨ワークフロー:**

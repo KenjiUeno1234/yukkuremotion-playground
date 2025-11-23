@@ -56,6 +56,8 @@ export const Face = (props: {
       if (index !== -1 && index < kuchipakuMap.amplitude.length) {
         return kuchipakuMap.amplitude[index];
       }
+      // kuchipakuMapが提供されているが、該当フレームがない場合は口を閉じる（間の部分）
+      return 0;
     }
     return AyumiMouthByFrame[frame] || 0;
   }, [frame, kuchipakuMap]);
