@@ -107,13 +107,13 @@ function calculatePauseAfter(
     const nextPart = getPartNumber(nextSlideId);
 
     if (currentPart !== nextPart) {
-      // パート間移行 → 1.5秒
-      return 1.5;
+      // パート間移行 → 0.5秒
+      return 0.5;
     }
   }
 
-  // スライド終わり（パート内） → 1.5秒
-  return 1.5;
+  // スライド終わり（パート内） → 0.5秒
+  return 0.5;
 }
 
 // メイン処理

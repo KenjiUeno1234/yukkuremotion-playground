@@ -27,8 +27,8 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 111
       }
     ],
-    "totalDurationFrames": 375,
-    "pauseAfter": 1.5
+    "totalDurationFrames": 345,
+    "pauseAfter": 0.5
   },
   {
     "id": "S002",
@@ -50,8 +50,8 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 187
       }
     ],
-    "totalDurationFrames": 542,
-    "pauseAfter": 1.5
+    "totalDurationFrames": 512,
+    "pauseAfter": 0.5
   },
   {
     "id": "S003",
@@ -73,8 +73,8 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 129
       }
     ],
-    "totalDurationFrames": 527,
-    "pauseAfter": 1.5
+    "totalDurationFrames": 497,
+    "pauseAfter": 0.5
   },
   {
     "id": "S004",
@@ -101,8 +101,8 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 179
       }
     ],
-    "totalDurationFrames": 654,
-    "pauseAfter": 1.5
+    "totalDurationFrames": 624,
+    "pauseAfter": 0.5
   },
   {
     "id": "S005",
@@ -129,8 +129,8 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 200
       }
     ],
-    "totalDurationFrames": 521,
-    "pauseAfter": 1.5
+    "totalDurationFrames": 491,
+    "pauseAfter": 0.5
   },
   {
     "id": "S006",
@@ -162,8 +162,8 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 120
       }
     ],
-    "totalDurationFrames": 555,
-    "pauseAfter": 1.5
+    "totalDurationFrames": 525,
+    "pauseAfter": 0.5
   },
   {
     "id": "S007",
@@ -185,8 +185,8 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 98
       }
     ],
-    "totalDurationFrames": 337,
-    "pauseAfter": 1.5
+    "totalDurationFrames": 307,
+    "pauseAfter": 0.5
   },
   {
     "id": "S008",
@@ -213,8 +213,8 @@ export const slideshowConfig: SlideshowConfig = {
         "audioDurationFrames": 122
       }
     ],
-    "totalDurationFrames": 577,
-    "pauseAfter": 1.5
+    "totalDurationFrames": 547,
+    "pauseAfter": 0.5
   },
   {
     "id": "S009",
@@ -240,5 +240,5 @@ export const slideshowConfig: SlideshowConfig = {
     "pauseAfter": 3
   }
 ],
-  totalFrames: 4721,
+  totalFrames: 4481,
 };
