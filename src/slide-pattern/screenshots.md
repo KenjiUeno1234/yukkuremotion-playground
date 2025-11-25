@@ -1,46 +1,54 @@
 ---
 marp: true
+backgroundImage: url('makimono.png')
 ---
 
 # タイトル
 
-<!-- アップロードされた画像のローカルパスをそのまま利用 -->
-<img src="/mnt/data/13978daf-3d42-4e66-b2b5-6bf7ba6fb7e1.png" width="700">
+<img src="screenshot.png" width="700">
 
 <style>
-/* 全体：上詰め＆左寄せ＋淡いブルー背景＋濃いブルー文字 */
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&display=swap');
+
+/* 全体を上詰め＆左寄せにする */
 section {
+  font-family: "Shippori Mincho", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", "MS PMincho", serif;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   padding: 16px 60px 40px 60px;
-
-  background: radial-gradient(circle at top left,
-    #ffffff 0%,
-    #f4f8ff 40%,
-    #e0efff 100%);
-  color: #003a8c;
-  text-shadow: 0 0 6px rgba(255,255,255,0.8);
-  font-size: 40px;
+  color: #d0bc89;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000,
+     0px  2px 3px #000;
 }
 
-/* タイトル：上部＋中央寄せ、濃いブルーで統一 */
+/* タイトル：上部＋中央寄せ */
 h1 {
   align-self: center;
-  color: #003a8c;
+  color: #d0bc89;
   text-align: center;
   font-size: 54px;
   font-weight: 700;
   margin-top: 4px;
   margin-bottom: 24px;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     0px  3px 6px #000;
+  letter-spacing: 0.08em;
 }
 
-/* 画像（スクショ）は中央配置＋少し影をつけて柔らかさUP */
+/* スクショはちょい大きめで中央に */
 img {
   display: block;
   margin: 20px auto 0 auto;
-  border-radius: 10px;
-  box-shadow: 0 0 14px rgba(0,0,0,0.12);
+  border-radius: 8px;
 }
 </style>

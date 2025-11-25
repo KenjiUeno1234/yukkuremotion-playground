@@ -1,210 +1,93 @@
-[
-  {
-    "section_id": "S001",
-    "type": "strong-message",
-    "props": {
-      "text": "AIツール登場で変わるサムネ制作"
+{
+  "slides": [
+    {
+      "section_id": "S001",
+      "type": "strong-message",
+      "props": {
+        "text": "AIツール登場で変わるサムネ制作"
+      }
+    },
+    {
+      "section_id": "S002",
+      "type": "list-3",
+      "props": {
+        "title": "見た目を整えるだけの仕事は厳しい",
+        "items": [
+          "AIの方が安くて早い",
+          "成果が伴うかが重要",
+          "クリック率を高める工夫が必要"
+        ]
+      }
+    },
+    {
+      "section_id": "S003",
+      "type": "list-3",
+      "props": {
+        "title": "サムネイルの真の役割",
+        "items": [
+          "動画の価値を一瞬で伝える",
+          "訴求力のある言葉や図が大事",
+          "企画に左右される"
+        ]
+      }
+    },
+    {
+      "section_id": "S004",
+      "type": "strong-message",
+      "props": {
+        "text": "トレンド動画とエバーグリーン動画の違い"
+      }
+    },
+    {
+      "section_id": "S004",
+      "type": "list-3",
+      "props": {
+        "title": "動画タイプ別のサムネ戦略",
+        "items": [
+          "トレンド動画は凝らなくても見られる",
+          "エバーグリーンは価値を伝える工夫が必要",
+          "情報設計の話"
+        ]
+      }
+    },
+    {
+      "section_id": "S005",
+      "type": "strong-message",
+      "props": {
+        "text": "AIで作れても価値が伝わらなければ意味がない"
+      }
+    },
+    {
+      "section_id": "S006",
+      "type": "list-4",
+      "props": {
+        "title": "これから求められるのはディレクター的な能力",
+        "items": [
+          "ただ作るだけならAIで済む",
+          "動画の意図を理解する",
+          "より良くする提案ができる",
+          "付加価値を出せる人が生き残る"
+        ]
+      }
+    },
+    {
+      "section_id": "S007",
+      "type": "strong-message",
+      "props": {
+        "text": "まとめ:企画力が価値を左右する"
+      }
+    },
+    {
+      "section_id": "S007",
+      "type": "list-3",
+      "props": {
+        "title": "これからのクリエイターに必要なこと",
+        "items": [
+          "「何を伝えるか」を考える企画力",
+          "AIは味方として活用する",
+          "人の意図が大事"
+        ]
+      }
     }
-  },
-  {
-    "section_id": "S001",
-    "type": "screenshots",
-    "props": {
-      "title": "Nano Banana Pro",
-      "target": "Nano Banana Proのツール画面",
-      "note": "話題のAIサムネイル制作ツール"
-    }
-  },
-  {
-    "section_id": "S001",
-    "type": "strong-message",
-    "props": {
-      "text": "サムネ制作代行は必要なくなる？"
-    }
-  },
-  {
-    "section_id": "S002",
-    "type": "strong-message",
-    "props": {
-      "text": "見た目を整えるだけの仕事は厳しい"
-    }
-  },
-  {
-    "section_id": "S002",
-    "type": "list-3",
-    "props": {
-      "title": "Nano Banana Proの強み",
-      "items": [
-        "安い",
-        "早い",
-        "出来も悪くない"
-      ]
-    }
-  },
-  {
-    "section_id": "S002",
-    "type": "strong-message",
-    "props": {
-      "text": "でも、綺麗さだけが全てじゃない"
-    }
-  },
-  {
-    "section_id": "S002",
-    "type": "list-3",
-    "props": {
-      "title": "サムネイルで本当に大事なこと",
-      "items": [
-        "ちゃんとクリックされるか",
-        "成果が伴うか",
-        "視聴者が「見たい！」と思えるか"
-      ]
-    }
-  },
-  {
-    "section_id": "S003",
-    "type": "strong-message",
-    "props": {
-      "text": "サムネイルの真の役割"
-    }
-  },
-  {
-    "section_id": "S003",
-    "type": "list-4",
-    "props": {
-      "title": "サムネイル設計の本質",
-      "items": [
-        "動画の価値を一瞬で伝える",
-        "きれいさより訴求力",
-        "動画の企画に左右される",
-        "企画がしっかりしていないと難しい"
-      ]
-    }
-  },
-  {
-    "section_id": "S003",
-    "type": "strong-message",
-    "props": {
-      "text": "内容とズレたサムネ＝「釣り」"
-    }
-  },
-  {
-    "section_id": "S004",
-    "type": "strong-message",
-    "props": {
-      "text": "トレンド動画 vs エバーグリーン動画"
-    }
-  },
-  {
-    "section_id": "S004",
-    "type": "list-3",
-    "props": {
-      "title": "トレンド動画の特徴",
-      "items": [
-        "新しいAIツールの紹介など",
-        "サムネイルに凝らなくても見られる",
-        "話題性が集客する"
-      ]
-    }
-  },
-  {
-    "section_id": "S004",
-    "type": "list-3",
-    "props": {
-      "title": "エバーグリーン動画の特徴",
-      "items": [
-        "トレンドに頼らない",
-        "「見る価値あるよ」と伝える工夫が必要",
-        "情報設計が重要"
-      ]
-    }
-  },
-  {
-    "section_id": "S004",
-    "type": "strong-message",
-    "props": {
-      "text": "サムネイル＝情報設計の話"
-    }
-  },
-  {
-    "section_id": "S004",
-    "type": "illustrations",
-    "props": {
-      "title": "参考書籍",
-      "imagePrompt": "『ノンデザイナーズ・デザインブック』の表紙または本を読んでいる人",
-      "caption": "設計のロジックを学べる名著"
-    }
-  },
-  {
-    "section_id": "S005",
-    "type": "strong-message",
-    "props": {
-      "text": "AIで作れても価値が伝わらなければ意味がない"
-    }
-  },
-  {
-    "section_id": "S005",
-    "type": "list-3",
-    "props": {
-      "title": "AI時代に必要なスキル",
-      "items": [
-        "訴求の中身を明確にする",
-        "見る人に価値を伝える",
-        "どんな価値を伝えたいか言語化する"
-      ]
-    }
-  },
-  {
-    "section_id": "S006",
-    "type": "strong-message",
-    "props": {
-      "text": "これから求められるのはディレクター的な能力"
-    }
-  },
-  {
-    "section_id": "S006",
-    "type": "list-4",
-    "props": {
-      "title": "AIで代替できること・できないこと",
-      "items": [
-        "✗ ただ作るだけ → AIで済む",
-        "○ 動画の意図を理解",
-        "○ ターゲットを理解",
-        "○ より良くする提案"
-      ]
-    }
-  },
-  {
-    "section_id": "S006",
-    "type": "strong-message",
-    "props": {
-      "text": "生き残るのは付加価値を出せる人"
-    }
-  },
-  {
-    "section_id": "S007",
-    "type": "strong-message",
-    "props": {
-      "text": "まとめ：企画力が価値を左右する"
-    }
-  },
-  {
-    "section_id": "S007",
-    "type": "list-4",
-    "props": {
-      "title": "AI時代のクリエイター価値",
-      "items": [
-        "「見た目を整える」は簡単になった",
-        "「何を伝えるか」の企画が重要",
-        "AIは味方",
-        "人の意図が大事"
-      ]
-    }
-  },
-  {
-    "section_id": "S007",
-    "type": "strong-message",
-    "props": {
-      "text": "AIを活かすのは人の意図"
-    }
-  }
-]
+  ]
+}

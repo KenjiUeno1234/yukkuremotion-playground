@@ -1,27 +1,29 @@
 ---
 marp: true
-paginate: false
-theme: default
+backgroundImage: url('makimono.png')
 ---
 
 <style>
-/* スライド全体の背景と基本文字色 */
-section {
-  background: #f0f8ff; /* 淡いブルー単色背景（Canva互換） */
-  color: #003a8c; /* 濃いめブルー */
-  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&display=swap');
 
-/* 中央のメッセージ */
-.big-center {
+section {
+  font-family: "Shippori Mincho", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", "MS PMincho", serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 500px;
+}
+
+.big-center {
   font-size: 64px;
   font-weight: 700;
-  color: #003a8c; /* タイトルと同系色 */
-  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  color: #d0bc89;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     0px  4px 8px #000;
+  letter-spacing: 0.1em;
 }
 </style>
 

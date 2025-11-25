@@ -1,14 +1,23 @@
 ---
 marp: true
 paginate: true
+backgroundImage: url('makimono.png')
 theme: default
 ---
 
 <style>
-/* 全体：左上寄せ＋淡いブルー背景＋濃いブルー文字 */
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&display=swap');
+
+/* 全体：左上寄せ＋文字大きめ */
 section {
-  background: #f0f8ff; /* 淡いブルー単色背景（Canva互換） */
-  color: #003a8c;
+  font-family: "Shippori Mincho", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", "MS PMincho", serif;
+  color: #d0bc89;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000,
+     0px  2px 3px #000;
   font-size: 40px;
   padding: 24px 72px 40px 72px;
 
@@ -17,23 +26,34 @@ section {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
-  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
 /* タイトル */
 h1 {
   align-self: center;
-  color: #003a8c;
+  color: #d0bc89;
   font-weight: 700;
   font-size: 55px;
   margin-top: 8px;
   margin-bottom: 24px;
-  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     0px  3px 6px #000;
+  letter-spacing: 0.08em;
 }
 
 h2, h3 {
-  color: #003a8c;
+  color: #d0bc89;
   font-weight: 700;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     0px  3px 6px #000;
 }
 
 /* 丸番号アイコン */
@@ -47,9 +67,14 @@ h2, h3 {
   border-radius: 50%;
   font-weight: 700;
   font-size: 32px;
-  background: #ffeb99;   /* 明るいイエロー */
-  color: #003a8c;        /* 濃いブルー文字 */
-  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  background: #d0bc89;
+  color: #0d0701;
+  box-shadow:
+    0 0 0 2px #3b2d1b,
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.2),
+    0 -1px 1px rgba(0, 0, 0, 0.7);
 }
 
 /* リスト1行のブロック */
@@ -57,7 +82,6 @@ h2, h3 {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 </style>
 

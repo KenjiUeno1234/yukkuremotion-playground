@@ -42,6 +42,7 @@ AIツール登場で変わるサムネ制作
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&display=swap');
 
+/* 全体：左上寄せ＋文字大きめ */
 section.list-slide {
   font-family: "Shippori Mincho", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", "MS PMincho", serif;
   color: #d0bc89;
@@ -53,6 +54,7 @@ section.list-slide {
      0px  2px 3px #000;
   font-size: 40px;
   padding: 24px 72px 40px 72px;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -60,6 +62,7 @@ section.list-slide {
   gap: 10px;
 }
 
+/* タイトル */
 section.list-slide h1 {
   align-self: center;
   color: #d0bc89;
@@ -88,6 +91,7 @@ section.list-slide h3 {
      0px  3px 6px #000;
 }
 
+/* 丸番号アイコン */
 section.list-slide .list-index {
   display: inline-flex;
   justify-content: center;
@@ -108,6 +112,7 @@ section.list-slide .list-index {
     0 -1px 1px rgba(0, 0, 0, 0.7);
 }
 
+/* リスト1行のブロック */
 section.list-slide .list-item {
   display: flex;
   align-items: center;
