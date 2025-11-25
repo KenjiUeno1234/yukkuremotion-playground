@@ -59,11 +59,11 @@
 		"uuid": "^9.0.0"
 	},
 	"dependencies": {
-		"@remotion/cli": "^3.3.25",
-		"@remotion/eslint-config": "^3.3.25",
-		"@remotion/google-fonts": "^3.3.25",
-		"@remotion/lambda": "3.3.25",
-		"@remotion/media-utils": "^3.3.25",
+		"@remotion/cli": "4.0.377",
+		"@remotion/eslint-config": "4.0.377",
+		"@remotion/google-fonts": "4.0.377",
+		"@remotion/lambda": "4.0.377",
+		"@remotion/media-utils": "4.0.377",
 		"@types/meyda": "^4.3.2",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
@@ -73,7 +73,7 @@
 		"node-aquestalk10": "^1.0.0",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
-		"remotion": "^3.3.25",
+		"remotion": "4.0.377",
 		"web-audio-api": "^0.2.2",
 		"web-audio-engine": "^0.13.4"
 	}

@@ -7,8 +7,8 @@ theme: default
 <style>
 /* スライド全体の背景と基本文字色 */
 section {
-  background: #f0f8ff;
-  color: #003a8c;
+  background: #f0f8ff; /* 淡いブルー単色背景（Canva互換） */
+  color: #003a8c; /* 濃いめブルー */
   font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
@@ -20,25 +20,26 @@ section {
   height: 500px;
   font-size: 64px;
   font-weight: 700;
-  color: #003a8c;
+  color: #003a8c; /* タイトルと同系色 */
   font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 </style>
 
 <!-- S001 -->
-
 <div class="big-center">
-なんでもかんでもRAGじゃない
+AIツール登場で<br>サムネ制作はどうなる？
 </div>
 
 ---
 
 <style>
+/* 全体：左上寄せ＋淡いブルー背景＋濃いブルー文字 */
 section {
-  background: #f0f8ff;
+  background: #f0f8ff; /* 淡いブルー単色背景（Canva互換） */
   color: #003a8c;
   font-size: 40px;
   padding: 24px 72px 40px 72px;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -47,6 +48,7 @@ section {
   font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
+/* タイトル */
 h1 {
   align-self: center;
   color: #003a8c;
@@ -57,12 +59,14 @@ h1 {
   font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
+/* 2枚目以降の見出し用（必要なら） */
 h2, h3 {
   color: #003a8c;
   font-weight: 700;
   font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
+/* 丸番号アイコン（①②③…） */
 .list-index {
   display: inline-flex;
   justify-content: center;
@@ -73,11 +77,12 @@ h2, h3 {
   border-radius: 50%;
   font-weight: 700;
   font-size: 32px;
-  background: #ffeb99;
-  color: #003a8c;
+  background: #ffeb99;   /* 明るいイエロー */
+  color: #003a8c;        /* 濃いブルー文字 */
   font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
+/* リスト1行のブロック */
 .list-item {
   display: flex;
   align-items: center;
@@ -87,182 +92,221 @@ h2, h3 {
 </style>
 
 <!-- S002 -->
-
-# よくある相談パターン
+# AIツール vs 人間の価値
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>「RAGを入れないといけない」という声が多い</div>
+  <div>見た目を整えるだけの仕事<br>→ AIが安く・早く・高品質</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>プロンプトだけで十分に回るケースが多い</div>
+  <div>でも綺麗さだけが全てではない</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>パターン化できるならRAGより精度が上がることも</div>
+  <div>クリックされるか・成果が伴うかが重要</div>
 </div>
 
 ---
 
 <!-- S003 -->
-
-# 問い①：全部見てほしいか？
+# サムネイルの真の役割
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>AIにデータを全部見てほしいのかどうか</div>
+  <div>動画の価値を一瞬で伝える</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>全部読んで判断してほしいなら部分検索のRAGは向かない</div>
+  <div>きれいさより訴求力</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>全文を読ませるほうが自然で確実</div>
+  <div>動画の企画に左右される</div>
+</div>
+
+<div class="list-item">
+  <div class="list-index">4</div>
+  <div>企画がしっかりしていないと難しい</div>
 </div>
 
 ---
 
 <!-- S004 -->
-
-# 問い②：入力上限に収まる？
+# トレンド動画 vs エバーグリーン動画
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>GPT/Claudeは10〜20万字、Geminiは100万字以上という上限</div>
+  <div>トレンド動画：凝らなくても見られる</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>意外と全部入る。コストはほんのわずか</div>
+  <div>エバーグリーン動画：価値を伝える工夫が必要</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>複雑なRAGを組むより安く・速く・安定して動く</div>
+  <div>サムネイル = 情報設計の話</div>
+</div>
+
+<div class="list-item">
+  <div class="list-index">4</div>
+  <div>参考：『ノンデザイナーズ・デザインブック』</div>
 </div>
 
 ---
 
 <!-- S005 -->
-
-# 問い③：パターン数は？
+# AI時代に必要なスキル
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>問い合わせや業務が10〜20パターンほどならテンプレート化が最適</div>
+  <div>AIで作れても価値が伝わらなければ意味がない</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>業界別に作ったプロンプトは使い回しが簡単</div>
+  <div>訴求の中身を明確にする</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>精度も運用性も申し分ない</div>
+  <div>どんな価値を伝えたいか言語化する</div>
 </div>
 
 ---
 
 <!-- S006 -->
-
-# RAGが必要ない条件
+# 生き残るのは誰か
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>全部見たいならプロンプトに入れる</div>
+  <div>✗ ただ作るだけ → AIで済む</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>上限に収まるなら全文を入れる</div>
+  <div>○ 動画の意図を理解</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>パターンが少ないならテンプレ化する</div>
+  <div>○ より良くする提案</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">4</div>
-  <div>この条件がそろえばRAGは必要ない</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">5</div>
-  <div>もっとシンプルで強い選択肢がある</div>
+  <div>○ ディレクター・プロデューサー的な能力</div>
 </div>
 
 ---
+
+<style>
+/* スライド全体の背景と基本文字色 */
+section {
+  background: #f0f8ff; /* 淡いブルー単色背景（Canva互換） */
+  color: #003a8c; /* 濃いめブルー */
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+
+/* 中央のメッセージ */
+.big-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  font-size: 64px;
+  font-weight: 700;
+  color: #003a8c; /* タイトルと同系色 */
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+</style>
 
 <!-- S007 -->
-
-# RAGは万能ではない
-
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>RAGは万能の正義ではない</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>適材適所でこそ輝く技術</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>どんな状況でもRAGに頼る必要はない</div>
+<div class="big-center">
+企画力が<br>価値を左右する
 </div>
 
 ---
 
-<!-- S008 -->
+<style>
+/* 全体：左上寄せ＋淡いブルー背景＋濃いブルー文字 */
+section {
+  background: #f0f8ff; /* 淡いブルー単色背景（Canva互換） */
+  color: #003a8c;
+  font-size: 40px;
+  padding: 24px 72px 40px 72px;
 
-# 今日覚えておきたいこと
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+
+/* タイトル */
+h1 {
+  align-self: center;
+  color: #003a8c;
+  font-weight: 700;
+  font-size: 55px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+
+/* 2枚目以降の見出し用（必要なら） */
+h2, h3 {
+  color: #003a8c;
+  font-weight: 700;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+
+/* 丸番号アイコン（①②③…） */
+.list-index {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  margin-right: 16px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 32px;
+  background: #ffeb99;   /* 明るいイエロー */
+  color: #003a8c;        /* 濃いブルー文字 */
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+
+/* リスト1行のブロック */
+.list-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+}
+</style>
+
+<!-- S007 -->
+# AI時代のクリエイター価値
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>RAGは部分を取り出す仕組み</div>
+  <div>「見た目を整える」は簡単になった</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>全部読ませたいなら向かない。収まるなら全文投入が合理的</div>
+  <div>「何を伝えるか」の企画が重要</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>パターンが少ないならテンプレ化で十分</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">4</div>
-  <div>状況に合わせて柔軟に選ぶことが鍵</div>
-</div>
-
----
-
-<!-- S009 -->
-
-# RAGを使わない勇気
-
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>勢いでRAGを導入して失敗する事例は多い</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>「本当に必要か」を落ち着いて見極める</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>RAGを使わない勇気が成功を近づける</div>
+  <div>AIを活かすのは人の意図</div>
 </div>

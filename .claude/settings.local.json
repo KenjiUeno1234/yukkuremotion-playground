@@ -52,7 +52,11 @@
       "Bash(tee:*)",
       "Bash(del publicvoicesS001-1.wav)",
       "Bash(del:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(pip install:*)",
+      "Bash(npx remotion:*)",
+      "Bash(type \"src\\marp-test\\2黒板リスト(list-table-of-contentsパターン)s.md\")",
+      "Bash(hexdump:*)"
     ],
     "deny": [],
     "ask": []

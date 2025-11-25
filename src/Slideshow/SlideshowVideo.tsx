@@ -120,7 +120,7 @@ export const SlideshowVideo: React.FC<SlideshowVideoProps> = ({ config }) => {
     <AbsoluteFill style={{ backgroundColor: 'transparent' }}>
       {/* 背景画像 - 全画面表示 */}
       <Img
-        src={staticFile('background/okumono_wakusei5.png')}
+        src={staticFile('background/kyaradeza-back.png')}
         style={{
           position: 'absolute',
           width: '100%',

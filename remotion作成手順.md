@@ -9,6 +9,7 @@
 - 依存パッケージがインストール済み（npm install 実行済み）
 - BGMファイル（Floraria.mp3）が `public/bgm/` に配置済み
 - スライド画像（S001.png ~ S009.png など）が `public/slide/` に配置済み
+- 背景画像（kyaradeza-back.png）が `src/BACKGROUND_LAYER/` または `public/background/` に配置済み
 
 ---
 
@@ -284,6 +285,10 @@ npm start
 ```bash
 # 前提: script_final.md（字幕用）と script_final_hosei.md（音声用）を配置済み
 # 前提: public/slide/ にスライドPNG配置済み
+
+# 0. 背景画像の準備（必要な場合）
+#    src/BACKGROUND_LAYER/kyaradeza-back.png を public/background/ にコピー
+powershell -Command "Copy-Item -Path 'src/BACKGROUND_LAYER/kyaradeza-back.png' -Destination 'public/background/kyaradeza-back.png' -Force"
 
 # 1. 音声ファイルを強制再生成（script_final_hosei.md から）
 #    --force オプションで既存ファイルを上書きし、常に最新版を生成

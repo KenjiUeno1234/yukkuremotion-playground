@@ -12,22 +12,37 @@ export const slideshowConfig: SlideshowConfig = {
     "slidePath": "slide/S001.png",
     "narrations": [
       {
-        "text": "最近、「自社データならRAGでしょ」っていう空気がありますよね。",
+        "text": "最近、Nano Banana ProっていうAIツールが話題になってるでしょ？",
         "voicePath": "voices/S001-1.wav",
-        "audioDurationFrames": 128
+        "audioDurationFrames": 143
       },
       {
-        "text": "でも、実はそうとも限らないんです。",
+        "text": "それが登場したことで、YouTubeのサムネイル制作の仕事がどうなるのかっていう話が出てきててね、",
         "voicePath": "voices/S001-2.wav",
-        "audioDurationFrames": 91
+        "audioDurationFrames": 205
       },
       {
-        "text": "まずは、その思い込みを静かにほどいてみましょう。",
+        "text": "特に「サムネ制作の代行って、もう必要なくなるのかな？」っていう疑問が、",
         "voicePath": "voices/S001-3.wav",
-        "audioDurationFrames": 111
+        "audioDurationFrames": 189
+      },
+      {
+        "text": "YouTuberとして気になるところなの。",
+        "voicePath": "voices/S001-4.wav",
+        "audioDurationFrames": 76
+      },
+      {
+        "text": "私自身、サムネイルは全部自分で作ってきたから、実際に代行サービスを使ったことはないんだけど、",
+        "voicePath": "voices/S001-5.wav",
+        "audioDurationFrames": 229
+      },
+      {
+        "text": "それでも制作側の目線で思うことは色々あるのよ。",
+        "voicePath": "voices/S001-6.wav",
+        "audioDurationFrames": 109
       }
     ],
-    "totalDurationFrames": 345,
+    "totalDurationFrames": 966,
     "pauseAfter": 0.5
   },
   {
@@ -35,22 +50,37 @@ export const slideshowConfig: SlideshowConfig = {
     "slidePath": "slide/S002.png",
     "narrations": [
       {
-        "text": "よくいただくご相談で、「RAGを入れないといけませんよね？」という声があります。",
+        "text": "結論から言うとね、「言われた通りに見た目を整えるだけ」の仕事だったら、",
         "voicePath": "voices/S002-1.wav",
         "audioDurationFrames": 169
       },
       {
-        "text": "けれど本当は、プロンプトだけで十分に回るケースが多いんです。",
+        "text": "たしかに厳しくなってくるかもしれないの。",
         "voicePath": "voices/S002-2.wav",
-        "audioDurationFrames": 141
+        "audioDurationFrames": 82
       },
       {
-        "text": "むしろ、内容がパターン化できるなら、RAGより精度が上がることも珍しくありません。",
+        "text": "Nano Banana Proの方が、安くて、早くて、しかも出来も悪くないからね。",
         "voicePath": "voices/S002-3.wav",
-        "audioDurationFrames": 187
+        "audioDurationFrames": 178
+      },
+      {
+        "text": "でもね、サムネイルって、ただ綺麗に見せればいいわけじゃなくて、",
+        "voicePath": "voices/S002-4.wav",
+        "audioDurationFrames": 142
+      },
+      {
+        "text": "ちゃんとクリックされるかどうか、つまり成果が伴うかがすごく大事なの。",
+        "voicePath": "voices/S002-5.wav",
+        "audioDurationFrames": 159
+      },
+      {
+        "text": "視聴者が「この動画、見たい！」って思えるかどうかっていうところね。",
+        "voicePath": "voices/S002-6.wav",
+        "audioDurationFrames": 152
       }
     ],
-    "totalDurationFrames": 512,
+    "totalDurationFrames": 897,
     "pauseAfter": 0.5
   },
   {
@@ -58,22 +88,37 @@ export const slideshowConfig: SlideshowConfig = {
     "slidePath": "slide/S003.png",
     "narrations": [
       {
-        "text": "最初に考えたいのは、「AIにデータを全部見てほしいのかどうか」。",
+        "text": "サムネイルの役割って、視覚的に動画の価値を一瞬で伝えることなのよ。",
         "voicePath": "voices/S003-1.wav",
-        "audioDurationFrames": 147
+        "audioDurationFrames": 163
       },
       {
-        "text": "もし\"最初から全部読んだうえで判断してほしい\"のであれば、部分検索であるRAGはあまり向いていません。",
+        "text": "きれいさよりも、訴求力のある言葉や図の方が大事だったりするんだよね。",
         "voicePath": "voices/S003-2.wav",
-        "audioDurationFrames": 206
+        "audioDurationFrames": 149
       },
       {
-        "text": "全文をそのまま読ませるほうが、自然で、確実です。",
+        "text": "そして、面白いことにね、サムネイルって自由に作れるわけじゃないの。",
         "voicePath": "voices/S003-3.wav",
-        "audioDurationFrames": 129
+        "audioDurationFrames": 161
+      },
+      {
+        "text": "動画の企画にすごく左右されるのよ。",
+        "voicePath": "voices/S003-4.wav",
+        "audioDurationFrames": 82
+      },
+      {
+        "text": "内容とズレたサムネを作ると「釣り」になっちゃって、視聴者の信頼を損ねるしね。",
+        "voicePath": "voices/S003-5.wav",
+        "audioDurationFrames": 177
+      },
+      {
+        "text": "逆に言えば、いいサムネを作るには、そもそもの企画がちゃんとしてないと難しいってことなのよ。",
+        "voicePath": "voices/S003-6.wav",
+        "audioDurationFrames": 206
       }
     ],
-    "totalDurationFrames": 497,
+    "totalDurationFrames": 953,
     "pauseAfter": 0.5
   },
   {
@@ -81,27 +126,42 @@ export const slideshowConfig: SlideshowConfig = {
     "slidePath": "slide/S004.png",
     "narrations": [
       {
-        "text": "そして次に、\"入力の上限に収まるかどうか\"。",
+        "text": "最近の私の経験から言うと、トレンド動画、たとえば新しいAIツールの紹介とかって、",
         "voicePath": "voices/S004-1.wav",
+        "audioDurationFrames": 213
+      },
+      {
+        "text": "そこまでサムネイルに凝らなくても結構見てもらえるの。",
+        "voicePath": "voices/S004-2.wav",
+        "audioDurationFrames": 108
+      },
+      {
+        "text": "でもね、トレンドに頼らないエバーグリーンな動画だと、",
+        "voicePath": "voices/S004-3.wav",
         "audioDurationFrames": 110
       },
       {
-        "text": "GPTやClaudeの10〜20万字、Geminiの100万字以上という上限なら、意外と全部入ってしまいます。",
-        "voicePath": "voices/S004-2.wav",
-        "audioDurationFrames": 252
-      },
-      {
-        "text": "しかもコストはほんのわずか。",
-        "voicePath": "voices/S004-3.wav",
-        "audioDurationFrames": 68
-      },
-      {
-        "text": "複雑なRAGを組むより、安く・速く・安定して動くことが多いんです。",
+        "text": "しっかり「この動画、見る価値あるよ」って伝える工夫が必要になってくるのよ。",
         "voicePath": "voices/S004-4.wav",
-        "audioDurationFrames": 179
+        "audioDurationFrames": 178
+      },
+      {
+        "text": "そういう意味では、サムネイルって見た目を作るだけの話じゃなくて、",
+        "voicePath": "voices/S004-5.wav",
+        "audioDurationFrames": 137
+      },
+      {
+        "text": "情報をどう整理して、どう見せるかっていう設計の話なの。",
+        "voicePath": "voices/S004-6.wav",
+        "audioDurationFrames": 137
+      },
+      {
+        "text": "実際、昔からある『ノンデザイナーズ・デザインブック』なんかを読むと、そのロジックがすごくわかりやすいよ。",
+        "voicePath": "voices/S004-7.wav",
+        "audioDurationFrames": 246
       }
     ],
-    "totalDurationFrames": 624,
+    "totalDurationFrames": 1144,
     "pauseAfter": 0.5
   },
   {
@@ -109,27 +169,22 @@ export const slideshowConfig: SlideshowConfig = {
     "slidePath": "slide/S005.png",
     "narrations": [
       {
-        "text": "さらにもうひとつ。",
+        "text": "だからね、Nano Banana Proで一見よさげなサムネが作れても、",
         "voicePath": "voices/S005-1.wav",
-        "audioDurationFrames": 46
+        "audioDurationFrames": 138
       },
       {
-        "text": "\"パターン数はどれくらいか\"。",
+        "text": "訴求の中身が曖昧だったり、見る人に価値が伝わらなければ意味がないの。",
         "voicePath": "voices/S005-2.wav",
-        "audioDurationFrames": 60
+        "audioDurationFrames": 161
       },
       {
-        "text": "もし問い合わせや業務が10〜20パターンほどなら、テンプレート化が最適です。",
+        "text": "AIに画像を作らせるにも、どんな価値を伝えたいかを自分でしっかり言語化しないとダメってことね。",
         "voicePath": "voices/S005-3.wav",
-        "audioDurationFrames": 170
-      },
-      {
-        "text": "業界別に作ったプロンプトは使い回しが簡単で、精度も運用性も申し分ありません。",
-        "voicePath": "voices/S005-4.wav",
-        "audioDurationFrames": 200
+        "audioDurationFrames": 215
       }
     ],
-    "totalDurationFrames": 491,
+    "totalDurationFrames": 529,
     "pauseAfter": 0.5
   },
   {
@@ -137,32 +192,37 @@ export const slideshowConfig: SlideshowConfig = {
     "slidePath": "slide/S006.png",
     "narrations": [
       {
-        "text": "つまり──全部見たいなら、プロンプトに入れる。",
+        "text": "結局のところ、「サムネ制作代行」っていう仕事も、",
         "voicePath": "voices/S006-1.wav",
-        "audioDurationFrames": 109
+        "audioDurationFrames": 127
       },
       {
-        "text": "上限に収まるなら、全文を入れる。",
+        "text": "ただ作るだけならAIで済んじゃうかもしれない。",
         "voicePath": "voices/S006-2.wav",
-        "audioDurationFrames": 88
+        "audioDurationFrames": 100
       },
       {
-        "text": "パターンが少ないなら、テンプレ化する。",
+        "text": "でも、動画の意図やターゲットをちゃんと理解して、",
         "voicePath": "voices/S006-3.wav",
-        "audioDurationFrames": 86
+        "audioDurationFrames": 113
       },
       {
-        "text": "この条件がそろえば、RAGは必要ありません。",
+        "text": "より良くする提案ができる人なら、これからも選ばれる可能性はあると思うの。",
         "voicePath": "voices/S006-4.wav",
-        "audioDurationFrames": 107
+        "audioDurationFrames": 164
       },
       {
-        "text": "もっとシンプルで、もっと強い選択肢があるからです。",
+        "text": "ただし、そういう人ってもう、ほとんどディレクターとかプロデューサーの領域よね。",
         "voicePath": "voices/S006-5.wav",
-        "audioDurationFrames": 120
+        "audioDurationFrames": 170
+      },
+      {
+        "text": "めちゃくちゃレベルの高い話だけど、そういう付加価値を出せる人が生き残っていくんじゃないかな。",
+        "voicePath": "voices/S006-6.wav",
+        "audioDurationFrames": 189
       }
     ],
-    "totalDurationFrames": 525,
+    "totalDurationFrames": 878,
     "pauseAfter": 0.5
   },
   {
@@ -170,75 +230,34 @@ export const slideshowConfig: SlideshowConfig = {
     "slidePath": "slide/S007.png",
     "narrations": [
       {
-        "text": "そもそも、RAGは万能の正義ではありません。",
+        "text": "まとめると、AIで「見た目を整える」ことは簡単になったけど、",
         "voicePath": "voices/S007-1.wav",
-        "audioDurationFrames": 102
+        "audioDurationFrames": 150
       },
       {
-        "text": "適材適所でこそ輝く技術なんです。",
+        "text": "「何を伝えるか」っていう企画の部分に向き合えるかどうかが、",
         "voicePath": "voices/S007-2.wav",
-        "audioDurationFrames": 92
+        "audioDurationFrames": 129
       },
       {
-        "text": "どんな状況でもRAGに頼る必要はないんですよ。",
+        "text": "これからのクリエイターやデザイナーの価値を左右していくんじゃないかなって思うんだ。",
         "voicePath": "voices/S007-3.wav",
-        "audioDurationFrames": 98
+        "audioDurationFrames": 157
+      },
+      {
+        "text": "AIは味方になるけど、それをちゃんと活かすためには、",
+        "voicePath": "voices/S007-4.wav",
+        "audioDurationFrames": 119
+      },
+      {
+        "text": "やっぱり人の意図が大事になってくるってことね。",
+        "voicePath": "voices/S007-5.wav",
+        "audioDurationFrames": 95
       }
     ],
-    "totalDurationFrames": 307,
-    "pauseAfter": 0.5
-  },
-  {
-    "id": "S008",
-    "slidePath": "slide/S008.png",
-    "narrations": [
-      {
-        "text": "今日覚えておきたいのは、RAGは\"部分を取り出す仕組み\"だということ。",
-        "voicePath": "voices/S008-1.wav",
-        "audioDurationFrames": 140
-      },
-      {
-        "text": "全部読ませたいなら向かないし、入力に収まるなら全文投入のほうが合理的。",
-        "voicePath": "voices/S008-2.wav",
-        "audioDurationFrames": 180
-      },
-      {
-        "text": "パターンが少ないならテンプレ化で十分。",
-        "voicePath": "voices/S008-3.wav",
-        "audioDurationFrames": 90
-      },
-      {
-        "text": "つまり、状況に合わせて柔軟に選ぶことが鍵です。",
-        "voicePath": "voices/S008-4.wav",
-        "audioDurationFrames": 122
-      }
-    ],
-    "totalDurationFrames": 547,
-    "pauseAfter": 0.5
-  },
-  {
-    "id": "S009",
-    "slidePath": "slide/S009.png",
-    "narrations": [
-      {
-        "text": "そして最後に……勢いでRAGを導入してうまくいかなかった、という事例は本当に多いんです。",
-        "voicePath": "voices/S009-1.wav",
-        "audioDurationFrames": 208
-      },
-      {
-        "text": "大切なのは「本当に必要なのか」を落ち着いて見極めること。",
-        "voicePath": "voices/S009-2.wav",
-        "audioDurationFrames": 145
-      },
-      {
-        "text": "ときには\"RAGを使わない勇気\"こそが、自社データ活用の成功をぐっと近づけてくれます。",
-        "voicePath": "voices/S009-3.wav",
-        "audioDurationFrames": 190
-      }
-    ],
-    "totalDurationFrames": 633,
+    "totalDurationFrames": 740,
     "pauseAfter": 3
   }
 ],
-  totalFrames: 4481,
+  totalFrames: 6107,
 };
