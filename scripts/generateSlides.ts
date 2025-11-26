@@ -83,7 +83,7 @@ function main() {
   // 手順4: slides_plan.md → slides_plan.pdf
   executeStep(
     "Step 4: Generate slides_plan.pdf",
-    "npx @marp-team/marp-cli slide-out/slides_plan.md -o slide-out/slides_plan.pdf",
+    "npx @marp-team/marp-cli slide-out/slides_plan.md -o slide-out/slides_plan.pdf --allow-local-files",
     projectRoot
   );
 
@@ -99,6 +99,15 @@ function main() {
   console.log(`  📄 ${path.join(slideOutDir, "slides_plan.pdf")}`);
 
   console.log("\n✓ All steps completed successfully!");
+
+  // PDFを自動で開く
+  console.log("\n🚀 Opening PDF...");
+  const pdfPath = path.join(slideOutDir, "slides_plan.pdf");
+  try {
+    execSync(`start "${pdfPath}"`, { stdio: "inherit" });
+  } catch (error) {
+    console.log("⚠️  Could not auto-open PDF. Please open it manually.");
+  }
 }
 
 main();

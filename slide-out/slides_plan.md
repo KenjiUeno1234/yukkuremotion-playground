@@ -17,14 +17,14 @@ section.strong-message-slide {
 section.strong-message-slide .big-center {
   font-size: 64px;
   font-weight: 700;
-  color: #d0bc89;
+  color: #ffffff;
   letter-spacing: 0.1em;
 }
 </style>
 
 <!-- S001 -->
 <div class="big-center">
-なんでもかんでもRAGじゃない
+AIツール登場で変わるサムネ制作
 </div>
 
 ---
@@ -34,7 +34,7 @@ section.strong-message-slide .big-center {
 <style>
 section.list-slide {
   font-family: "Yu Mincho", "Hiragino Mincho ProN", "MS PMincho", "Noto Serif JP", serif;
-  color: #d0bc89;
+  color: #ffffff;
   font-size: 40px;
   padding: 24px 72px 40px 72px;
   display: flex;
@@ -46,18 +46,12 @@ section.list-slide {
 
 section.list-slide h1 {
   align-self: center;
-  color: #d0bc89;
+  color: #ffffff;
   font-weight: 700;
   font-size: 55px;
   margin-top: 8px;
   margin-bottom: 24px;
   letter-spacing: 0.08em;
-}
-
-section.list-slide h2,
-section.list-slide h3 {
-  color: #d0bc89;
-  font-weight: 700;
 }
 
 section.list-slide .list-index {
@@ -82,21 +76,21 @@ section.list-slide .list-item {
 </style>
 
 <!-- S002 -->
-# よくある相談パターン
+# 見た目を整えるだけの仕事は厳しい
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>「RAGを入れないといけない」という声が多い</div>
+  <div>AIの方が安くて早い</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>プロンプトだけで十分に回るケースが多い</div>
+  <div>成果が伴うかが重要</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>パターン化できるならRAGより精度が上がることも</div>
+  <div>クリック率を高める工夫が必要</div>
 </div>
 
 ---
@@ -104,21 +98,21 @@ section.list-slide .list-item {
 <!-- _class: list-slide -->
 
 <!-- S003 -->
-# 問い①：全部見てほしいか？
+# サムネイルの真の役割
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>AIにデータを全部見てほしいのかどうか</div>
+  <div>動画の価値を一瞬で伝える</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>全部読んで判断してほしいなら部分検索のRAGは向かない</div>
+  <div>訴求力のある言葉や図が大事</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>全文を読ませるほうが自然で確実</div>
+  <div>企画に左右される</div>
 </div>
 
 ---
@@ -126,43 +120,46 @@ section.list-slide .list-item {
 <!-- _class: list-slide -->
 
 <!-- S004 -->
-# 問い②：入力上限に収まる？
+# トレンド動画とエバーグリーン動画の違い
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>GPT/Claudeは10〜20万字、Geminiは100万字以上という上限</div>
+  <div>トレンド動画は凝らなくても見られる</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>意外と全部入る。コストはほんのわずか</div>
+  <div>エバーグリーンは価値を伝える工夫が必要</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>複雑なRAGを組むより安く・速く・安定して動く</div>
+  <div>情報設計の話</div>
 </div>
 
 ---
 
-<!-- _class: list-slide -->
+<!-- _class: strong-message-slide -->
+
+<style>
+section.strong-message-slide {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", "MS PMincho", "Noto Serif JP", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section.strong-message-slide .big-center {
+  font-size: 64px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+}
+</style>
 
 <!-- S005 -->
-# 問い③：パターン数は？
-
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>問い合わせや業務が10〜20パターンほどならテンプレート化が最適</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>業界別に作ったプロンプトは使い回しが簡単</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>精度も運用性も申し分ない</div>
+<div class="big-center">
+AIで作れても価値が伝わらなければ意味がない
 </div>
 
 ---
@@ -170,31 +167,26 @@ section.list-slide .list-item {
 <!-- _class: list-slide -->
 
 <!-- S006 -->
-# RAGが必要ない条件
+# これから求められるのはディレクター的な能力
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>全部見たいならプロンプトに入れる</div>
+  <div>ただ作るだけならAIで済む</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>上限に収まるなら全文を入れる</div>
+  <div>動画の意図を理解する</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>パターンが少ないならテンプレ化する</div>
+  <div>より良くする提案ができる</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">4</div>
-  <div>この条件がそろえばRAGは必要ない</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">5</div>
-  <div>もっとシンプルで強い選択肢がある</div>
+  <div>付加価値を出せる人が生き残る</div>
 </div>
 
 ---
@@ -202,68 +194,19 @@ section.list-slide .list-item {
 <!-- _class: list-slide -->
 
 <!-- S007 -->
-# RAGは万能ではない
+# まとめ:企画力が価値を左右する
 
 <div class="list-item">
   <div class="list-index">1</div>
-  <div>RAGは万能の正義ではない</div>
+  <div>「何を伝えるか」を考える企画力</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">2</div>
-  <div>適材適所でこそ輝く技術</div>
+  <div>AIは味方として活用する</div>
 </div>
 
 <div class="list-item">
   <div class="list-index">3</div>
-  <div>どんな状況でもRAGに頼る必要はない</div>
-</div>
-
----
-
-<!-- _class: list-slide -->
-
-<!-- S008 -->
-# 今日覚えておきたいこと
-
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>RAGは部分を取り出す仕組み</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>全部読ませたいなら向かない。収まるなら全文投入が合理的</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>パターンが少ないならテンプレ化で十分</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">4</div>
-  <div>状況に合わせて柔軟に選ぶことが鍵</div>
-</div>
-
----
-
-<!-- _class: list-slide -->
-
-<!-- S009 -->
-# RAGを使わない勇気
-
-<div class="list-item">
-  <div class="list-index">1</div>
-  <div>勢いでRAGを導入して失敗する事例は多い</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">2</div>
-  <div>「本当に必要か」を落ち着いて見極める</div>
-</div>
-
-<div class="list-item">
-  <div class="list-index">3</div>
-  <div>RAGを使わない勇気が成功を近づける</div>
+  <div>人の意図が大事</div>
 </div>

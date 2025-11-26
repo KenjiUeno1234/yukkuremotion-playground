@@ -15,7 +15,7 @@ type List3Slide = {
   type: "list-3";
   props: {
     title: string;
-    items: [string, string, string];
+    items: string[];
   };
 };
 
@@ -24,7 +24,7 @@ type List4Slide = {
   type: "list-4";
   props: {
     title: string;
-    items: [string, string, string, string];
+    items: string[];
   };
 };
 
@@ -33,7 +33,7 @@ type List5Slide = {
   type: "list-5";
   props: {
     title: string;
-    items: [string, string, string, string, string];
+    items: string[];
   };
 };
 
@@ -65,28 +65,67 @@ type SlideConfig =
   | IllustrationsSlide
   | ScreenshotsSlide;
 
-// 共通のCSSスタイル
-const COMMON_STYLES = `<style>
-section {
-  background: linear-gradient(to bottom right, #ffffff, #e0f0ff);
-  color: #003a8c;
-  font-size: 32px;
-  padding: 60px;
+// strong-messageスライド用のCSSスタイル
+const STRONG_MESSAGE_STYLES = `<style>
+section.strong-message-slide {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", "MS PMincho", "Noto Serif JP", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h1 {
-  text-align: center;
-  color: #003a8c;
-  font-size: 48px;
-  margin-bottom: 40px;
+section.strong-message-slide .big-center {
+  font-size: 64px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+}
+</style>`;
+
+// listスライド用のCSSスタイル
+const LIST_SLIDE_STYLES = `<style>
+section.list-slide {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", "MS PMincho", "Noto Serif JP", serif;
+  color: #ffffff;
+  font-size: 40px;
+  padding: 24px 72px 40px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
 }
 
-ol {
-  font-size: 32px;
-  line-height: 1.6;
+section.list-slide h1 {
+  align-self: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 55px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  letter-spacing: 0.08em;
 }
-</style>
-`;
+
+section.list-slide .list-index {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  margin-right: 16px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 32px;
+  background: #d0bc89;
+  color: #0d0701;
+}
+
+section.list-slide .list-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+</style>`;
 
 // strong-message テンプレートのレンダー関数
 function renderStrongMessage(slide: StrongMessageSlide, isFirst: boolean): string {
@@ -95,111 +134,88 @@ function renderStrongMessage(slide: StrongMessageSlide, isFirst: boolean): strin
   if (isFirst) {
     parts.push("---");
     parts.push("marp: true");
+    parts.push("paginate: false");
+    parts.push("backgroundImage: url('../src/slide-pattern/makimono.png')");
     parts.push("theme: default");
-    parts.push("paginate: true");
+    parts.push("class: strong-message-slide");
     parts.push("---");
     parts.push("");
-    parts.push(COMMON_STYLES);
+    parts.push(STRONG_MESSAGE_STYLES);
+    parts.push("");
+    parts.push(`<!-- ${slide.section_id} -->`);
+    parts.push('<div class="big-center">');
+    parts.push(slide.props.text);
+    parts.push("</div>");
   } else {
     parts.push("---");
+    parts.push("");
+    parts.push("<!-- _class: strong-message-slide -->");
+    parts.push("");
+    parts.push(STRONG_MESSAGE_STYLES);
+    parts.push("");
+    parts.push(`<!-- ${slide.section_id} -->`);
+    parts.push('<div class="big-center">');
+    parts.push(slide.props.text);
+    parts.push("</div>");
   }
 
-  parts.push("");
-  parts.push(`<!-- ${slide.section_id} -->`);
-  parts.push("");
-  parts.push(`# ${slide.props.text}`);
+  return parts.join("\n");
+}
+
+// list テンプレートの共通レンダー関数
+function renderListSlide(
+  slide: List3Slide | List4Slide | List5Slide,
+  isFirstList: boolean
+): string {
+  const listItems = slide.props.items
+    .map((item, index) => {
+      return `<div class="list-item">
+  <div class="list-index">${index + 1}</div>
+  <div>${item}</div>
+</div>`;
+    })
+    .join("\n\n");
+
+  const parts = [];
+
+  if (isFirstList) {
+    parts.push("---");
+    parts.push("");
+    parts.push("<!-- _class: list-slide -->");
+    parts.push("");
+    parts.push(LIST_SLIDE_STYLES);
+    parts.push("");
+    parts.push(`<!-- ${slide.section_id} -->`);
+    parts.push(`# ${slide.props.title}`);
+    parts.push("");
+    parts.push(listItems);
+  } else {
+    parts.push("---");
+    parts.push("");
+    parts.push("<!-- _class: list-slide -->");
+    parts.push("");
+    parts.push(`<!-- ${slide.section_id} -->`);
+    parts.push(`# ${slide.props.title}`);
+    parts.push("");
+    parts.push(listItems);
+  }
 
   return parts.join("\n");
 }
 
 // list-3 テンプレートのレンダー関数
-function renderList3(slide: List3Slide, isFirst: boolean): string {
-  const items = slide.props.items
-    .map((item, index) => `${index + 1}. ${item}`)
-    .join("\n\n");
-
-  const parts = [];
-
-  if (isFirst) {
-    parts.push("---");
-    parts.push("marp: true");
-    parts.push("theme: default");
-    parts.push("paginate: true");
-    parts.push("---");
-    parts.push("");
-    parts.push(COMMON_STYLES);
-  } else {
-    parts.push("---");
-  }
-
-  parts.push("");
-  parts.push(`<!-- ${slide.section_id} -->`);
-  parts.push("");
-  parts.push(`# ${slide.props.title}`);
-  parts.push("");
-  parts.push(items);
-
-  return parts.join("\n");
+function renderList3(slide: List3Slide, isFirstList: boolean): string {
+  return renderListSlide(slide, isFirstList);
 }
 
 // list-4 テンプレートのレンダー関数
-function renderList4(slide: List4Slide, isFirst: boolean): string {
-  const items = slide.props.items
-    .map((item, index) => `${index + 1}. ${item}`)
-    .join("\n\n");
-
-  const parts = [];
-
-  if (isFirst) {
-    parts.push("---");
-    parts.push("marp: true");
-    parts.push("theme: default");
-    parts.push("paginate: true");
-    parts.push("---");
-    parts.push("");
-    parts.push(COMMON_STYLES);
-  } else {
-    parts.push("---");
-  }
-
-  parts.push("");
-  parts.push(`<!-- ${slide.section_id} -->`);
-  parts.push("");
-  parts.push(`# ${slide.props.title}`);
-  parts.push("");
-  parts.push(items);
-
-  return parts.join("\n");
+function renderList4(slide: List4Slide, isFirstList: boolean): string {
+  return renderListSlide(slide, isFirstList);
 }
 
 // list-5 テンプレートのレンダー関数
-function renderList5(slide: List5Slide, isFirst: boolean): string {
-  const items = slide.props.items
-    .map((item, index) => `${index + 1}. ${item}`)
-    .join("\n\n");
-
-  const parts = [];
-
-  if (isFirst) {
-    parts.push("---");
-    parts.push("marp: true");
-    parts.push("theme: default");
-    parts.push("paginate: true");
-    parts.push("---");
-    parts.push("");
-    parts.push(COMMON_STYLES);
-  } else {
-    parts.push("---");
-  }
-
-  parts.push("");
-  parts.push(`<!-- ${slide.section_id} -->`);
-  parts.push("");
-  parts.push(`# ${slide.props.title}`);
-  parts.push("");
-  parts.push(items);
-
-  return parts.join("\n");
+function renderList5(slide: List5Slide, isFirstList: boolean): string {
+  return renderListSlide(slide, isFirstList);
 }
 
 // illustrations テンプレートのレンダー関数
@@ -282,17 +298,37 @@ function renderSlide(slide: SlideConfig, isFirst: boolean): string {
 // メイン処理
 function main() {
   const projectRoot = path.resolve(__dirname, "..");
-  const inputPath = path.join(projectRoot, "slide-out", "slides_plan.json");
+  const inputPath = path.join(projectRoot, "slides_plan.json");
   const outputPath = path.join(projectRoot, "slide-out", "slides_plan.md");
 
   console.log("Reading slides_plan.json...");
   const slidesJson = fs.readFileSync(inputPath, "utf-8");
-  const slides: SlideConfig[] = JSON.parse(slidesJson);
+  const slidesData = JSON.parse(slidesJson);
+  const slides: SlideConfig[] = slidesData.slides || slidesData;
 
   console.log(`Found ${slides.length} slides to render.`);
 
   // 各スライドをMarkdown形式にレンダリング
-  const markdownSlides = slides.map((slide, index) => renderSlide(slide, index === 0));
+  let isFirstSlide = true;
+  let isFirstList = true;
+
+  const markdownSlides = slides.map((slide) => {
+    let rendered: string;
+
+    if (slide.type === "strong-message") {
+      rendered = renderSlide(slide, isFirstSlide);
+      isFirstSlide = false;
+    } else if (slide.type.startsWith("list-")) {
+      rendered = renderSlide(slide, isFirstList);
+      isFirstList = false;
+      isFirstSlide = false;
+    } else {
+      rendered = renderSlide(slide, isFirstSlide);
+      isFirstSlide = false;
+    }
+
+    return rendered;
+  });
 
   // 全スライドを結合
   const fullMarkdown = markdownSlides.join("\n\n");
@@ -302,7 +338,7 @@ function main() {
 
   console.log(`✓ Successfully generated: ${outputPath}`);
   console.log(
-    `\nNext step: Run "npx @marp-team/marp-cli slide-out/slides_plan.md -o slide-out/slides_plan.pdf"`
+    `\nNext step: Run "npx @marp-team/marp-cli slide-out/slides_plan.md -o slide-out/slides_plan.pdf --allow-local-files"`
   );
 }
 
