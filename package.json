@@ -25,6 +25,10 @@
 		"generate:script-final": "ts-node scripts/generateScriptFinalVoices.ts",
 		"generate:slideshow-config": "ts-node scripts/generateSlideshowConfig.ts",
 		"generate:slides": "ts-node scripts/generateSlides.ts",
+		"workflow": "run-remotion-workflow.bat",
+		"workflow:ps1": "powershell -ExecutionPolicy Bypass -File run-remotion-workflow.ps1",
+		"workflow:skip-voice": "powershell -ExecutionPolicy Bypass -File run-remotion-workflow.ps1 -SkipVoiceGeneration",
+		"workflow:no-preview": "powershell -ExecutionPolicy Bypass -File run-remotion-workflow.ps1 -SkipPreview",
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook"
 	},

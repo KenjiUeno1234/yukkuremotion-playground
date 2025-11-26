@@ -10,6 +10,10 @@
 - BGMファイル（Floraria.mp3）が `public/bgm/` に配置済み
 - スライド画像（S001.png ~ S009.png など）が `public/slide/` に配置済み
 - 背景画像（kyaradeza-back.png）が `src/BACKGROUND_LAYER/` または `public/background/` に配置済み
+- **重要**: ゆっくりキャラクター画像ファイル名に特殊文字が含まれていないこと
+  - `public/jinbutu/` 内のファイル名は `&` などの特殊文字を使わず、ハイフン `-` を使用
+  - 正しい例: `eye-open-moth-close.png`
+  - 誤った例: `eye-open&moth-close.png` (URLエンコード問題が発生)
 
 ---
 
@@ -84,6 +88,60 @@ NARRATOR:
    - [S001] → `public/slide/S001.png`
    - [S002] → `public/slide/S002.png`
    - スライド、字幕、音声のタイミングが自動的に同期される
+
+---
+
+## 🚀 自動実行スクリプト（推奨）
+
+全ての手順を自動実行するスクリプトを用意しています。以下のコマンドで一括実行できます：
+
+### 基本的な使い方
+
+```bash
+# 方法1: npm スクリプトで実行（推奨）
+npm run workflow
+
+# 方法2: バッチファイルを直接実行
+run-remotion-workflow.bat
+
+# 方法3: PowerShell スクリプトを直接実行
+powershell -ExecutionPolicy Bypass -File run-remotion-workflow.ps1
+```
+
+このスクリプトは以下を自動的に実行します：
+1. ✅ 前提条件のチェック（必要なファイルの存在確認）
+2. 📁 背景画像の準備
+3. 🎤 音声ファイルの生成（--force で強制再生成）
+4. ⚙️ スライドショー設定ファイルの生成
+5. 🎬 プレビューサーバーの起動
+
+**プレビュー確認:**
+スクリプト実行後、コンソールに表示されるURLをブラウザで開いてください：
+```
+Server ready - Local: http://localhost:3000
+```
+上記のような表示が出たら、そのURLをブラウザで開きます。
+
+### オプション
+
+```bash
+# 音声生成をスキップ（既存の音声ファイルを使用）
+npm run workflow:skip-voice
+
+# プレビューサーバーの起動をスキップ
+npm run workflow:no-preview
+
+# PowerShell で直接実行する場合のオプション
+powershell -ExecutionPolicy Bypass -File run-remotion-workflow.ps1 -SkipVoiceGeneration
+powershell -ExecutionPolicy Bypass -File run-remotion-workflow.ps1 -SkipPreview
+powershell -ExecutionPolicy Bypass -File run-remotion-workflow.ps1 -NoForce  # 既存ファイルをスキップ
+```
+
+---
+
+## 手動実行手順（詳細）
+
+自動スクリプトを使わずに手動で実行する場合は、以下の手順に従ってください。
 
 ---
 
@@ -192,8 +250,8 @@ npx ts-node scripts/generateSlideshowConfig.ts
 2. **public/voices/** から音声ファイル（S001-1.wav など）を読み込む
 3. 音声ファイルの長さを自動計算（フレーム数に変換）
 4. pauseAfter（間）を自動設定:
-   - スライド終わり（パート内）: 1.5秒
-   - パート間移行: 1.5秒
+   - スライド終わり（パート内）: 0.5秒
+   - パート間移行: 0.5秒
    - 動画終わり: 3.0秒
 5. **src/data/slideshowConfig.ts** を生成
 
@@ -219,7 +277,7 @@ export const slideshowConfig: SlideshowConfig = {
         }
       ],
       totalDurationFrames: 375,  // 音声フレーム数 + pauseAfterフレーム数
-      pauseAfter: 1.5
+      pauseAfter: 0.5
     }
   ],
   totalFrames: 4655
@@ -244,11 +302,11 @@ function calculatePauseAfter(
     const currentPart = getPartNumber(slideId);
     const nextPart = getPartNumber(nextSlideId);
     if (currentPart !== nextPart) {
-      return 1.5;  // パート間移行
+      return 0.5;  // パート間移行
     }
   }
 
-  return 1.5;  // スライド終わり（パート内）
+  return 0.5;  // スライド終わり（パート内）
 }
 ```
 
@@ -262,8 +320,30 @@ function calculatePauseAfter(
 npm start
 ```
 
+**起動確認:**
+サーバーが正常に起動すると、以下のようなログが表示されます：
+```
+Server ready - Local: http://localhost:3000
+Built in 1363ms
+```
+
+**重要**:
+- ログに表示されたURLをメモしてください（ポート番号は3000、3006など変わる可能性があります）
+- サーバーが起動するまで10～20秒かかる場合があります
+
+**起動確認方法:**
+```bash
+# Windowsの場合（別のターミナルで実行）
+netstat -ano | findstr :3000
+# または
+netstat -ano | findstr :3006
+```
+
+何か表示されれば、そのポートでサーバーが起動しています。
+
 ブラウザで以下のURLを開きます：
-- **http://localhost:3000**
+- **ログに表示されたURL**（例: http://localhost:3000 または http://localhost:3006）
+- **重要**: 必ずサーバー起動時のログに表示されたURLを使用してください
 
 ### 3-2. プレビューでの確認事項
 
@@ -275,17 +355,40 @@ npm start
 ✅ **口パクアニメーション**:
 　　- ナレーション中: ゆっくりの口がパクパク動く
 　　- 間（pauseAfter）の部分: ゆっくりの口が閉じて停止している
-✅ **間の長さ**: pauseAfterが適切に設定されているか（1.5秒または3秒）
+✅ **間の長さ**: pauseAfterが適切に設定されているか（0.5秒または3秒）
 ✅ **BGM**: BGMが適切な音量で流れているか（デフォルト20%）
 
 ---
 
 ## クイックスタート（要約）
 
-```bash
-# 前提: script_final.md（字幕用）と script_final_hosei.md（音声用）を配置済み
-# 前提: public/slide/ にスライドPNG配置済み
+### 🚀 自動実行（推奨）
 
+**前提条件:**
+- `script_final.md`（字幕用）と `script_final_hosei.md`（音声用）を配置済み
+- `public/slide/` にスライドPNG配置済み（S001.png, S002.png など）
+- VOICEPEAK がインストール済み（パス: `C:\voicepeak\VOICEPEAK\voicepeak.exe`）
+- BGMファイル `public/bgm/Floraria.mp3` が配置済み
+
+**実行コマンド:**
+
+```bash
+# 全自動で実行（推奨）
+npm run workflow
+```
+
+たったこれだけで、以下が自動的に実行されます：
+- ✅ 前提条件のチェック
+- 📁 背景画像の準備
+- 🎤 音声ファイルの生成
+- ⚙️ スライドショー設定ファイルの生成
+- 🎬 プレビューサーバーの起動
+
+---
+
+### 手動実行（詳細な制御が必要な場合）
+
+```bash
 # 0. 背景画像の準備（必要な場合）
 #    src/BACKGROUND_LAYER/kyaradeza-back.png を public/background/ にコピー
 powershell -Command "Copy-Item -Path 'src/BACKGROUND_LAYER/kyaradeza-back.png' -Destination 'public/background/kyaradeza-back.png' -Force"
@@ -297,9 +400,15 @@ npx ts-node scripts/generateScriptFinalHoseiVoices.ts --force
 # 2. スライドショー設定ファイルを生成（字幕はscript_final.md、音声は最新wav）
 npx ts-node scripts/generateSlideshowConfig.ts
 
-# 3. プレビュー確認
+# 3. プレビュー確認（バックグラウンドで起動）
 npm start
+
+# ブラウザで表示されるURL（例: http://localhost:3006）を開いて確認
 ```
+
+**注意事項:**
+- プレビューサーバーのポート番号は起動時のコンソール出力で確認してください
+- サーバーを停止する場合は、Ctrl+C を押してください
 
 **⚠️ 重要な注意事項:**
 - **推奨:** 常に`--force`オプションを使用して音声ファイルを最新版に更新することで、字幕と音声の不一致を防げます
@@ -311,6 +420,70 @@ npm start
 ---
 
 ## トラブルシューティング
+
+### ブラウザで「このサイトにアクセスできません」と表示される
+
+**症状:**
+- プレビューURLを開いても「このサイトにアクセスできません」エラーが出る
+
+**原因:**
+- プレビューサーバーが起動していない
+- または、間違ったポート番号でアクセスしている
+
+**解決方法:**
+
+1. プレビューサーバーが起動しているか確認：
+```bash
+# Windowsの場合
+netstat -ano | findstr :3000
+netstat -ano | findstr :3006
+```
+
+2. 何も表示されない場合、サーバーが起動していないので起動：
+```bash
+npm start
+```
+
+3. サーバー起動時のログで正しいURLを確認：
+```
+Server ready - Local: http://localhost:3000
+```
+
+4. ブラウザで表示されたURLを開く（ポート番号は3000または3006など、ログに表示された番号を使用）
+
+### ゆっくりキャラクターが表示されない / 画像読み込みエラー
+
+**症状:**
+- ブラウザのコンソールに画像読み込みエラーが表示される
+- 例: `Error loading image with src: .../eye-open&moth-close.png`
+
+**原因:**
+- 画像ファイル名に特殊文字（`&`など）が含まれている
+
+**解決方法:**
+
+このプロジェクトでは既に修正済みですが、同様の問題を防ぐため：
+
+1. **ファイル名の確認**:
+   - `public/jinbutu/` フォルダ内の画像ファイル名を確認
+   - 正しいファイル名:
+     - `eye-open-moth-close.png` ✅
+     - `eye-open-moth-open.png` ✅
+     - `eye-close-moth-open.png` ✅
+   - 避けるべきファイル名:
+     - `eye-open&moth-close.png` ❌（`&`記号）
+     - `eye-close&moth-open..png` ❌（二重ピリオド）
+
+2. **ファイル名を修正する場合**:
+```bash
+cd public/jinbutu
+mv "eye-open&moth-close.png" "eye-open-moth-close.png"
+mv "eye-open&moth-open.png" "eye-open-moth-open.png"
+mv "eye-close&moth-open..png" "eye-close-moth-open.png"
+```
+
+3. **コード側の参照も更新**:
+   - `src/yukkuri/Face/YukkuriFace.tsx` で新しいファイル名を参照
 
 ### 字幕と音声の内容が合わない
 
@@ -457,7 +630,7 @@ export const slideshowConfig: SlideshowConfig = {
   - 字幕: 技術用語を正確に表示（「RAG」「AI」）
   - 音声: 自然な読み上げ（「ラグ」「エーアイ」）
 - スライド番号（[S001]）でPNG、字幕、音声を自動同期
-- pauseAfter で適切な間を自動設定
+- pauseAfter で適切な間を自動設定（0.5秒または3.0秒）
 - **口パクアニメーションが音声に完全同期**
   - 音声再生中: 口パクが動く（8フレームサイクル: 4フレーム開いて4フレーム閉じる）
   - 間（pauseAfter）: 口を閉じて停止
@@ -465,14 +638,25 @@ export const slideshowConfig: SlideshowConfig = {
 - **--forceオプションで常に最新版の音声を生成し、字幕と音声の不一致を防止**
 
 **推奨ワークフロー:**
+
 ```bash
+# 🚀 自動実行（一番簡単！）
+npm run workflow
+```
+
+または、手動で実行する場合：
+
+```bash
+# 0. 背景画像の準備（初回のみ）
+powershell -Command "Copy-Item -Path 'src/BACKGROUND_LAYER/kyaradeza-back.png' -Destination 'public/background/kyaradeza-back.png' -Force"
+
 # 1. 音声を最新版で強制再生成
 npx ts-node scripts/generateScriptFinalHoseiVoices.ts --force
 
 # 2. スライドショー設定を生成
 npx ts-node scripts/generateSlideshowConfig.ts
 
-# 3. プレビュー確認
+# 3. プレビュー確認（起動時に表示されるURLをブラウザで開く）
 npm start
 ```
 

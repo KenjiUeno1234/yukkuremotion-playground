@@ -74,18 +74,18 @@ export const Face = (props: {
   // Map eye and mouth states to image filenames
   // EyeState: 0 = open, 1 = open (transition), 2 = close
   // MouthState: 0 = close, 1 = open
-  let imageName = 'eye-open&moth-close.png'; // Default
+  let imageName = 'eye-open-moth-close.png'; // Default
 
   if (eyeState === 0 || eyeState === 1) {
     // Eye open
     if (mouthState === 0) {
-      imageName = 'eye-open&moth-close.png';
+      imageName = 'eye-open-moth-close.png';
     } else {
-      imageName = 'eye-open&moth-open.png';
+      imageName = 'eye-open-moth-open.png';
     }
   } else if (eyeState === 2) {
     // Eye close
-    imageName = 'eye-close&moth-open..png';
+    imageName = 'eye-close-moth-open.png';
   }
 
   return (

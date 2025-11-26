@@ -9,6 +9,7 @@ import {slideshowConfig} from './data/slideshowConfig';
 import {SlideshowVideo} from './Slideshow/SlideshowVideo';
 import {TestSlide} from './Slideshow/TestSlide';
 import {MinimalTest} from './Slideshow/MinimalTest';
+import {DiagnosticTest} from './Slideshow/DiagnosticTest';
 
 export const RemotionRoot: React.FC = () => {
   // フォント読み込み（オプショナル）
@@ -25,6 +26,14 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={{config: slideshowConfig}}
+      />
+      <Composition
+        id="DiagnosticTest"
+        component={DiagnosticTest}
+        durationInFrames={300}
+        fps={FPS}
+        width={1920}
+        height={1080}
       />
     </>
   );

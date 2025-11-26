@@ -57,7 +57,9 @@
       "Bash(npx remotion:*)",
       "Bash(type \"src\\marp-test\\2黒板リスト(list-table-of-contentsパターン)s.md\")",
       "Bash(hexdump:*)",
-      "Bash(start slide-out/slides_plan.pdf)"
+      "Bash(start slide-out/slides_plan.pdf)",
+      "Bash(powershell:*)",
+      "Bash(netstat:*)"
     ],
     "deny": [],
     "ask": []
